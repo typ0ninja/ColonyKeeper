@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ColonyKeeper</string>
+    <string name="add_hive_title">Add Hive</string>
+    <string name="name_input_placeholder">Name</string>
+    <string name="notes_input_placeholder">Notes</string>
+    <string name="queen_date_placeholder">Queen Date</string>
+    <string name="take_picture_gps_placeholder">Take Picture + GPS</string>
+    <string name="add_hive_button">Add Hive?</string>
+    <string name="add_bee_yard_title">Add Bee Yard</string>
+    <string name="add_yard_button">Add Yard?</string>
 </resources>
