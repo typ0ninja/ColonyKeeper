@@ -25,9 +25,6 @@ class YardAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YardViewHolder {
-        //NOTE: must be a when not an if or this will break
-        //choose between grid or vert/horizontal layout
-
 
         //Inflate the layout
         val adapterLayout = LayoutInflater.from(parent.context)
@@ -43,7 +40,6 @@ class YardAdapter(
     override fun onBindViewHolder(holder: YardAdapter.YardViewHolder, position: Int) {
 
         //val dog: Dog = dogs[position]
-        //find a specific pig at index position
         val yard: BeeYard = yards[position]
         val resources = context?.resources
         //set the actual display views to the correct view for a given pig inside a card
