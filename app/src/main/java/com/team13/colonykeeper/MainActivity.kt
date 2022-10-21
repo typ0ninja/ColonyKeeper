@@ -12,19 +12,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<>(R.layout.activity_main.star)
 
         binding.startYards.setOnClickListener{
-            System.out.println("made it into launchYard")
-            launchYard()}
+            launchYard()
+        }
+
+        binding.startHives.setOnClickListener{
+            launchHive()
+        }
     }
 
     private fun launchYard(){
-        System.out.println("made it into launchYard")
         yardIntent = Intent(this, YardActivity::class.java)
+        startActivity(yardIntent)
+    }
+
+    private fun launchHive(){
+        yardIntent = Intent(this, HiveActivity::class.java)
         startActivity(yardIntent)
     }
 }
