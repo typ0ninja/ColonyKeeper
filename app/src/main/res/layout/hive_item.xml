@@ -14,23 +14,23 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/yardName"
+            android:id="@+id/hiveName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bill's Farm" />
+            tools:text="Crystal Tower" />
 
         <ImageView
-            android:id="@+id/yardView"
+            android:id="@+id/hiveView"
             android:layout_width="412dp"
             android:layout_height="448dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yardName"
-            tools:srcCompat="@drawable/beeyard_temp" />
+            app:layout_constraintTop_toBottomOf="@+id/hiveName"
+            tools:srcCompat="@drawable/beehive_temp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

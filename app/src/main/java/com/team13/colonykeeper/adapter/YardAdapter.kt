@@ -28,7 +28,7 @@ class YardAdapter(
 
         //Inflate the layout
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_yard_list, parent, false)
+            .inflate(R.layout.yard_item, parent, false)
 
         return YardViewHolder(adapterLayout)
     }
