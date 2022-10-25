@@ -25,7 +25,7 @@ class YardActivity: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.addYard.setOnClickListener{
-            startActivity(Intent(this, ActivityAddBeeYardBinding::class.java))
+            startActivity(Intent(this, AddBeeYardActivity::class.java))
 
         }
     }

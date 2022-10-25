@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/layout/activity_add_bee_hive.xml" value="0.17074275362318841" />
         <entry key="app/src/main/res/layout/activity_add_bee_yard.xml" value="0.18490374873353596" />
+        <entry key="app/src/main/res/layout/activity_add_inspection.xml" value="0.17074275362318841" />
         <entry key="app/src/main/res/layout/activity_hive.xml" value="0.37916666666666665" />
+        <entry key="app/src/main/res/layout/activity_hive_individual.xml" value="0.17074275362318841" />
         <entry key="app/src/main/res/layout/activity_hive_list.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/activity_yard.xml" value="0.37916666666666665" />
