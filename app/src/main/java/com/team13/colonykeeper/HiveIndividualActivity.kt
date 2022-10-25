@@ -1,5 +1,6 @@
 package com.team13.colonykeeper
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.databinding.ActivityHiveIndividualBinding
@@ -12,7 +13,29 @@ class HiveIndividualActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.hiveStartInspectionButton.setOnClickListener {
+            gotoNewInspection()
+        }
+
+        binding.editHiveButton.setOnClickListener {
+            //TODO
+        }
+
+        binding.hiveScheduleInspectionButton.setOnClickListener{
+            //TODO
+        }
+
+        binding.viewPastInspectionsButton.setOnClickListener {
+            //TODO
+        }
     }
+
+    fun gotoNewInspection(){
+        startActivity(Intent(this, AddInspectionActivity::class.java))
+    }
+
+
 
 
 }
