@@ -8,7 +8,7 @@
         android:id="@+id/add_bee_yard_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="cursive"
+        android:fontFamily="@font/lalezar"
         android:text="@string/add_bee_yard_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintBottom_toTopOf="@id/bee_yard_name_input_layout"
