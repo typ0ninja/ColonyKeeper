@@ -32,6 +32,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".YardActivity" />
         </activity>
+        <activity android:name=".AddBeeYardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".YardActivity" />
+        </activity>
     </application>
 
 </manifest>
