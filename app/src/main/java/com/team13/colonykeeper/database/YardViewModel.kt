@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 
 class YardViewModel(private val repository: YardRepository): ViewModel() {
-    fun allYards(): LiveData<List<Hive>> = repository.allYards.asLiveData()
+    fun allYards(): LiveData<List<Yard>> = repository.allYards.asLiveData()
 
     fun insert(yard: Yard) = viewModelScope.launch {
         repository.insert(yard)
