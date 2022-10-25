@@ -13,7 +13,7 @@ class YardActivity: AppCompatActivity() {
     private lateinit var hiveIntent: Intent
     private lateinit var yardIntent: Intent
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityYardListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,8 +32,5 @@ class YardActivity: AppCompatActivity() {
         startActivity(hiveIntent)
     }
     */
-    fun backToGallery(){
-        yardIntent = Intent(this, YardActivity::class.java)
-        startActivity(yardIntent)
-    }
+
 }
