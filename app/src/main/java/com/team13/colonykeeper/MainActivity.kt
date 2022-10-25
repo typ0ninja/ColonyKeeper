@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+/**
         binding.startYards.setOnClickListener{
             launchYard()
         }
@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         binding.startHives.setOnClickListener{
             launchHive()
         }
+        */
     }
+
 
     private fun launchYard(){
         yardIntent = Intent(this, YardActivity::class.java)
