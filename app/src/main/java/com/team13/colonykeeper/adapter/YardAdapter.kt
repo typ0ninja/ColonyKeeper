@@ -58,11 +58,11 @@ class YardAdapter(
         holder.yardPic?.setImageResource(yard.imageResourceId)
         holder.yardName?.text = yard.name
         holder.yardPic?.setOnClickListener {
-            gotoHive(holder.yardPic.context)
+            gotoYard(holder.yardPic.context)
         }
     }
 
-    fun gotoHive(actContext: Context){
+    fun gotoYard(actContext: Context){
         if(context === actContext){
             Log.d("banana", "contexts are the same")
         }
