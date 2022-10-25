@@ -7,7 +7,7 @@ import com.team13.colonykeeper.adapter.YardAdapter
 import com.team13.colonykeeper.databinding.ActivityAddBeeYardBinding
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
-class YardActivity: AppCompatActivity() {
+class YardListActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityYardListBinding
     private lateinit var hiveIntent: Intent

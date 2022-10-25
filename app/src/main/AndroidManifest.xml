@@ -22,20 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".YardActivity">
+        <activity android:name=".YardListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".HiveActivity">
+        <activity android:name=".HiveListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".YardActivity" />
+                android:value=".YardListActivity" />
         </activity>
         <activity android:name=".AddBeeYardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".YardActivity" />
+                android:value=".YardListActivity" />
         </activity>
 
         <meta-data

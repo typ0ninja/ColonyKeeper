@@ -3,7 +3,6 @@ package com.team13.colonykeeper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.team13.colonykeeper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,12 +27,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchYard(){
-        yardIntent = Intent(this, YardActivity::class.java)
+        yardIntent = Intent(this, YardListActivity::class.java)
         startActivity(yardIntent)
     }
 
     private fun launchHive(){
-        hiveIntent = Intent(this, HiveActivity::class.java)
+        hiveIntent = Intent(this, HiveListActivity::class.java)
         startActivity(hiveIntent)
     }
 }

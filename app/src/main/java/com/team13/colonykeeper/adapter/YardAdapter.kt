@@ -8,15 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
-import com.team13.colonykeeper.HiveActivity
+import com.team13.colonykeeper.HiveListActivity
 import com.team13.colonykeeper.R
 import com.team13.colonykeeper.data.BeeYard
 import com.team13.colonykeeper.data.DataSource
-import com.team13.colonykeeper.data.DataSource.yards
-import com.team13.colonykeeper.YardActivity
 
 
 class YardAdapter(
@@ -66,7 +62,7 @@ class YardAdapter(
         if(context === actContext){
             Log.d("banana", "contexts are the same")
         }
-        hiveIntent = Intent(actContext, HiveActivity::class.java)
+        hiveIntent = Intent(actContext, HiveListActivity::class.java)
         hiveIntent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
         actContext?.startActivity(hiveIntent)
     }

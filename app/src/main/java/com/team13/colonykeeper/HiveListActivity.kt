@@ -3,12 +3,10 @@ package com.team13.colonykeeper
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.adapter.HiveAdapter
 import com.team13.colonykeeper.databinding.ActivityHiveListBinding
 
-class HiveActivity: AppCompatActivity() {
+class HiveListActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityHiveListBinding
     private lateinit var yardIntent: Intent
@@ -29,7 +27,7 @@ class HiveActivity: AppCompatActivity() {
 
     }
     fun backToGallery(){
-        yardIntent = Intent(this, YardActivity::class.java)
+        yardIntent = Intent(this, YardListActivity::class.java)
         startActivity(yardIntent)
     }
 }
