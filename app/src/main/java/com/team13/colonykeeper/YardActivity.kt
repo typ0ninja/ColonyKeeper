@@ -3,8 +3,8 @@ package com.team13.colonykeeper
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.adapter.YardAdapter
+import com.team13.colonykeeper.databinding.ActivityAddBeeYardBinding
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
 class YardActivity: AppCompatActivity() {
@@ -23,6 +23,11 @@ class YardActivity: AppCompatActivity() {
         binding.yardGridRecyclerView.setHasFixedSize(true)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.addYard.setOnClickListener{
+            startActivity(Intent(this, ActivityAddBeeYardBinding::class.java))
+
+        }
     }
 
     /**

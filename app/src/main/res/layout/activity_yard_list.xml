@@ -11,30 +11,37 @@
         android:layout_width="414dp"
         android:layout_height="57dp"
         android:text="Bee Yards"
+        android:fontFamily="@font/lalezar"
         android:textAlignment="center"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <FrameLayout
-        android:id="@+id/yardFrameLayout"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/yard_grid_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        tools:context=".YardActivity"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:maxHeight="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/yardNameView">
+        app:layout_constraintTop_toBottomOf="@id/yardNameView" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/yard_grid_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-                app:spanCount="1" />
 
-        </FrameLayout>
+
+    <Button
+        android:id="@+id/addYard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Add Yard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yard_grid_recycler_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
