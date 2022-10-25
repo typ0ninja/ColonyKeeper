@@ -59,9 +59,6 @@ class YardAdapter(
     }
 
     fun gotoYard(actContext: Context){
-        if(context === actContext){
-            Log.d("banana", "contexts are the same")
-        }
         hiveIntent = Intent(actContext, HiveListActivity::class.java)
         hiveIntent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
         actContext?.startActivity(hiveIntent)

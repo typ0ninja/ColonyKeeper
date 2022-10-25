@@ -37,6 +37,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".YardListActivity" />
         </activity>
+        <activity android:name=".HiveIndividualActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HiveListActivity" />
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
