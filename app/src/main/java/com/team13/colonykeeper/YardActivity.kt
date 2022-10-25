@@ -1,5 +1,6 @@
 package com.team13.colonykeeper
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,8 @@ import com.team13.colonykeeper.databinding.ActivityYardListBinding
 class YardActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityYardListBinding
+    private lateinit var hiveIntent: Intent
+    private lateinit var yardIntent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -20,5 +23,17 @@ class YardActivity: AppCompatActivity() {
         binding.yardGridRecyclerView.setHasFixedSize(true)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    /**
+    fun gotoHive(){
+        hiveIntent = Intent(this, HiveActivity::class.java)
+        //hiveIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(hiveIntent)
+    }
+    */
+    fun backToGallery(){
+        yardIntent = Intent(this, YardActivity::class.java)
+        startActivity(yardIntent)
     }
 }
