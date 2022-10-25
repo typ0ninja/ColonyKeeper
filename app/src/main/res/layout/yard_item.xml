@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Bill's Farm" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/yardView"
             android:layout_width="412dp"
             android:layout_height="448dp"

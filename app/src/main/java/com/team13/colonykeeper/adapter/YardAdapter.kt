@@ -31,7 +31,7 @@ class YardAdapter(
 
     class YardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
         //find each view and assign to this container
-        val yardPic: ImageButton? = view!!.findViewById(R.id.yardView)
+        val yardPic: ImageView? = view!!.findViewById(R.id.yardView)
         val yardName: TextView? = view!!.findViewById(R.id.yardName)
         val view: View = view!!
     }
@@ -57,12 +57,15 @@ class YardAdapter(
         //set the actual display views to the correct view for a given pig inside a card
         holder.yardPic?.setImageResource(yard.imageResourceId)
         holder.yardName?.text = yard.name
-        holder.yardPic?.setOnClickListener {
-            gotoHive(holder.yardPic.context)
+//        holder.yardPic?.setOnClickListener {
+//            gotoYard(holder.yardPic.context)
+//        }
+        holder.view.setOnClickListener{
+            gotoYard(holder.view.context)
         }
     }
 
-    fun gotoHive(actContext: Context){
+    fun gotoYard(actContext: Context){
         if(context === actContext){
             Log.d("banana", "contexts are the same")
         }
