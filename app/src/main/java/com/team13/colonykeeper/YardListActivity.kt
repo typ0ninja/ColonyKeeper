@@ -2,8 +2,12 @@ package com.team13.colonykeeper
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.YardAdapter
+import com.team13.colonykeeper.database.YardListApplication
+import com.team13.colonykeeper.database.YardViewModel
+import com.team13.colonykeeper.database.YardViewModelFactory
 import com.team13.colonykeeper.databinding.ActivityAddBeeYardBinding
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
@@ -13,10 +17,15 @@ class YardListActivity: AppCompatActivity() {
     private lateinit var hiveIntent: Intent
     private lateinit var yardIntent: Intent
 
+    private val yardViewModel: YardViewModel by viewModels {
+        YardViewModelFactory((application as YardListApplication).repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityYardListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         binding.yardGridRecyclerView.adapter = YardAdapter(applicationContext, 3)
 

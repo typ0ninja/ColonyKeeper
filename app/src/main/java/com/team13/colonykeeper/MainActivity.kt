@@ -3,12 +3,22 @@ package com.team13.colonykeeper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import com.team13.colonykeeper.adapter.YardAdapter
+import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var yardIntent: Intent
     private lateinit var hiveIntent: Intent
+
+    private val hiveViewModel: HiveViewModel by viewModels {
+        HiveViewModelFactory((application as HiveListApplication).repository)
+    }
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding.startHives.setOnClickListener{
             launchHive()
         }
+
+
     }
 
     private fun launchYard(){
