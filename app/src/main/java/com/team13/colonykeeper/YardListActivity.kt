@@ -8,7 +8,6 @@ import com.team13.colonykeeper.adapter.YardAdapter
 import com.team13.colonykeeper.database.YardListApplication
 import com.team13.colonykeeper.database.YardViewModel
 import com.team13.colonykeeper.database.YardViewModelFactory
-import com.team13.colonykeeper.databinding.ActivityAddBeeYardBinding
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
 class YardListActivity: AppCompatActivity() {
@@ -26,8 +25,8 @@ class YardListActivity: AppCompatActivity() {
         binding = ActivityYardListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        binding.yardGridRecyclerView.adapter = YardAdapter(applicationContext, 3)
+        //start up recycler view, pass it live data of yards
+        binding.yardGridRecyclerView.adapter = YardAdapter(applicationContext, 3, yardViewModel.allYards())
 
         binding.yardGridRecyclerView.setHasFixedSize(true)
 

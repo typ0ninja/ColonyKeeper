@@ -9,20 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import com.team13.colonykeeper.HiveListActivity
 import com.team13.colonykeeper.R
 import com.team13.colonykeeper.data.BeeYard
 import com.team13.colonykeeper.data.DataSource
+import com.team13.colonykeeper.database.Yard
 
 
 class YardAdapter(
     private val context: Context?,
-    private val layout: Int
+    private val layout: Int,
+    private val yardList : LiveData<List<Yard>>
 
 ): RecyclerView.Adapter<YardAdapter.YardViewHolder>() {
 
     //private val listener =
-    val yards: MutableList<BeeYard> = DataSource.yards
+    val yards: LiveData<List<Yard>> = yardList
     private lateinit var hiveIntent: Intent
 
     class YardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
@@ -42,19 +45,22 @@ class YardAdapter(
     }
     override fun getItemCount(): Int {
         //number of pigs in list to display
-        return yards.size
+        return yards.value!!.size
     }
 
     override fun onBindViewHolder(holder: YardAdapter.YardViewHolder, position: Int) {
 
         //val dog: Dog = dogs[position]
-        val yard: BeeYard = yards[position]
+        val yard: Yard? = yards.value?.get(position)
         val resources = context?.resources
         //set the actual display views to the correct view for a given pig inside a card
-        holder.yardPic?.setImageResource(yard.imageResourceId)
-        holder.yardName?.text = yard.name
-        holder.yardPic?.setOnClickListener {
-            gotoYard(holder.yardPic.context)
+
+        if (yard != null) {
+            //holder.yardPic?.setImageResource(yard.imageResourceId)
+            holder.yardName?.text = yard.yardName
+            holder.yardPic?.setOnClickListener {
+                gotoYard(holder.yardPic.context)
+            }
         }
     }
 
