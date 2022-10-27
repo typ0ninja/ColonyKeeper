@@ -1,8 +1,10 @@
 package com.team13.colonykeeper
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.team13.colonykeeper.adapter.YardAdapter
 import com.team13.colonykeeper.database.*
@@ -11,11 +13,13 @@ import com.team13.colonykeeper.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var yardIntent: Intent
-    private lateinit var hiveIntent: Intent
+//    private lateinit var hiveIntent: Intent
 
     private val hiveViewModel: HiveViewModel by viewModels {
         HiveViewModelFactory((application as HiveListApplication).repository)
     }
+
+
 
 
 
@@ -31,9 +35,10 @@ class MainActivity : AppCompatActivity() {
             launchYard()
         }
 
-        binding.startHives.setOnClickListener{
-            launchHive()
-        }
+        val animator = ObjectAnimator.ofFloat(binding.startScreenAnimation, View.ROTATION,
+            -360f, 0f)
+        animator.duration = 2000
+        animator.start()
 
 
     }
@@ -43,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(yardIntent)
     }
 
-    private fun launchHive(){
-        hiveIntent = Intent(this, HiveListActivity::class.java)
-        startActivity(hiveIntent)
-    }
+//    private fun launchHive(){
+//        hiveIntent = Intent(this, HiveListActivity::class.java)
+//        startActivity(hiveIntent)
+//    }
 }

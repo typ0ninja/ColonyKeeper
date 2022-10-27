@@ -9,7 +9,7 @@
     <string name="add_bee_yard_title">Add Bee Yard</string>
     <string name="add_yard_button">Add Yard?</string>
     <string name="add_inspection_title">Add Inspection</string>
-    <string name="inspection_text_input_hint">Add notes...</string>
+    <string name="inspection_text_input_hint">Add notes…</string>
     <string name="add_voice_inspection_content_desc">Add voice inspection</string>
     <string name="add_inspection_back_content_desc">Back to previous screen</string>
     <string name="inspection_add_photo_button">Add Photo</string>
@@ -20,4 +20,5 @@
     <string name="edit_hive_button">Edit Hive</string>
     <string name="schedule_inspection_title">Schedule Inspection</string>
     <string name="choose_time_label">Choose Time:</string>
+    <string name="yard_gallery_button">Yard Gallery</string>
 </resources>
