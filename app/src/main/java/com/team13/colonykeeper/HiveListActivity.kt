@@ -29,11 +29,21 @@ class HiveListActivity: AppCompatActivity() {
             addHive()
         }
 
+        binding.reportButton.setOnClickListener{
+            makeReport()
+        }
+
     }
+
     fun editYard(){
         startActivity(Intent(this, EditYardActivity::class.java))
     }
+
     fun addHive(){
         startActivity(Intent(this, AddBeeHiveActivity::class.java))
+    }
+
+    fun makeReport(){
+        startActivity(Intent(this, ReportActivity::class.java))
     }
 }

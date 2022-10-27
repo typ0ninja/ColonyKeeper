@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:text="Edit Yard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hiveFrameLayout" />
 
@@ -69,6 +70,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_yard_button" />
+
+    <Button
+        android:id="@+id/report_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Generate Report"
+        app:layout_constraintBottom_toTopOf="@+id/add_hive_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_yard_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
