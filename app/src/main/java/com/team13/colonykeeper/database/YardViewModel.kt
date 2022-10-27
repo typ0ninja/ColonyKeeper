@@ -13,7 +13,7 @@ class YardViewModel(private val repository: YardRepository): ViewModel() {
 
 class YardViewModelFactory(private val repository: YardRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HiveViewModel::class.java)){
+        if (modelClass.isAssignableFrom(YardViewModel::class.java)){
             return YardViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
