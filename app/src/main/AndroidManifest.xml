@@ -49,6 +49,12 @@
                 android:value=".HiveIndividualActivity" />
         </activity>
 
+        <activity android:name=".AddBeeHiveActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HiveListActivity" />
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

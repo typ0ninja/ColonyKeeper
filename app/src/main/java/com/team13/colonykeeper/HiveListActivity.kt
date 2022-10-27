@@ -25,9 +25,16 @@ class HiveListActivity: AppCompatActivity() {
             backToGallery()
         }
 
+        binding.addHiveButton.setOnClickListener{
+            addHive()
+        }
+
     }
     fun backToGallery(){
         yardIntent = Intent(this, YardListActivity::class.java)
         startActivity(yardIntent)
+    }
+    fun addHive(){
+        startActivity(Intent(this, AddBeeHiveActivity::class.java))
     }
 }
