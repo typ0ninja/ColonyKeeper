@@ -10,12 +10,24 @@
         android:id="@+id/hiveNameView"
         android:layout_width="414dp"
         android:layout_height="57dp"
-        android:text="Hive List"
+        android:text=":name of yard:"
+        android:fontFamily="@font/lalezar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textAlignment="center"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hive_list_label"
+        android:text="Hives in yard:"
+        android:fontFamily="@font/lalezar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/hiveNameView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <GridLayout
@@ -25,7 +37,7 @@
         tools:context=".hiveActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hiveNameView">
+        app:layout_constraintTop_toBottomOf="@id/hive_list_label">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hive_grid_recycler_view"
@@ -39,10 +51,10 @@
     </GridLayout>
 
     <Button
-        android:id="@+id/backToYard"
+        android:id="@+id/edit_yard_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="Edit Yard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hiveFrameLayout" />
@@ -56,7 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backToYard" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_yard_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

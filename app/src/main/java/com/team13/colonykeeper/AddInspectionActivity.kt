@@ -16,9 +16,12 @@ class AddInspectionActivity: AppCompatActivity() {
             //TODO
         }
         binding.submitInspectionButton.setOnClickListener {
-            //TODO
+            submitInspection()
         }
     }
 
+    fun submitInspection(){
+        finish()
+    }
 
 }

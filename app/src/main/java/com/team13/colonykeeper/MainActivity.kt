@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import androidx.activity.viewModels
 import com.team13.colonykeeper.adapter.YardAdapter
 import com.team13.colonykeeper.database.*
@@ -38,7 +39,12 @@ class MainActivity : AppCompatActivity() {
         val animator = ObjectAnimator.ofFloat(binding.startScreenAnimation, View.ROTATION,
             -360f, 0f)
         animator.duration = 2000
+        //animator.repeatCount(Animation.INFINITE)
         animator.start()
+
+        binding.startScreenAnimation.setOnClickListener{
+            animator.start()
+        }
 
 
     }

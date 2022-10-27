@@ -7,8 +7,8 @@
     <TextView
         android:id="@+id/add_inspection_title"
         android:text="@string/add_inspection_title"
+        android:fontFamily="@font/lalezar"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:fontFamily="cursive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

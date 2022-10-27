@@ -12,8 +12,9 @@
         android:layout_height="57dp"
         android:text="Bee Yards"
         android:fontFamily="@font/lalezar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

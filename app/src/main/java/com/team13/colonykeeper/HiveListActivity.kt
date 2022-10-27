@@ -21,8 +21,8 @@ class HiveListActivity: AppCompatActivity() {
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.backToYard.setOnClickListener{
-            backToGallery()
+        binding.editYardButton.setOnClickListener{
+            editYard()
         }
 
         binding.addHiveButton.setOnClickListener{
@@ -30,9 +30,8 @@ class HiveListActivity: AppCompatActivity() {
         }
 
     }
-    fun backToGallery(){
-        yardIntent = Intent(this, YardListActivity::class.java)
-        startActivity(yardIntent)
+    fun editYard(){
+        startActivity(Intent(this, EditYardActivity::class.java))
     }
     fun addHive(){
         startActivity(Intent(this, AddBeeHiveActivity::class.java))

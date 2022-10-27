@@ -19,7 +19,7 @@ class HiveIndividualActivity : AppCompatActivity(){
         }
 
         binding.editHiveButton.setOnClickListener {
-            //TODO
+            editHive()
         }
 
         binding.hiveScheduleInspectionButton.setOnClickListener{
@@ -33,6 +33,10 @@ class HiveIndividualActivity : AppCompatActivity(){
 
     fun gotoNewInspection(){
         startActivity(Intent(this, AddInspectionActivity::class.java))
+    }
+
+    fun editHive(){
+        startActivity(Intent(this, EditHiveActivity::class.java))
     }
 
 
