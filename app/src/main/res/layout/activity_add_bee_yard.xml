@@ -26,9 +26,9 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/bee_yard_name_input_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/bee_yard_gps"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,11 +54,10 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/bee_yard_notes_input_layout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/add_picture_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,18 +74,18 @@
 
     <Button
         android:id="@+id/add_picture_button"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:text="@string/inspection_add_photo_button"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@id/bee_yard_notes_input_layout"
         app:layout_constraintBottom_toTopOf="@id/add_bee_yard_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/bee_yard_notes_input_layout" />
 
     <Button
         android:id="@+id/add_bee_yard_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:text="@string/add_yard_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
