@@ -34,7 +34,8 @@ class YardListActivity: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.addYard.setOnClickListener{
-            startActivity(Intent(this, AddBeeYardActivity::class.java))
+            startActivity(Intent(this, AddBeeYardActivity::class.java)
+                .putExtra("YardName", "testtesttest"))
 
         }
     }
