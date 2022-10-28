@@ -50,8 +50,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/date_option1_card"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
@@ -111,8 +111,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/date_option2_card"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
@@ -170,8 +170,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/date_option3_card"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
@@ -228,8 +228,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/date_option4_card"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
@@ -286,8 +286,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/date_option5_card"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
@@ -344,8 +344,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/date_option6_card"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
