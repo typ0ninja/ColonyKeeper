@@ -10,27 +10,35 @@
         android:id="@+id/yardNameView"
         android:layout_width="414dp"
         android:layout_height="57dp"
-        android:text="Bee Yards"
         android:fontFamily="@font/lalezar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:text="Bee Yards"
         android:textAlignment="center"
+        android:textColor="@color/brown_700"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/yard_grid_recycler_view"
+    <FrameLayout
+        android:id="@+id/frameRecycler"
+        app:layout_constraintTop_toBottomOf="@id/yardNameView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        android:maxHeight="250dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/yardNameView" />
+        android:layout_height="600dp"
+        tools:context=".GridListActivity"
+        android:padding="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/yard_grid_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/yardNameView"
+            app:spanCount="2" />
+    </FrameLayout>
 
 
 
@@ -38,11 +46,11 @@
         android:id="@+id/addYard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginBottom="20dp"
         android:text="Add Yard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/yard_grid_recycler_view" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

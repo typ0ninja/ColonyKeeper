@@ -43,10 +43,10 @@
             android:id="@+id/hive_grid_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
-            app:spanCount="1" />
+            app:spanCount="2" />
 
     </GridLayout>
 
