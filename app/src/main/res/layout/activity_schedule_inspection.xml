@@ -61,6 +61,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <RadioButton
+                        android:id="@+id/date_option1_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:paddingStart="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/date_option1"
                         android:text="Day 1"
@@ -94,16 +105,7 @@
                         app:srcCompat="@drawable/ic_clouds_icon" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <RadioButton
-                    android:id="@+id/date_option1_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.cardview.widget.CardView>
 
@@ -114,6 +116,11 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option2_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/date_option2_button"
@@ -126,6 +133,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/date_option2"
+                    android:text="Day 2"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/date_option2_temp"
+                    android:text="73^F"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option2"/>
+
+                <ImageView
+                    android:id="@+id/date_option2_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option2_temp"
+                    app:srcCompat="@drawable/ic_snow_icon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -135,6 +175,10 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option3_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/date_option3_button"
@@ -147,6 +191,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/date_option3"
+                    android:text="Day 3"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/date_option3_temp"
+                    android:text="90^F"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option3"/>
+
+                <ImageView
+                    android:id="@+id/date_option3_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option3_temp"
+                    app:srcCompat="@drawable/ic_storm_icon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -156,6 +233,10 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option4_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/date_option4_button"
@@ -168,6 +249,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/date_option4"
+                        android:text="Day 4"
+                        android:textSize="24sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/date_option4_temp"
+                        android:text="90^F"
+                        android:textSize="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/date_option4"/>
+
+                    <ImageView
+                        android:id="@+id/date_option4_icon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/date_option4_temp"
+                        app:srcCompat="@drawable/ic_water_icon" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -177,6 +291,11 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option5_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/date_option5_button"
@@ -189,6 +308,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/date_option5"
+                    android:text="Day 5"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/date_option5_temp"
+                    android:text="90^F"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option5"/>
+
+                <ImageView
+                    android:id="@+id/date_option5_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option5_temp"
+                    app:srcCompat="@drawable/ic_sunny_icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -198,6 +349,11 @@
                 android:layout_margin="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option6_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/date_option6_button"
@@ -210,6 +366,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/date_option6"
+                    android:text="Day 6"
+                    android:textSize="24sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/date_option6_temp"
+                    android:text="90^F"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option6"/>
+
+                <ImageView
+                    android:id="@+id/date_option6_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/date_option6_temp"
+                    app:srcCompat="@drawable/ic_sunny_icon" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
         </RadioGroup>

@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="@id/app_screen_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/start_yards"
-        app:srcCompat="@drawable/bee_animation"
+        app:srcCompat="@drawable/bee_animation_alpha"
         android:contentDescription="TODO" />
 
     <Button
