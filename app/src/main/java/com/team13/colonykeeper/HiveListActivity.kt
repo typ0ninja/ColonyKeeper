@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.HiveAdapter
 import com.team13.colonykeeper.databinding.ActivityHiveListBinding
+import com.team13.colonykeeper.databinding.YardItemBinding
 
 class HiveListActivity: AppCompatActivity() {
 
@@ -20,12 +21,12 @@ class HiveListActivity: AppCompatActivity() {
         binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
-        val extras = this.intent.extras
 
-        binding.hiveNameView.text = intent.getStringExtra("YardName").toString()
+        binding.hiveNameView.text = intent.getStringExtra("yardName").toString()
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         binding.editYardButton.setOnClickListener{
             editYard()
         }

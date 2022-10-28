@@ -2,6 +2,7 @@ package com.team13.colonykeeper
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.YardAdapter
@@ -34,9 +35,7 @@ class YardListActivity: AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.addYard.setOnClickListener{
-            startActivity(Intent(this, AddBeeYardActivity::class.java)
-                .putExtra("YardName", "testtesttest"))
-
+            startActivity(Intent(this, AddBeeYardActivity::class.java))
         }
     }
 
