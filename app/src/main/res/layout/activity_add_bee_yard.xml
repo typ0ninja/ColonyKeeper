@@ -23,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@id/bee_yard_name_input_layout"
         app:layout_constraintTop_toBottomOf="@id/add_bee_yard_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
