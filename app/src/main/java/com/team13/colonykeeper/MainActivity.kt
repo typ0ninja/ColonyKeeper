@@ -1,6 +1,7 @@
 package com.team13.colonykeeper
 
 import android.animation.ObjectAnimator
+import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -41,6 +42,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchYard(){
         yardIntent = Intent(this, YardListActivity::class.java)
-        startActivity(yardIntent)
+        startActivity(yardIntent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
     }
 }
