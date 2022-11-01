@@ -52,7 +52,6 @@ class YardListActivity: AppCompatActivity() {
 
         binding.addYard.setOnClickListener{
             startActivity(Intent(this, AddBeeYardActivity::class.java))
-
         }
     }
 

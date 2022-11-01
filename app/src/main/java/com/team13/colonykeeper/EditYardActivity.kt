@@ -5,26 +5,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
-import com.team13.colonykeeper.databinding.ActivityAddInspectionBinding
+import com.team13.colonykeeper.databinding.ActivityEditItemBinding
 
-class AddInspectionActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityAddInspectionBinding
+class EditYardActivity: AppCompatActivity() {
+    private lateinit var binding: ActivityEditItemBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddInspectionBinding.inflate(layoutInflater)
+        binding = ActivityEditItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.addPictureButton.setOnClickListener {
+        binding.submitButton.setOnClickListener{
+            submitChanges()
+        }
+
+        binding.photoButton.setOnClickListener{
             takePhoto()
         }
-        binding.submitInspectionButton.setOnClickListener {
-            submitInspection()
-        }
-    }
-
-    fun submitInspection(){
-        finish()
     }
 
     fun takePhoto() {
@@ -37,4 +34,7 @@ class AddInspectionActivity: AppCompatActivity() {
         }
     }
 
+    fun submitChanges(){
+        finish()
+    }
 }

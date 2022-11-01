@@ -2,9 +2,11 @@ package com.team13.colonykeeper
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.HiveAdapter
 import com.team13.colonykeeper.databinding.ActivityHiveListBinding
+import com.team13.colonykeeper.databinding.YardItemBinding
 
 class HiveListActivity: AppCompatActivity() {
 
@@ -20,14 +22,34 @@ class HiveListActivity: AppCompatActivity() {
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
+        binding.hiveNameView.text = intent.getStringExtra("yardName").toString()
+
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.backToYard.setOnClickListener{
-            backToGallery()
+
+        binding.editYardButton.setOnClickListener{
+            editYard()
+        }
+
+        binding.addHiveButton.setOnClickListener{
+            addHive()
+        }
+
+        binding.reportButton.setOnClickListener{
+            makeReport()
         }
 
     }
-    fun backToGallery(){
-        yardIntent = Intent(this, YardListActivity::class.java)
-        startActivity(yardIntent)
+
+    fun editYard(){
+        startActivity(Intent(this, EditYardActivity::class.java))
+    }
+
+    fun addHive(){
+        startActivity(Intent(this, AddBeeHiveActivity::class.java))
+    }
+
+    fun makeReport(){
+        startActivity(Intent(this, ReportActivity::class.java))
     }
 }

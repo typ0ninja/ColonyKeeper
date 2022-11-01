@@ -7,8 +7,8 @@
     <TextView
         android:id="@+id/add_inspection_title"
         android:text="@string/add_inspection_title"
+        android:fontFamily="@font/lalezar"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:fontFamily="cursive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,11 +30,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inspection_input_layout"
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_inspection_title"
-        android:layout_marginTop="30dp">
+        app:layout_constraintTop_toBottomOf="@id/add_inspection_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inspection_text_input"
