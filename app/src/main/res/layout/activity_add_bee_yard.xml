@@ -38,7 +38,8 @@
             android:id="@+id/bee_yard_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name_input_placeholder" />
+            android:hint="@string/name_input_placeholder"
+            android:singleLine="true" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -67,7 +68,8 @@
             android:id="@+id/bee_yard_notes_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/notes_input_placeholder" />
+            android:hint="@string/notes_input_placeholder"
+            android:singleLine="true"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
