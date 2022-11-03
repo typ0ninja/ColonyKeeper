@@ -4,7 +4,7 @@
     package="com.team13.colonykeeper">
 
     <application
-        android:name=".database.YardListApplication"
+        android:name=".database.ColonyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

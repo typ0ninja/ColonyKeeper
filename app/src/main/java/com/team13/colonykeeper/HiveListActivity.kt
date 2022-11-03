@@ -3,15 +3,20 @@ package com.team13.colonykeeper
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.HiveAdapter
+import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityHiveListBinding
-import com.team13.colonykeeper.databinding.YardItemBinding
 
 class HiveListActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityHiveListBinding
     private lateinit var yardIntent: Intent
+
+    private val hiveViewModel: HiveViewModel by viewModels {
+        HiveViewModelFactory((application as ColonyApplication).hiveRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -37,6 +42,18 @@ class HiveListActivity: AppCompatActivity() {
 
         binding.reportButton.setOnClickListener{
             makeReport()
+        }
+
+        val hiveAdapter: HiveAdapter = HiveAdapter(applicationContext, 3)
+        binding.hiveGridRecyclerView.adapter = hiveAdapter
+
+        hiveViewModel.hivesFromYard(intent.getStringExtra("yardName").toString())
+            .observe(this)
+        {
+                hives ->
+            hiveAdapter.addHiveList(hives)
+            Log.d("Getting hive Size", "${hives.size}")
+            hiveAdapter.notifyDataSetChanged()
         }
 
     }

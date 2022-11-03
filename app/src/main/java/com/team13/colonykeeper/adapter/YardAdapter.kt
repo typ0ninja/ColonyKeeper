@@ -62,19 +62,20 @@ class YardAdapter(
 
         //holder.yardPic?.setImageResource(yard.imageResourceId)
         holder.yardName?.text = yard.yardName
-        //holder.yardPic?.setOnClickListener {
-            //gotoYard(holder.yardPic.context)
-        //}
+        holder.yardPic?.setOnClickListener {
+            gotoYard(holder.yardPic.context, yard.yardName)
+        }
 
     }
 
-    fun gotoYard(actContext: Context){
+    fun gotoYard(actContext: Context, yardName: String){
         hiveIntent = Intent(actContext, HiveListActivity::class.java)
+            .putExtra("yardName", yardName)
         hiveIntent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
         actContext?.startActivity(hiveIntent)
     }
 
-    fun myTestFunction(yards: List<Yard>) {
+    fun addYardList(yards: List<Yard>) {
         this.yards = yards
         Log.d("TestFunction", "${this.yards.toString()}")
         Log.d("TestFunction", "${yards.toString()}")
