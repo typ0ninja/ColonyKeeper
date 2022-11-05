@@ -15,6 +15,7 @@ import com.team13.colonykeeper.R
 import com.team13.colonykeeper.data.DataSource
 import com.team13.colonykeeper.data.DataSource.hives
 import com.team13.colonykeeper.data.DataSource.yards
+import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Hive
 import com.team13.colonykeeper.database.Yard
 
@@ -30,6 +31,7 @@ class HiveAdapter(
         //find each view and assign to this container
         val hivePic: ImageView? = view!!.findViewById(R.id.hiveView)
         val hiveName: TextView? = view!!.findViewById(R.id.hiveName)
+        val view: View = view!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HiveAdapter.HiveViewHolder {
@@ -46,15 +48,15 @@ class HiveAdapter(
     }
 
     override fun onBindViewHolder(holder: HiveAdapter.HiveViewHolder, position: Int) {
-
         //val dog: Dog = dogs[position]
         val hive: Hive = hives[position]
         val resources = context?.resources
         //set the actual display views to the correct view for a given pig inside a card
-        //holder.hivePic?.setImageResource(hive.imageResourceId)
+        holder.hivePic?.setImageResource(R.drawable.beehive_temp)
         holder.hiveName?.text = hive.hiveName
-        holder.hivePic?.setOnClickListener {
-            gotoHive(holder.hivePic.context)
+        holder.view.setOnClickListener {
+            ColonyApplication.instance.curHive = hive
+            gotoHive(holder.view.context)
         }
     }
 
@@ -66,9 +68,6 @@ class HiveAdapter(
 
     fun addHiveList(hives: List<Hive>) {
         this.hives = hives
-        Log.d("TestFunction", "${this.hives.toString()}")
-        Log.d("TestFunction", "${yards.toString()}")
-
     }
 
 }

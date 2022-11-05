@@ -28,7 +28,7 @@
             app:srcCompat="@drawable/beeyard_temp"
             tools:text="Bill's Farm" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/yardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -8,6 +8,6 @@ import com.team13.colonykeeper.data.BeeYard
 
 @Entity(tableName = "yard_table")
 data class Yard (
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @NonNull @ColumnInfo(name = "yard_name") val yardName: String
 )

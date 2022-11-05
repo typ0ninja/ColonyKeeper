@@ -25,9 +25,6 @@ class YardListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityYardListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        Log.d("YardListActivity", "Made it to YardListActivity")
-        //yardViewModel.allYards()
         //start up recycler view, pass it live data of yard
 
         /*
@@ -37,11 +34,10 @@ class YardListActivity: AppCompatActivity() {
         val yardAdapter: YardAdapter = YardAdapter(applicationContext, 3)
         binding.yardGridRecyclerView.adapter = yardAdapter
         //observe the actual database info and assign it to gridview list via lambda
-        yardViewModel.allYards().observe(this)
-        {
+        yardViewModel.allYards()
+            .observe(this) {
             yards ->
             yardAdapter.addYardList(yards)
-            Log.d("Getting Yard Size", "${yards.size}")
             yardAdapter.notifyDataSetChanged()
         }
 
@@ -53,13 +49,4 @@ class YardListActivity: AppCompatActivity() {
             startActivity(Intent(this, AddBeeYardActivity::class.java))
         }
     }
-
-    /**
-    fun gotoHive(){
-        hiveIntent = Intent(this, HiveActivity::class.java)
-        //hiveIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(hiveIntent)
-    }
-    */
-
 }

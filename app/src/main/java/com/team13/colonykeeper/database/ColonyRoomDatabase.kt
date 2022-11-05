@@ -51,18 +51,22 @@ public abstract class ColonyRoomDatabase: RoomDatabase() {
 
         suspend fun populateDatabase(yardDao: YardDao, hiveDao: HiveDao) {
             yardDao.deleteAll()
+            //make 2 yards
             var yard = Yard(1, "Yard 1")
             yardDao.insert(yard)
             yard = Yard(2, "Yard 2")
             yardDao.insert(yard)
-            var hive = Hive(5,"batman", "Yard 1")
-            hive = Hive(5,"batman", "Yard 1")
+
+            //add to first yard
+            var hive = Hive(5,"batman", 1)
             hiveDao.insert(hive)
-            hive = Hive(6,"robin", "Yard 1")
+            hive = Hive(6,"robin", 1)
             hiveDao.insert(hive)
-            hive = Hive(7,"riddler", "Yard 2")
+
+            //add to second yard
+            hive = Hive(7,"riddler", 2)
             hiveDao.insert(hive)
-            hive = Hive(8,"harley", "Yard 2")
+            hive = Hive(8,"harley", 2)
             hiveDao.insert(hive)
         }
     }

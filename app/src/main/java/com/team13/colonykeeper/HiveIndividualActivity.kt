@@ -2,17 +2,30 @@ package com.team13.colonykeeper
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.team13.colonykeeper.database.ColonyApplication
+import com.team13.colonykeeper.database.HiveViewModel
+import com.team13.colonykeeper.database.HiveViewModelFactory
 import com.team13.colonykeeper.databinding.ActivityHiveIndividualBinding
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
 class HiveIndividualActivity : AppCompatActivity(){
     private lateinit var binding: ActivityHiveIndividualBinding
+    private val hiveViewModel: HiveViewModel by viewModels {
+        HiveViewModelFactory((application as ColonyApplication).hiveRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        hiveViewModel.getHive(ColonyApplication.instance.curHive.id)
+
+        hiveViewModel.getHive(ColonyApplication.instance.curHive.id).observe(this){
+            hive ->
+            binding.individualHiveTitle.text = hive.hiveName
+        }
 
         binding.hiveStartInspectionButton.setOnClickListener {
             gotoNewInspection()

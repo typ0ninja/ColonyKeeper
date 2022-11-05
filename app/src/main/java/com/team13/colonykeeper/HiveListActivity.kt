@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.HiveAdapter
+import com.team13.colonykeeper.data.DataSource.hives
 import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityHiveListBinding
 
@@ -27,8 +28,10 @@ class HiveListActivity: AppCompatActivity() {
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
-        binding.hiveNameView.text = intent.getStringExtra("yardName").toString()
-
+        binding.hiveNameView.text = ColonyApplication.instance.curYard.yardName
+        hiveViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
+                hives ->
+        }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -44,15 +47,18 @@ class HiveListActivity: AppCompatActivity() {
             makeReport()
         }
 
+        /*
+        Saving myAdapter variable for lambda capture then assigning to grid view for display
+        Cannot use grid view adapter directly in lambda, so need both variable here and assignment
+         */
         val hiveAdapter: HiveAdapter = HiveAdapter(applicationContext, 3)
         binding.hiveGridRecyclerView.adapter = hiveAdapter
 
-        hiveViewModel.hivesFromYard(intent.getStringExtra("yardName").toString())
-            .observe(this)
-        {
+        hiveViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
                 hives ->
+            Log.d("hiveAdapter", "currHiveId global${ColonyApplication.instance.curYard.id}")
+            Log.d("hiveAdapter", "Hives size: ${hives.size}")
             hiveAdapter.addHiveList(hives)
-            Log.d("Getting hive Size", "${hives.size}")
             hiveAdapter.notifyDataSetChanged()
         }
 
