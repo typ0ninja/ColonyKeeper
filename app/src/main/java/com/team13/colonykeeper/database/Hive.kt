@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "hive_table")
 data class Hive (
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @NonNull @ColumnInfo(name = "hive_name") val hiveName: String,
-    @NonNull @ColumnInfo(name = "yard") val yard: String
+    //@NonNull @ColumnInfo(name = "yard") val yard: String,
+    @NonNull @ColumnInfo(name = "yardID") val yardID: Int
 )

@@ -11,8 +11,11 @@ interface HiveDao {
     @Query("SELECT * FROM hive_table ORDER BY hive_name ASC")
     fun getAllHives(): Flow<List<Hive>>
 
-    @Query("SELECT * FROM hive_table WHERE yard = :yard_name ORDER BY hive_name ASC")
-    fun getHivesFromYard(yard_name: String): Flow<List<Hive>>
+    @Query("SELECT * FROM hive_table WHERE yardID = :yardID ORDER BY hive_name ASC")
+    fun getHivesFromYard(yardID: Int): Flow<List<Hive>>
+
+    @Query("SELECT * FROM hive_table WHERE id = :hive_id")
+    fun getHive(hive_id: Int) : Flow<Hive>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(hive: Hive)
@@ -25,4 +28,8 @@ interface HiveDao {
 
     @Query("DELETE FROM hive_table")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM hive_table WHERE yardID = :yard_ID")
+    suspend fun deleteYardHives(yard_ID: Int)
+
 }

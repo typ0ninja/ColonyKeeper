@@ -13,19 +13,25 @@ import com.team13.colonykeeper.HiveIndividualActivity
 import com.team13.colonykeeper.HiveListActivity
 import com.team13.colonykeeper.R
 import com.team13.colonykeeper.data.DataSource
+import com.team13.colonykeeper.data.DataSource.hives
+import com.team13.colonykeeper.data.DataSource.yards
+import com.team13.colonykeeper.database.ColonyApplication
+import com.team13.colonykeeper.database.Hive
+import com.team13.colonykeeper.database.Yard
 
 
 class HiveAdapter(
     private val context: Context?,
     private val layout: Int
 ): RecyclerView.Adapter<HiveAdapter.HiveViewHolder>() {
-    val hives: MutableList<BeeHive> = DataSource.hives
+    var hives: List<Hive> = emptyList()
     private lateinit var hiveIntent: Intent
 
     class HiveViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
         //find each view and assign to this container
         val hivePic: ImageView? = view!!.findViewById(R.id.hiveView)
         val hiveName: TextView? = view!!.findViewById(R.id.hiveName)
+        val view: View = view!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HiveAdapter.HiveViewHolder {
@@ -42,15 +48,15 @@ class HiveAdapter(
     }
 
     override fun onBindViewHolder(holder: HiveAdapter.HiveViewHolder, position: Int) {
-
         //val dog: Dog = dogs[position]
-        val hive: BeeHive = hives[position]
+        val hive: Hive = hives[position]
         val resources = context?.resources
         //set the actual display views to the correct view for a given pig inside a card
-        holder.hivePic?.setImageResource(hive.imageResourceId)
-        holder.hiveName?.text = hive.name
-        holder.hivePic?.setOnClickListener {
-            gotoHive(holder.hivePic.context)
+        holder.hivePic?.setImageResource(R.drawable.beehive_temp)
+        holder.hiveName?.text = hive.hiveName
+        holder.view.setOnClickListener {
+            ColonyApplication.instance.curHive = hive
+            gotoHive(holder.view.context)
         }
     }
 
@@ -59,4 +65,9 @@ class HiveAdapter(
         hiveIntent.setFlags(Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP)
         actContext?.startActivity(hiveIntent)
     }
+
+    fun addHiveList(hives: List<Hive>) {
+        this.hives = hives
+    }
+
 }
