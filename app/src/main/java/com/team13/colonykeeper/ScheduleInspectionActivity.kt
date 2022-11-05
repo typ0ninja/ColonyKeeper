@@ -12,9 +12,9 @@ class ScheduleInspectionActivity: AppCompatActivity() {
         binding = ActivityScheduleInspectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.submitButton.setOnClickListener{
-            scheduleInspection()
-        }
+//        binding.submitButton.setOnClickListener{
+//            scheduleInspection()
+//        }
     }
 
     fun scheduleInspection() {
