@@ -22,4 +22,7 @@ interface YardDao {
 
     @Query("DELETE FROM yard_table")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM yard_table JOIN hive_table ON :yard_id = hive_table.yardID")
+    fun getYardHives(yard_id: Int) : Flow<List<Hive>>
 }

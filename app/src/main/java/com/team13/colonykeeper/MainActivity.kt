@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var yardIntent: Intent
 
-    private val hiveViewModel: HiveViewModel by viewModels {
-        HiveViewModelFactory((application as HiveListApplication).repository)
-    }
+//    private val hiveViewModel: HiveViewModel by viewModels {
+//        HiveViewModelFactory((application as HiveListApplication).repository)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
