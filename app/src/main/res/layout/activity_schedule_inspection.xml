@@ -36,6 +36,7 @@
 
             <ImageButton
                 android:id="@+id/previous_day_button"
+                android:contentDescription="Navigate to previous  day"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -110,6 +111,7 @@
 
             <ImageButton
                 android:id="@+id/next_day_button"
+                android:contentDescription="Navigate to next  day"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
