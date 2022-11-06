@@ -11,8 +11,7 @@ import kotlinx.coroutines.launch
 
 @Database(entities = [Yard::class, Hive::class], version = 1, exportSchema = false)
 public abstract class ColonyRoomDatabase: RoomDatabase() {
-    abstract fun yardDao(): YardDao
-    abstract fun hiveDao(): HiveDao
+    abstract fun colonyDao(): ColonyDao
 
     companion object {
         @Volatile
@@ -44,30 +43,31 @@ public abstract class ColonyRoomDatabase: RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch(Dispatchers.IO) {
-                    populateDatabase(database.yardDao(), database.hiveDao())
+                    populateDatabase(database.colonyDao())
                 }
             }
         }
 
-        suspend fun populateDatabase(yardDao: YardDao, hiveDao: HiveDao) {
-            yardDao.deleteAll()
+        suspend fun populateDatabase(colonyDao: ColonyDao) {
+            colonyDao.deleteAllYard()
+            colonyDao.deleteAllHive()
             //make 2 yards
             var yard = Yard(1, "Yard 1")
-            yardDao.insert(yard)
+            colonyDao.insertYard(yard)
             yard = Yard(2, "Yard 2")
-            yardDao.insert(yard)
+            colonyDao.insertYard(yard)
 
             //add to first yard
             var hive = Hive(5,"batman", 1)
-            hiveDao.insert(hive)
+            colonyDao.insertHive(hive)
             hive = Hive(6,"robin", 1)
-            hiveDao.insert(hive)
+            colonyDao.insertHive(hive)
 
             //add to second yard
             hive = Hive(7,"riddler", 2)
-            hiveDao.insert(hive)
+            colonyDao.insertHive(hive)
             hive = Hive(8,"harley", 2)
-            hiveDao.insert(hive)
+            colonyDao.insertHive(hive)
         }
     }
 }

@@ -4,25 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.team13.colonykeeper.database.ColonyApplication
-import com.team13.colonykeeper.database.HiveViewModel
-import com.team13.colonykeeper.database.HiveViewModelFactory
+import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityHiveIndividualBinding
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
 class HiveIndividualActivity : AppCompatActivity(){
     private lateinit var binding: ActivityHiveIndividualBinding
-    private val hiveViewModel: HiveViewModel by viewModels {
-        HiveViewModelFactory((application as ColonyApplication).hiveRepository)
+    private val colonyViewModel: ColonyViewModel by viewModels {
+        ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        hiveViewModel.getHive(ColonyApplication.instance.curHive.id)
+        colonyViewModel.getHive(ColonyApplication.instance.curHive.id)
 
-        hiveViewModel.getHive(ColonyApplication.instance.curHive.id).observe(this){
+        colonyViewModel.getHive(ColonyApplication.instance.curHive.id).observe(this){
             hive ->
             binding.individualHiveTitle.text = hive.hiveName
         }
