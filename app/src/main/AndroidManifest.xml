@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.team13.colonykeeper">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".database.ColonyApplication"
         android:allowBackup="true"

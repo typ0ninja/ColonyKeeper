@@ -1,9 +1,12 @@
 package com.team13.colonykeeper.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.team13.colonykeeper.network.Forecast
+import com.team13.colonykeeper.network.Weather
 import com.team13.colonykeeper.network.WeatherApi
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -24,19 +27,22 @@ class PlanInspectionViewModel: ViewModel() {
 
     private var dayIndex = 0
 
-    fun getWeekForcast() {
+    fun getWeekForecast() {
         viewModelScope.launch {
+            Log.d("PlanInspectionViewModel", "In getWeekForecast")
             _status.value = WeatherApiStatus.LOADING
 
-            val response = WeatherApi.retrofitService.getWeekForecast(39.25F, -97.75F)
-            response.enqueue(object : Callback<DailyUnits> {
-                override fun onResponse(call: Call<DailyUnits>, response: Response<DailyUnits>) {
+            val response = WeatherApi.retrofitService.getWeekForecast()
+            response.enqueue(object : Callback<Forecast> {
+                override fun onResponse(call: Call<Forecast>, response: Response<Forecast>) {
+                    Log.d("PlanInspectionViewModel", "In Response callback")
                     _weekForcast.value = response.body()?.parseToWeatherList()
                     _dayForcast.value = _weekForcast.value?.get(dayIndex)
                     _status.value = WeatherApiStatus.DONE
                 }
 
-                override fun onFailure(call: Call<DailyUnits>, t: Throwable) {
+                override fun onFailure(call: Call<Forecast>, t: Throwable) {
+                    Log.d("PlanInspectionViewModel", "In Failure callback")
                     _weekForcast.value = listOf()
                     _status.value = WeatherApiStatus.ERROR
                 }
