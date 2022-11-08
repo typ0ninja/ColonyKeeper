@@ -1,7 +1,9 @@
 package com.team13.colonykeeper.database
 
+import android.net.Uri
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
+import java.net.URI
 
 class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     //Yard Items
@@ -21,6 +23,15 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     fun insertHive(hive: Hive) = viewModelScope.launch {
         repository.insertHive(hive)
     }
+
+    suspend fun updateHivePhoto(hive_id: Int, photoURI: Uri){
+        repository.updateHivePhoto(hive_id, photoURI)
+    }
+
+    suspend fun updateYardPhoto(yard_id: Int, photoURI: Uri){
+        repository.updateHivePhoto(yard_id, photoURI)
+    }
+
 }
 
 class ColonyViewModelFactory(private val repository: ColonyRepository): ViewModelProvider.Factory {

@@ -1,13 +1,17 @@
 package com.team13.colonykeeper.database
 
+import android.net.Uri
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import java.net.URI
 
 @Dao
 interface ColonyDao {
+
+    //Hive Calls
     @Query("SELECT * FROM hive_table ORDER BY hive_name ASC")
     fun getAllHives(): Flow<List<Hive>>
 
@@ -29,9 +33,12 @@ interface ColonyDao {
     @Query("DELETE FROM hive_table")
     suspend fun deleteAllHive()
 
+    @Query("Update hive_table SET photoURI = :photoURI WHERE id = :hive_id")
+    suspend fun updateHivePhoto(hive_id: Int, photoURI: Uri)
+
+    //Yard Calls
     @Query("DELETE FROM hive_table WHERE yardID = :yard_ID")
     suspend fun deleteYardHives(yard_ID: Int)
-
 
     @Query("SELECT * FROM yard_table ORDER BY yard_name ASC")
     fun getYards(): Flow<List<Yard>>
@@ -50,4 +57,7 @@ interface ColonyDao {
 
     @Query("SELECT * FROM yard_table JOIN hive_table ON :yard_id = hive_table.yardID")
     fun getYardHives(yard_id: Int) : Flow<List<Hive>>
+
+    @Query("Update yard_table SET photoURI = :photoURI WHERE id = :yard_id")
+    suspend fun updateYardPhoto(yard_id: Int, photoURI: Uri)
 }

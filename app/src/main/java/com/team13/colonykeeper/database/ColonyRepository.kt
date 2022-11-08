@@ -1,7 +1,9 @@
 package com.team13.colonykeeper.database
 
+import android.net.Uri
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
+import java.net.URI
 
 class ColonyRepository(private val colonyDao: ColonyDao) {
     val allYards: Flow<List<Yard>> = colonyDao.getYards()
@@ -20,5 +22,17 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
     suspend fun insertYard(yard: Yard) {
         colonyDao.insertYard(yard)
     }
+
+    @WorkerThread
+    suspend fun updateHivePhoto(hive_id: Int, photoURI: Uri){
+        colonyDao.updateHivePhoto(hive_id, photoURI)
+    }
+
+    @WorkerThread
+    suspend fun updateYardPhoto(yard_id: Int, photoURI: Uri){
+        colonyDao.updateHivePhoto(yard_id, photoURI)
+    }
+
+
 
 }
