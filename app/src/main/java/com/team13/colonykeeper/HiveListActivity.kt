@@ -15,8 +15,8 @@ class HiveListActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHiveListBinding
     private lateinit var yardIntent: Intent
 
-    private val hiveViewModel: HiveViewModel by viewModels {
-        HiveViewModelFactory((application as ColonyApplication).hiveRepository)
+    private val colonyViewModel: ColonyViewModel by viewModels {
+        ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?){
@@ -24,16 +24,16 @@ class HiveListActivity: AppCompatActivity() {
         binding = ActivityHiveListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = ColonyApplication.instance.curYard.yardName
-
         binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
-        hiveViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
+        binding.hiveNameView.text = ColonyApplication.instance.curYard.yardName
+        colonyViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
                 hives ->
         }
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.editYardButton.setOnClickListener{
             editYard()
@@ -54,7 +54,7 @@ class HiveListActivity: AppCompatActivity() {
         val hiveAdapter: HiveAdapter = HiveAdapter(applicationContext, 3)
         binding.hiveGridRecyclerView.adapter = hiveAdapter
 
-        hiveViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
+        colonyViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
                 hives ->
             Log.d("hiveAdapter", "currHiveId global${ColonyApplication.instance.curYard.id}")
             Log.d("hiveAdapter", "Hives size: ${hives.size}")

@@ -7,9 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.YardAdapter
-import com.team13.colonykeeper.database.ColonyApplication
-import com.team13.colonykeeper.database.YardViewModel
-import com.team13.colonykeeper.database.YardViewModelFactory
+import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
 class YardListActivity: AppCompatActivity() {
@@ -18,8 +16,8 @@ class YardListActivity: AppCompatActivity() {
     private lateinit var hiveIntent: Intent
     private lateinit var yardIntent: Intent
 
-    private val yardViewModel: YardViewModel by viewModels {
-        YardViewModelFactory((application as ColonyApplication).yardRepository)
+    private val colonyViewModel: ColonyViewModel by viewModels {
+        ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +37,7 @@ class YardListActivity: AppCompatActivity() {
         val yardAdapter: YardAdapter = YardAdapter(applicationContext, 3)
         binding.yardGridRecyclerView.adapter = yardAdapter
         //observe the actual database info and assign it to gridview list via lambda
-        yardViewModel.allYards()
+        colonyViewModel.allYards()
             .observe(this) {
             yards ->
             yardAdapter.addYardList(yards)
