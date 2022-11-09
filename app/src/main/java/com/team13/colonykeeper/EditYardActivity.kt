@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
+import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.databinding.ActivityEditItemBinding
 
 class EditYardActivity: AppCompatActivity() {
@@ -16,6 +17,8 @@ class EditYardActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName
 
         binding.submitButton.setOnClickListener{
             submitChanges()

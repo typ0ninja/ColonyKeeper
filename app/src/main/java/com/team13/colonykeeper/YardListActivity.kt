@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.YardAdapter
 import com.team13.colonykeeper.database.ColonyApplication
@@ -25,6 +26,10 @@ class YardListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityYardListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Bee Yards"
+
         //start up recycler view, pass it live data of yard
 
         /*
@@ -42,8 +47,6 @@ class YardListActivity: AppCompatActivity() {
         }
 
         binding.yardGridRecyclerView.setHasFixedSize(true)
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.addYard.setOnClickListener{
             startActivity(Intent(this, AddBeeYardActivity::class.java))

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
+import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.databinding.ActivityAddInspectionBinding
 
 class AddInspectionActivity: AppCompatActivity() {
@@ -16,6 +17,9 @@ class AddInspectionActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddInspectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / " + ColonyApplication.instance.curHive.hiveName
 
         binding.addPictureButton.setOnClickListener {
             takePhoto()

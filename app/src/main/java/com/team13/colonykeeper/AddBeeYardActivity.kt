@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
+import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.databinding.ActivityAddBeeYardBinding
 import com.team13.colonykeeper.databinding.ActivityMainBinding
 
@@ -19,6 +20,8 @@ class AddBeeYardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBeeYardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = "New Yard"
 
         binding.addBeeYardButton.setOnClickListener{
             submitNewYard()

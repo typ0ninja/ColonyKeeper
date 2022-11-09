@@ -3,6 +3,7 @@ package com.team13.colonykeeper
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.databinding.ActivityScheduleInspectionBinding
 import com.team13.colonykeeper.model.PlanInspectionViewModel
 
@@ -15,6 +16,9 @@ class ScheduleInspectionActivity: AppCompatActivity() {
         binding = ActivityScheduleInspectionBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         setContentView(binding.root)
+
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / " + ColonyApplication.instance.curHive.hiveName
 
         binding.viewModel = viewModel
         viewModel.getWeekForecast()

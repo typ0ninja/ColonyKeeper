@@ -38,8 +38,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/yardNameView"
             app:spanCount="2" />
-    </FrameLayout>
 
+    </FrameLayout>
 
     <Button
         android:id="@+id/addYard"

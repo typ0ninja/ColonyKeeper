@@ -24,6 +24,9 @@ class HiveListActivity: AppCompatActivity() {
         binding = ActivityHiveListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName
+
         binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
@@ -32,8 +35,6 @@ class HiveListActivity: AppCompatActivity() {
         hiveViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
                 hives ->
         }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.editYardButton.setOnClickListener{
             editYard()
