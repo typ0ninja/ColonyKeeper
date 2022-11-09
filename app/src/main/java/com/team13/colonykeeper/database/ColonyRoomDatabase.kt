@@ -11,7 +11,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Yard::class, Hive::class], version = 1, exportSchema = false)
+@Database(entities = [Yard::class, Hive::class, Inspections::class, Scheduled::class],
+    version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 public abstract class ColonyRoomDatabase: RoomDatabase() {
     abstract fun colonyDao(): ColonyDao
