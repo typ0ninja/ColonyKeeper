@@ -31,7 +31,6 @@ class HiveListActivity: AppCompatActivity() {
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
-        binding.hiveNameView.text = ColonyApplication.instance.curYard.yardName
         hiveViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
                 hives ->
         }

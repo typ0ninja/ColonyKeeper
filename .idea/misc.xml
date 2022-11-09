@@ -15,11 +15,13 @@
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_hive_inspection_list.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_hive_list.xml" value="0.264" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_report.xml" value="0.3625" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_schedule_inspection.xml" value="0.4" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_view_future_inspections.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/activity_yard_list.xml" value="0.264" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/hive_inspection_item.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/hive_item.xml" value="0.21203703703703702" />
+        <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/inspection_item.xml" value="0.3625" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/yard_inspection_item.xml" value="0.264" />
         <entry key="..\:/Users/scarl/AndroidStudioProjects/ColonyKeeper/app/src/main/res/layout/yard_item.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/activity_add_bee_hive.xml" value="0.17074275362318841" />
