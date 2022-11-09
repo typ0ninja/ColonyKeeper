@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.adapter.HiveAdapter
-import com.team13.colonykeeper.data.DataSource.hives
 import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityHiveListBinding
 
@@ -23,12 +22,12 @@ class HiveListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHiveListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName
 
         binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
-        binding.hiveNameView.text = ColonyApplication.instance.curYard.yardName
         colonyViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
                 hives ->
         }

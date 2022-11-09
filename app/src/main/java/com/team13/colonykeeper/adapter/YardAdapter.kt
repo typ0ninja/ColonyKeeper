@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.HiveListActivity
 import com.team13.colonykeeper.R
-import com.team13.colonykeeper.data.DataSource
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Yard
 

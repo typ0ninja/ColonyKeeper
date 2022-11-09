@@ -3,8 +3,6 @@ package com.team13.colonykeeper.model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.team13.colonykeeper.database.ColonyApplication
-import com.team13.colonykeeper.database.HiveDao
-import com.team13.colonykeeper.database.HiveRepository
 import com.team13.colonykeeper.database.Yard
 
 class FutureInspectionsViewModel {
