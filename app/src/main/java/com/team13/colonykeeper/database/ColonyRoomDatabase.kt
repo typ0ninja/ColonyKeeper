@@ -47,7 +47,7 @@ public abstract class ColonyRoomDatabase: RoomDatabase() {
             super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch(Dispatchers.IO) {
-                    populateDatabase(database.colonyDao())
+                    //populateDatabase(database.colonyDao())
                 }
             }
         }

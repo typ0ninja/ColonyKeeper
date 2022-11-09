@@ -2,6 +2,7 @@ package com.team13.colonykeeper.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,13 @@ class YardAdapter(
         val yard: Yard = yards[position]
         val resources = context?.resources
 
-        holder.yardPic?.setImageResource(R.drawable.beeyard_temp)
+        Log.d("URI", "Yard URI: ${yard.photoURI}")
+
+        val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, yard.photoURI)
+
+        holder.yardPic?.setImageBitmap(bitmap)
+
+        //holder.yardPic?.setImageResource(R.drawable.beeyard_temp)
         holder.yardName?.text = yard.yardName
         holder.view.setOnClickListener {
             ColonyApplication.instance.curYard = yard
