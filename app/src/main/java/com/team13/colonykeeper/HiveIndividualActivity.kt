@@ -1,7 +1,9 @@
 package com.team13.colonykeeper
 
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.team13.colonykeeper.database.*
@@ -16,6 +18,12 @@ class HiveIndividualActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val location = intent.getParcelableExtra<Location>(
+            ForegroundOnlyLocationService.EXTRA_LOCATION
+        )
+
+        Log.d("TESTING", "${location}")
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
         colonyViewModel.getHive(ColonyApplication.instance.curHive.id)
