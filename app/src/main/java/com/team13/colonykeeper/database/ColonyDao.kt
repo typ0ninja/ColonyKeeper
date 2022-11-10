@@ -71,8 +71,6 @@ interface ColonyDao {
 
     @Query("SELECT * FROM scheduled_table WHERE id = :scheduled_id")
     fun getScheduled(scheduled_id: Int): Flow<Scheduled>
-//TODO: Pretty much I need to add new inspections, delete old ones (which can be by ID),
-// and get a list of inspections by tag and by yard.
 
     @Delete
     suspend fun deleteScheduled(scheduled: Scheduled)

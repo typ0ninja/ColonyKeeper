@@ -43,15 +43,14 @@ class HiveAdapter(
         return HiveAdapter.HiveViewHolder(adapterLayout)
     }
     override fun getItemCount(): Int {
-        //number of pigs in list to display
         return hives.size
     }
 
     override fun onBindViewHolder(holder: HiveAdapter.HiveViewHolder, position: Int) {
-        //val dog: Dog = dogs[position]
+
         val hive: Hive = hives[position]
         val resources = context?.resources
-        //set the actual display views to the correct view for a given pig inside a card
+
         holder.hivePic?.setImageResource(R.drawable.beehive_temp)
         holder.hiveName?.text = hive.hiveName
         holder.view.setOnClickListener {
