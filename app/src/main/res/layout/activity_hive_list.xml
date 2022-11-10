@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside" />
+        app:layout_constraintVertical_chainStyle="spread" />
 
 
     <GridLayout
@@ -47,7 +47,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="5dp"
         android:text="Edit Yard"
-        app:layout_constraintBottom_toTopOf="@+id/report_button"
+        app:layout_constraintBottom_toTopOf="@+id/plan_inspection_button"
         app:layout_constraintEnd_toStartOf="@id/add_hive_button"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,10 +66,10 @@
         app:layout_constraintTop_toTopOf="@id/edit_yard_button" />
 
     <Button
-        android:id="@+id/report_button"
+        android:id="@+id/plan_inspection_button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:text="Generate Report"
+        android:text="Plan Inspection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

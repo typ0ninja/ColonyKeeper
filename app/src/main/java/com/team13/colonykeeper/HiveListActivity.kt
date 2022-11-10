@@ -42,8 +42,8 @@ class HiveListActivity: AppCompatActivity() {
             addHive()
         }
 
-        binding.reportButton.setOnClickListener{
-            makeReport()
+        binding.planInspectionButton.setOnClickListener{
+            startActivity(Intent(this, ScheduleInspectionActivity::class.java))
         }
 
         /*
@@ -69,9 +69,5 @@ class HiveListActivity: AppCompatActivity() {
 
     fun addHive(){
         startActivity(Intent(this, AddBeeHiveActivity::class.java))
-    }
-
-    fun makeReport(){
-        startActivity(Intent(this, ReportActivity::class.java))
     }
 }

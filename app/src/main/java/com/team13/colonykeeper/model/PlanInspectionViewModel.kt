@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
+import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.network.Forecast
 import com.team13.colonykeeper.network.Weather
 import com.team13.colonykeeper.network.WeatherApi
@@ -27,6 +30,15 @@ class PlanInspectionViewModel: ViewModel() {
 
     private var dayIndex = 0
 
+    private val _hour = MutableLiveData<Int>()
+    val hour: LiveData<Int> = _hour
+
+    private val _minute = MutableLiveData<Int>()
+    val minute: LiveData<Int> = _minute
+
+    private val _checked = MutableLiveData<Boolean>()
+    val checked: LiveData<Boolean> = _checked
+
     fun getWeekForecast() {
         viewModelScope.launch {
             Log.d("PlanInspectionViewModel", "In getWeekForecast")
@@ -48,6 +60,15 @@ class PlanInspectionViewModel: ViewModel() {
                 }
             })
         }
+    }
+
+    fun onTimeChanged(newHour: Int, newMinute: Int){
+        _hour.value = newHour
+        _minute.value = newMinute
+    }
+
+    fun onCheckBoxToggled(isChecked: Boolean) {
+        _checked.value = isChecked
     }
 
     fun onBackArrowClicked() {

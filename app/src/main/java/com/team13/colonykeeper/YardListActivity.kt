@@ -46,7 +46,7 @@ class YardListActivity: AppCompatActivity() {
 
         binding.yardGridRecyclerView.setHasFixedSize(true)
 
-        binding.addYard.setOnClickListener{
+        binding.addYardButton.setOnClickListener{
             startActivity(Intent(this, AddBeeYardActivity::class.java))
         }
     }
