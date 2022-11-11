@@ -34,43 +34,43 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
 
     fun getTagScheduled(tag: String): LiveData<List<Scheduled>> = repository.getTagScheduled(tag).asLiveData()
 
-    suspend fun deleteScheduled(scheduled: Scheduled) = viewModelScope.launch {
+    fun deleteScheduled(scheduled: Scheduled) = viewModelScope.launch {
         repository.deleteScheduled(scheduled)
     }
 
-    suspend fun deleteScheduled(scheduled_id: Int) = viewModelScope.launch {
+    fun deleteScheduled(scheduled_id: Int) = viewModelScope.launch {
         repository.deleteScheduled(scheduled_id)
     }
 
-    suspend fun deleteYardScheduled(yard_id: Int) = viewModelScope.launch {
+    fun deleteYardScheduled(yard_id: Int) = viewModelScope.launch {
         repository.deleteYardScheduled(yard_id)
     }
 
-    suspend fun deleteTagScheduled(tag: String) = viewModelScope.launch {
+    fun deleteTagScheduled(tag: String) = viewModelScope.launch {
         repository.deleteTagScheduled(tag)
     }
 
-    suspend fun updateHivePhoto(hive_id: Int, photoURI: Uri) = viewModelScope.launch {
+    fun updateHivePhoto(hive_id: Int, photoURI: Uri) = viewModelScope.launch {
         repository.updateHivePhoto(hive_id, photoURI)
     }
 
-    suspend fun updateYardPhoto(yard_id: Int, photoURI: Uri) = viewModelScope.launch {
+    fun updateYardPhoto(yard_id: Int, photoURI: Uri) = viewModelScope.launch {
         repository.updateHivePhoto(yard_id, photoURI)
     }
 
-    suspend fun scheduleInspection(scheduled: Scheduled) = viewModelScope.launch {
+    fun scheduleInspection(scheduled: Scheduled) = viewModelScope.launch {
         repository.scheduleInspection(scheduled)
     }
 
-    suspend fun updateInspection(scheduled: Scheduled) = viewModelScope.launch {
+    fun updateInspection(scheduled: Scheduled) = viewModelScope.launch {
         repository.updateInspection(scheduled)
     }
 
-    suspend fun addInspection(newInspection: Inspections) = viewModelScope.launch {
+    fun addInspection(newInspection: Inspections) = viewModelScope.launch {
         repository.addInspection(newInspection)
     }
 
-    suspend fun deleteInspection(inspection: Inspections) = viewModelScope.launch {
+    fun deleteInspection(inspection: Inspections) = viewModelScope.launch {
         repository.deleteInspection(inspection)
     }
 
