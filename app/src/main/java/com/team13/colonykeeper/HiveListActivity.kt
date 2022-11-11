@@ -24,7 +24,7 @@ class HiveListActivity: AppCompatActivity() {
         binding = ActivityHiveListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
+        //binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
