@@ -69,5 +69,15 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
         colonyDao.updateInspection(scheduled)
     }
 
+    @WorkerThread
+    suspend fun addInspection(newInspection: Inspections){
+        colonyDao.addInspection(newInspection)
+    }
+
+    @WorkerThread
+    suspend fun deleteInspection(inspection: Inspections){
+        colonyDao.deleteInspection(inspection)
+    }
+
 
 }

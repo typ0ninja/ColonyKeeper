@@ -58,6 +58,13 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         repository.updateInspection(scheduled)
     }
 
+    fun addInspection(newInspection: Inspections) = viewModelScope.launch {
+        repository.addInspection(newInspection)
+    }
+
+    suspend fun deleteInspection(inspection: Inspections){
+        repository.deleteInspection(inspection)
+    }
 }
 
 class ColonyViewModelFactory(private val repository: ColonyRepository): ViewModelProvider.Factory {

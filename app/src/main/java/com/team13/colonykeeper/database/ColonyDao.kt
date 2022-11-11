@@ -90,10 +90,13 @@ interface ColonyDao {
     @Query("DELETE FROM scheduled_table where tag = :tag")
     suspend fun deleteTagScheduled(tag: String)
 
-
-
-
     //Previous Inspections:
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addInspection(newInspection: Inspections)
+
+    @Delete
+    suspend fun deleteInspection(inspection: Inspections)
 
 
 
