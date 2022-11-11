@@ -4,6 +4,8 @@ import android.net.Uri
 import android.net.Uri.parse
 import androidx.room.TypeConverter
 import java.net.URI
+import java.time.LocalDate
+import java.util.*
 
 
 class Converters {
@@ -16,4 +18,10 @@ class Converters {
     fun fromURI(photoString: String): Uri? {
         return Uri.parse(photoString)
     }
+
+    @TypeConverter
+    fun toString(date: Date): String {
+        return date.toString()
+    }
+
 }

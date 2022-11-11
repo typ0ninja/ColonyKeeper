@@ -84,4 +84,8 @@ class PlanInspectionViewModel: ViewModel() {
             _dayForcast.value = _weekForcast.value?.get(dayIndex)
         }
     }
+
+    fun returnTime(): String {
+        return _hour.value.toString() + ":" + _minute.value.toString()
+    }
 }

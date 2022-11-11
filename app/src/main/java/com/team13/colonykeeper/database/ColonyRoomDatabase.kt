@@ -51,7 +51,7 @@ public abstract class ColonyRoomDatabase: RoomDatabase() {
                 }
             }
         }
-
+/*
         suspend fun populateDatabase(colonyDao: ColonyDao) {
             colonyDao.deleteAllYard()
             colonyDao.deleteAllHive()
@@ -73,5 +73,7 @@ public abstract class ColonyRoomDatabase: RoomDatabase() {
             hive = Hive(8,"harley", 2)
             colonyDao.insertHive(hive)
         }
+    */
     }
+
 }
