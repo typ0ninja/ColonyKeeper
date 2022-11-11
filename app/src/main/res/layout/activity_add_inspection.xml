@@ -41,8 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="top"
+            android:gravity="top|start"
             android:hint="@string/inspection_text_input_hint"
-            android:singleLine="true"/>
+            android:inputType="textMultiLine"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

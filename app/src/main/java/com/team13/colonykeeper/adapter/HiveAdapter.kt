@@ -2,6 +2,7 @@ package com.team13.colonykeeper.adapter
 import com.team13.colonykeeper.data.BeeHive
 import android.content.Context
 import android.content.Intent
+import android.provider.MediaStore
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -51,7 +52,10 @@ class HiveAdapter(
         val hive: Hive = hives[position]
         val resources = context?.resources
 
-        holder.hivePic?.setImageResource(R.drawable.beehive_temp)
+        val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, hive.photoURI)
+
+        holder.hivePic?.setImageBitmap(bitmap)
+
         holder.hiveName?.text = hive.hiveName
         holder.view.setOnClickListener {
             ColonyApplication.instance.curHive = hive
