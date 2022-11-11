@@ -76,7 +76,7 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
 
     @WorkerThread
     suspend fun deleteInspection(inspection: Inspections){
-        colonyDao.deleteInspection(inspection)
+        colonyDao.addInspection((inspection))
     }
 
 

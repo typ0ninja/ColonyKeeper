@@ -88,7 +88,6 @@ class AddInspectionActivity: AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-
         when (keyCode) {
             KeyEvent.KEYCODE_VOLUME_DOWN -> voiceText()
             KeyEvent.KEYCODE_VOLUME_UP -> takePhoto()

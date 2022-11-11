@@ -58,6 +58,9 @@ interface ColonyDao {
     @Query("Update yard_table SET photoURI = :photoURI WHERE id = :yard_id")
     suspend fun updateYardPhoto(yard_id: Int, photoURI: Uri)
 
+    @Query("Update yard_table SET latitude = :latitude AND longitude = :longitude WHERE id = :id")
+    suspend fun updateYardGPS(id: Int, latitude: Double, longitude: Double)
+
     //Scheduled Inspections:
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
