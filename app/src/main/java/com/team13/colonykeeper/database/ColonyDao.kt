@@ -40,6 +40,9 @@ interface ColonyDao {
     @Query("SELECT * FROM yard_table ORDER BY yard_name ASC")
     fun getYards(): Flow<List<Yard>>
 
+    @Query("SELECT * FROM yard_table WHERE id = :yard_id")
+    fun getYard(yard_id: Int): Flow<Yard>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertYard(yard: Yard)
 

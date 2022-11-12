@@ -1,10 +1,9 @@
 package com.team13.colonykeeper.database
 
 import android.net.Uri
-import android.net.Uri.parse
 import androidx.room.TypeConverter
-import java.net.URI
-import java.time.LocalDate
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
 
 
@@ -22,6 +21,16 @@ class Converters {
     @TypeConverter
     fun toString(date: Date): String {
         return date.toString()
+    }
+
+    @TypeConverter
+    fun UriListToString(uriList: MutableList<Uri>): String{
+        return Gson().toJson( uriList, object : TypeToken<String>(){}.type )
+    }
+
+    @TypeConverter
+    fun UriListFromString(uriString: String): MutableList<Uri>{
+        return Gson().fromJson( uriString, object : TypeToken<MutableList<Uri>>(){}.type )
     }
 
 }

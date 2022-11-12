@@ -17,6 +17,8 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
 
     fun getHive(hiveID: Int): Flow<Hive> = colonyDao.getHive(hiveID)
 
+    fun getYard(yard_id: Int): Flow<Yard> = colonyDao.getYard(yard_id)
+
     //scheduled inspections
 
     fun getAllScheduled(): Flow<List<Scheduled>> = colonyDao.getAllScheduled()

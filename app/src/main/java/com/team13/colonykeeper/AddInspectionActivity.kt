@@ -29,7 +29,8 @@ class AddInspectionActivity: AppCompatActivity() {
     private val pic_id = 1
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
-    var cameraPhotoFilePath: Uri? = null
+    var cameraPhotoFilePath: Uri? = Uri.EMPTY
+    var picList: MutableList<Uri> = mutableListOf<Uri>()
     private lateinit var imageFilePath: String
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -79,14 +80,6 @@ class AddInspectionActivity: AppCompatActivity() {
         }
     }
 
-    fun submitInspection(){
-        var newInspection: Inspections = Inspections( "fresh", "10-22-22",
-            binding.inspectionTextInput.text.toString())
-        Log.d("Inspection", "hive id:${newInspection.id}")
-        colonyViewModel.addInspection(newInspection)
-        finish()
-    }
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_VOLUME_DOWN -> voiceText()
@@ -123,11 +116,13 @@ class AddInspectionActivity: AppCompatActivity() {
         if (photoFile != null) {
             Log.d("erroring", "didn't make the file")
             cameraPhotoFilePath = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
-                BuildConfig.APPLICATION_ID + ".provider", photoFile);
+                BuildConfig.APPLICATION_ID + ".provider", photoFile)
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                cameraPhotoFilePath);
+                cameraPhotoFilePath)
             startActivityForResult(takePictureIntent,
-                REQUEST_IMAGE_CAPTURE);
+                REQUEST_IMAGE_CAPTURE)
+            //add Uri to list of pics
+            picList.add(cameraPhotoFilePath!!)
         }
     }
 
@@ -154,6 +149,15 @@ class AddInspectionActivity: AppCompatActivity() {
             val photo = data!!.extras!!["data"] as Bitmap?
 
         }
+    }
+
+    fun submitInspection(){
+        var newInspection: Inspections = Inspections( "fresh", Calendar.DATE.toString(),
+            binding.inspectionTextInput.text.toString())
+        newInspection.photoList = picList
+        Log.d("Inspection", "hive id:${newInspection.id}")
+        colonyViewModel.addInspection(newInspection)
+        finish()
     }
 
 }
