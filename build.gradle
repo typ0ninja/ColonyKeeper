@@ -31,4 +31,6 @@ ext {
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'
     androidxJunitVersion = '1.1.3'
+// Work Manager
+    workVersion = "2.7.1"
 }

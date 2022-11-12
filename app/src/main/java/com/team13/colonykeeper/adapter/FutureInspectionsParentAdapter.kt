@@ -9,11 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.R
-import com.team13.colonykeeper.YardInspection
-import com.team13.colonykeeper.database.ColonyApplication
-import com.team13.colonykeeper.database.ColonyViewModel
-import com.team13.colonykeeper.database.Yard
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class FutureInspectionsParentAdapter(private val context: Context?) :
 RecyclerView.Adapter<FutureInspectionsParentAdapter.YardInspectionViewHolder>() {

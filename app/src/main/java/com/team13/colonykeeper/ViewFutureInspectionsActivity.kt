@@ -6,10 +6,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.team13.colonykeeper.adapter.FutureInspectionsParentAdapter
+import com.team13.colonykeeper.adapter.YardInspection
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.ColonyViewModelFactory
-import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.databinding.ActivityViewFutureInspectionsBinding
 
 class ViewFutureInspectionsActivity: AppCompatActivity() {

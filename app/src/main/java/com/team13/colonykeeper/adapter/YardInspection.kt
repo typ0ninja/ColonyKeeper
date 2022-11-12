@@ -1,4 +1,4 @@
-package com.team13.colonykeeper
+package com.team13.colonykeeper.adapter
 
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.database.Yard
