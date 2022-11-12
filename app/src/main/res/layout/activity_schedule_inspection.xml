@@ -1,438 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/screen_title"
-        android:text="@string/schedule_inspection_title"
-        android:fontFamily="@font/lalezar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.team13.colonykeeper.model.PlanInspectionViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/date_label"
-        android:text="Choose Date"
-        android:fontFamily="@font/lalezar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/screen_title"/>
-
-    <HorizontalScrollView
-        android:id="@+id/date_picker_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_label">
+        android:layout_height="match_parent">
 
-        <RadioGroup
-            android:id="@+id/date_picker_group"
+        <TextView
+            android:id="@+id/plan_inspection_screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/lalezar"
+            android:text="Plan Inspection"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            app:layout_constraintBottom_toTopOf="@id/date_selector_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/date_selector_card"
+            android:layout_width="350dp"
+            android:layout_height="175dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="556dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toTopOf="@id/time_selector_card"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/date_option1_card"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="7dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/option1_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/date_option1_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:paddingStart="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/date_option1"
-                        android:text="Day 1"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/date_option1_temp"
-                        android:text="78^F"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/date_option1"/>
-
-                    <ImageView
-                        android:id="@+id/date_option1_icon"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/date_option1_temp"
-                        app:srcCompat="@drawable/ic_clouds_icon" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/date_option2_card"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="7dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/option2_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/date_option2_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <ImageButton
+                    android:id="@+id/previous_day_button"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Navigate to previous  day"
+                    app:layout_constraintBottom_toTopOf="@id/current_day"
+                    app:layout_constraintEnd_toStartOf="@id/weather_icon"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
                 <TextView
-                    android:id="@+id/date_option2"
-                    android:text="Day 2"
-                    android:textSize="24sp"
+                    android:id="@+id/temperature_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/date_option2_temp"
-                    android:text="73^F"
-                    android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option2"/>
+                    android:text="@{viewModel.dayForcast.tempRange}"
+                    app:layout_constraintBottom_toTopOf="@id/weather_icon"
+                    app:layout_constraintEnd_toEndOf="@+id/weather_icon"
+                    app:layout_constraintStart_toStartOf="@+id/weather_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="76°  69°" />
 
                 <ImageView
-                    android:id="@+id/date_option2_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option2_temp"
-                    app:srcCompat="@drawable/ic_snow_icon" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:id="@+id/weather_icon"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    app:layout_constraintBottom_toTopOf="@id/current_day"
+                    app:layout_constraintEnd_toStartOf="@id/sunrise_label"
+                    app:layout_constraintStart_toEndOf="@id/previous_day_button"
+                    app:layout_constraintTop_toBottomOf="@id/temperature_text"
+                    app:weatherIcon="@{viewModel.dayForcast.imageResourceId}"
+                    tools:srcCompat="@drawable/ic_snow_icon" />
 
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/date_option3_card"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="7dp">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/option3_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/date_option3_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/date_option3"
-                    android:text="Day 3"
-                    android:textSize="24sp"
+                    android:id="@+id/sunrise_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    android:text="Sunrise"
+                    app:layout_constraintBottom_toTopOf="@id/sunrise_text"
+                    app:layout_constraintEnd_toStartOf="@id/next_day_button"
+                    app:layout_constraintStart_toEndOf="@id/weather_icon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
-                    android:id="@+id/date_option3_temp"
-                    android:text="90^F"
+                    android:id="@+id/sunrise_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.dayForcast.sunrise}"
+                    app:layout_constraintBottom_toTopOf="@id/sunset_label"
+                    app:layout_constraintEnd_toEndOf="@id/sunrise_label"
+                    app:layout_constraintStart_toStartOf="@id/sunrise_label"
+                    app:layout_constraintTop_toBottomOf="@id/sunrise_label"
+                    tools:text="7:48 AM" />
+
+                <TextView
+                    android:id="@+id/sunset_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Sunset"
+                    app:layout_constraintBottom_toTopOf="@id/sunset_text"
+                    app:layout_constraintEnd_toEndOf="@id/sunrise_label"
+                    app:layout_constraintStart_toStartOf="@id/sunrise_label"
+                    app:layout_constraintTop_toBottomOf="@id/sunrise_text" />
+
+                <TextView
+                    android:id="@+id/sunset_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.dayForcast.sunset}"
+                    app:layout_constraintBottom_toTopOf="@id/current_day"
+                    app:layout_constraintEnd_toEndOf="@id/sunrise_label"
+                    app:layout_constraintStart_toStartOf="@id/sunrise_label"
+                    app:layout_constraintTop_toBottomOf="@id/sunset_label"
+                    tools:text="6:40 PM" />
+
+                <ImageButton
+                    android:id="@+id/next_day_button"
+                    android:layout_width="48dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Navigate to next  day"
+                    app:layout_constraintBottom_toTopOf="@id/current_day"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/sunrise_label"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+                <TextView
+                    android:id="@+id/current_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{viewModel.dayForcast.date}"
                     android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    app:fontFamily="@font/lalezar"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option3"/>
+                    tools:text="Monday Nov 9" />
 
                 <ImageView
-                    android:id="@+id/date_option3_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option3_temp"
-                    app:srcCompat="@drawable/ic_storm_icon" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/date_option4_card"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="7dp">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/option4_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/date_option4_button"
+                    android:id="@+id/status_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="10dp"
+                    android:background="@android:color/white"
+                    app:apiStatus="@{viewModel.status}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/date_option4"
-                        android:text="Day 4"
-                        android:textSize="24sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/date_option4_temp"
-                        android:text="90^F"
-                        android:textSize="20sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/date_option4"/>
-
-                    <ImageView
-                        android:id="@+id/date_option4_icon"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/date_option4_temp"
-                        app:srcCompat="@drawable/ic_water_icon" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/date_option5_card"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="7dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/option5_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/date_option5_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/date_option5"
-                    android:text="Day 5"
-                    android:textSize="24sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/date_option5_temp"
-                    android:text="90^F"
-                    android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option5"/>
-
-                <ImageView
-                    android:id="@+id/date_option5_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option5_temp"
-                    app:srcCompat="@drawable/ic_sunny_icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/date_option6_card"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_margin="5dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="7dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/time_selector_card"
+            android:layout_width="350dp"
+            android:layout_height="175dp"
+            android:layout_marginTop="50dp"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_selector_card">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/option6_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <RadioButton
-                    android:id="@+id/date_option6_button"
+                <TimePicker
+                    android:id="@+id/time_picker"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="10dp"
+                    android:fontFamily="@font/lalezar"
+                    android:timePickerMode="spinner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/date_option6"
-                    android:text="Day 6"
-                    android:textSize="24sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/date_option6_temp"
-                    android:text="90^F"
-                    android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option6"/>
+        </androidx.cardview.widget.CardView>
 
-                <ImageView
-                    android:id="@+id/date_option6_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/date_option6_temp"
-                    app:srcCompat="@drawable/ic_sunny_icon" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+        <CheckBox
+            android:id="@+id/set_reminder_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Reminder"
+            app:layout_constraintBottom_toTopOf="@id/plan_inspection_submit_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_selector_card" />
 
-        </RadioGroup>
+        <Button
+            android:id="@+id/plan_inspection_submit_button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/set_reminder_check_box" />
 
-    </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/time_label"
-        android:text="@string/choose_time_label"
-        android:fontFamily="@font/lalezar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_picker_container"/>
-
-    <TimePicker
-        android:id="@+id/time_picker"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:timePickerMode="spinner"
-        android:fontFamily="@font/lalezar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_label" />
-
-    <Button
-        android:id="@+id/submit_button"
-        android:text="Schedule Inspection"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_picker" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

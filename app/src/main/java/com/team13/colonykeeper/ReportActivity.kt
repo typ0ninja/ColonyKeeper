@@ -2,6 +2,7 @@ package com.team13.colonykeeper
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.databinding.ActivityReportBinding
 
 class ReportActivity: AppCompatActivity() {
@@ -11,5 +12,7 @@ class ReportActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = "Generate Report"
     }
 }

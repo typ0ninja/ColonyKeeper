@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--Code adapted from Stack Overflow: -->
-<!-- https://stackoverflow.com/questions/68799823/how-to-select-one-cardview-out-of-many-cardviews -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners android:radius="1dp"/>
-    <solid android:color="#D2FFDF"/>
-</shape>

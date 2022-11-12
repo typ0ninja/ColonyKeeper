@@ -1,7 +1,7 @@
 package com.team13.colonykeeper.adapter
-import com.team13.colonykeeper.data.BeeHive
 import android.content.Context
 import android.content.Intent
+import android.provider.MediaStore
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,14 +10,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.team13.colonykeeper.HiveIndividualActivity
-import com.team13.colonykeeper.HiveListActivity
 import com.team13.colonykeeper.R
-import com.team13.colonykeeper.data.DataSource
-import com.team13.colonykeeper.data.DataSource.hives
-import com.team13.colonykeeper.data.DataSource.yards
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Hive
-import com.team13.colonykeeper.database.Yard
 
 
 class HiveAdapter(
@@ -43,16 +38,18 @@ class HiveAdapter(
         return HiveAdapter.HiveViewHolder(adapterLayout)
     }
     override fun getItemCount(): Int {
-        //number of pigs in list to display
         return hives.size
     }
 
     override fun onBindViewHolder(holder: HiveAdapter.HiveViewHolder, position: Int) {
-        //val dog: Dog = dogs[position]
+
         val hive: Hive = hives[position]
         val resources = context?.resources
-        //set the actual display views to the correct view for a given pig inside a card
-        holder.hivePic?.setImageResource(R.drawable.beehive_temp)
+
+        val bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, hive.photoURI)
+
+        holder.hivePic?.setImageBitmap(bitmap)
+
         holder.hiveName?.text = hive.hiveName
         holder.view.setOnClickListener {
             ColonyApplication.instance.curHive = hive
