@@ -49,5 +49,8 @@ class YardListActivity: AppCompatActivity() {
         binding.addYardButton.setOnClickListener{
             startActivity(Intent(this, AddBeeYardActivity::class.java))
         }
+        binding.manageInspectionsButton.setOnClickListener {
+            startActivity(Intent(this, ViewFutureInspectionsActivity::class.java))
+        }
     }
 }

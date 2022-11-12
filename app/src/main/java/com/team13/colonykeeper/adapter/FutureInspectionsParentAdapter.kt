@@ -1,5 +1,7 @@
 package com.team13.colonykeeper.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,13 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.R
+import com.team13.colonykeeper.YardInspection
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.Yard
+import kotlinx.coroutines.NonDisposableHandle.parent
 
-class FutureInspectionsParentAdapter(val colonyViewModel: ColonyViewModel) :
+class FutureInspectionsParentAdapter(private val context: Context?) :
 RecyclerView.Adapter<FutureInspectionsParentAdapter.YardInspectionViewHolder>() {
-    var yardList: List<Yard> = mutableListOf()
+    var yardList: List<YardInspection> = mutableListOf()
 
     class YardInspectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val locationTextView: TextView
@@ -36,20 +40,17 @@ RecyclerView.Adapter<FutureInspectionsParentAdapter.YardInspectionViewHolder>() 
     }
 
     override fun onBindViewHolder(viewHolder: YardInspectionViewHolder, position: Int) {
-        viewHolder.locationTextView.text = yardList[position].yardName
-        val childMembersAdapter = FutureInspectionsChildAdapter(listOf())
-        colonyViewModel.getYardScheduled(yardList[position].id)
-            .observe(this)
-            itemView.hiveInspectionList.layoutManager = LinearLayoutManager(
-                itemView.context, LinearLayoutManager.VERTICAL,false
-            )
-            itemView.hiveInspectionList.adapter = childMembersAdapter
-
+        viewHolder.locationTextView.text = yardList[position].yard.yardName
+        val childMembersAdapter = FutureInspectionsChildAdapter(yardList[position].ScheduledInspections)
+        viewHolder.childRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+        viewHolder.childRecyclerView.adapter = childMembersAdapter
     }
 
     override fun getItemCount(): Int = yardList.size
 
-    fun addData(list: List<Yard>) {
+    fun addData(list: List<YardInspection>) {
+        Log.d("ParentAdapter", "Here in addData")
+        Log.d("ParentAdapter", "List size ${list.size}")
         yardList = list
         notifyDataSetChanged()
     }
