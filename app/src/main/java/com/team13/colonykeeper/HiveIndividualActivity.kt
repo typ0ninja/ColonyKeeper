@@ -18,6 +18,9 @@ class HiveIndividualActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / " + ColonyApplication.instance.curHive.hiveName
+
         colonyViewModel.getHive(ColonyApplication.instance.curHive.id)
 
         colonyViewModel.getHive(ColonyApplication.instance.curHive.id).observe(this){

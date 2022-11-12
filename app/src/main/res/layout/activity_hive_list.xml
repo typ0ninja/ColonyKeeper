@@ -6,32 +6,26 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/hiveNameView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/lalezar"
-        android:text=":name of yard:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/hive_list_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/lalezar"
         android:text="Hives in yard:"
-        android:textSize="24dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/hiveFrameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hiveNameView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
 
 
     <GridLayout
         android:id="@+id/hiveFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_yard_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hive_list_label"
@@ -51,31 +45,36 @@
         android:id="@+id/edit_yard_button"
         android:layout_width="120dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="5dp"
         android:text="Edit Yard"
-        app:layout_constraintBottom_toTopOf="@id/report_button"
+        app:layout_constraintBottom_toTopOf="@+id/plan_inspection_button"
         app:layout_constraintEnd_toStartOf="@id/add_hive_button"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hiveFrameLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/hiveFrameLayout"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
         android:id="@+id/add_hive_button"
         android:layout_width="120dp"
         android:layout_height="50dp"
+        android:layout_marginStart="5dp"
         android:text="Add Hive"
-        app:layout_constraintBottom_toTopOf="@id/report_button"
+        app:layout_constraintBottom_toBottomOf="@id/edit_yard_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/edit_yard_button"
-        app:layout_constraintTop_toBottomOf="@id/hiveFrameLayout" />
+        app:layout_constraintTop_toTopOf="@id/edit_yard_button" />
 
     <Button
-        android:id="@+id/report_button"
+        android:id="@+id/plan_inspection_button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:text="Generate Report"
-        app:layout_constraintTop_toBottomOf="@id/add_hive_button"
+        android:text="Plan Inspection"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_yard_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

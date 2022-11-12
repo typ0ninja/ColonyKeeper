@@ -41,6 +41,9 @@ class AddInspectionActivity: AppCompatActivity() {
         binding = ActivityAddInspectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / " + ColonyApplication.instance.curHive.hiveName
+
         binding.addPictureButton.setOnClickListener {
             takePhoto()
         }

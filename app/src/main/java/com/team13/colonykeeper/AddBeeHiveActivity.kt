@@ -33,6 +33,9 @@ class AddBeeHiveActivity: AppCompatActivity() {
         binding = ActivityAddBeeHiveBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / New Hive"
+
         binding.addBeeHiveButton.setOnClickListener{
             submitNewHive()
         }

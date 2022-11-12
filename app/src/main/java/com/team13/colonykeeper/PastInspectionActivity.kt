@@ -38,5 +38,8 @@ class PastInspectionActivity: AppCompatActivity() {
 
     fun setInspectionList(inspections: List<Inspections>){
         previousInspections = inspections
+
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / " + ColonyApplication.instance.curHive.hiveName
     }
 }

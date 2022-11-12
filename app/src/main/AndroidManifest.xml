@@ -9,8 +9,7 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.RECORD_AUDIO" />
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".database.ColonyApplication"
@@ -92,6 +91,12 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HiveIndividualActivity" />
+        </activity>
+
+        <activity android:name=".ViewFutureInspectionsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".YardListActivity" />
         </activity>
 
         <activity android:name=".PastInspectionActivity">

@@ -7,13 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.HiveListActivity
 import com.team13.colonykeeper.R
-import com.team13.colonykeeper.data.DataSource
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Yard
 
