@@ -17,5 +17,5 @@ class Inspections(
     @ColumnInfo(name = "id")
     var id: Int = 0
     @ColumnInfo(name = "photoList")
-    var photoList: MutableList<Uri> = mutableListOf<Uri>()
+    lateinit var photoList: Array<String>
 }

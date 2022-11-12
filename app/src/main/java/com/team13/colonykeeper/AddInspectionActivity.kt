@@ -30,7 +30,7 @@ class AddInspectionActivity: AppCompatActivity() {
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
     var cameraPhotoFilePath: Uri? = Uri.EMPTY
-    var picList: MutableList<Uri> = mutableListOf<Uri>()
+    var picList: MutableList<String> = mutableListOf<String>()
     private lateinit var imageFilePath: String
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -149,14 +149,14 @@ class AddInspectionActivity: AppCompatActivity() {
             //do something with picture
             //val photo = data!!.extras!!["data"] as Bitmap?
             //add Uri to list of pics
-            picList.add(cameraPhotoFilePath!!)
+            picList.add(cameraPhotoFilePath!!.toString())
         }
     }
 
     fun submitInspection(){
         var newInspection: Inspections = Inspections( "fresh", Calendar.DATE.toString(),
             binding.inspectionTextInput.text.toString())
-        newInspection.photoList = picList
+        newInspection.photoList = picList.toTypedArray()
         Log.d("Inspection", "Size of photoset: ${newInspection.photoList.size}")
         Log.d("Inspection", "hive id:${newInspection.id}")
 

@@ -27,22 +27,18 @@ class Converters {
     }
 
     @TypeConverter
-    fun UriListToString(uriList: MutableList<Uri>): String{
+    fun UriListToString(uriList: Array<String>): String{
         Log.d("JSON", uriList.toString())
-        val uriArray: Array<Uri> = uriList.toTypedArray()
-        val json = Gson().toJson(uriArray.toString())
+        val json = Gson().toJson(uriList)
         Log.d("JSON", json.toString())
-        return json.toString()//Gson().toJson( uriList, object : TypeToken<String>(){}.type )
+        return json.toString()
     }
 
     @TypeConverter
-    fun UriListFromString(uriString: String): MutableList<Uri>{
-        var uriList: MutableList<Uri> = mutableListOf<Uri>()
-
-        val json = Gson().toJson(uriString)[0]
-        Log.d("JSON", "from method 0${json.toString()}")
-        //TODO: finish type converter here
-        return uriList
+    fun UriListFromString(uriString: String): Array<String>{
+        val myPhotos = Gson().fromJson(uriString, Array<String>::class.java)
+        Log.d("JSON", "myPhotos = ${myPhotos.size}")
+        return myPhotos
     }
 
 }

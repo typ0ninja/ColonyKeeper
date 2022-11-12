@@ -2,8 +2,10 @@ package com.team13.colonykeeper
 
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.ColonyViewModelFactory
@@ -24,22 +26,31 @@ class PastInspectionActivity: AppCompatActivity() {
         binding = ActivityPastInspectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                " / " + ColonyApplication.instance.curHive.hiveName
 
         colonyViewModel.getInspections()
             .observe(this) {
+                Log.d("JSON", "Size: ${it.size}")
                 setInspectionList(it)
+                var firstInspection = previousInspections[0]
+                Log.d("JSON", firstInspection.photoList.size.toString())
+                updateImage()
+
             }
-
-        val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, previousInspections[0].photoList[0])
-        binding.imageView.setImageBitmap(bitmap)
-
     }
 
     fun setInspectionList(inspections: List<Inspections>){
         previousInspections = inspections
+    }
 
-        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
-                " / " + ColonyApplication.instance.curHive.hiveName
+    fun updateImage(){
+        if (!previousInspections.isEmpty()) {
+            val bitmap = MediaStore.Images.Media.getBitmap(
+                this.contentResolver,
+                previousInspections[0].photoList[0].toUri()
+            )
+            binding.imageView.setImageBitmap(bitmap)
+        }
     }
 }
