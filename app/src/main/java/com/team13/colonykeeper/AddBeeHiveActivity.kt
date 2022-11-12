@@ -106,7 +106,7 @@ class AddBeeHiveActivity: AppCompatActivity() {
 
     fun submitNewHive(){
         //startActivity(Intent(this, HiveListActivity::class.java))
-        var newHive: Hive = Hive( "testHive", ColonyApplication.instance.curYard.id, cameraPhotoFilePath)
+        var newHive: Hive = Hive( binding.beeHiveNameInput.text.toString(), ColonyApplication.instance.curYard.id, cameraPhotoFilePath)
         Log.d("Hive", "hive id:${newHive.id}")
         colonyViewModel.insertHive(newHive)
         finish()

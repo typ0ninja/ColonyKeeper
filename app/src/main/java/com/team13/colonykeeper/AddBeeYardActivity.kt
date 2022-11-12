@@ -108,7 +108,7 @@ class AddBeeYardActivity : AppCompatActivity() {
 
     fun submitNewYard(){
         //startActivity(Intent(this, YardListActivity::class.java))
-        var newYard: Yard = Yard( "testyard", cameraPhotoFilePath)
+        var newYard: Yard = Yard( binding.beeYardNameInput.text.toString(), cameraPhotoFilePath)
         colonyViewModel.insertYard(newYard)
         finish()
     }

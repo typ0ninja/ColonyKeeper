@@ -29,6 +29,8 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
 
     fun getTagScheduled(tag: String): Flow<List<Scheduled>> = colonyDao.getTagScheduled(tag)
 
+    fun getInspections(): Flow<List<Inspections>> = colonyDao.getInspections()
+
     @WorkerThread
     suspend fun deleteScheduled(scheduled: Scheduled) = colonyDao.deleteScheduled(scheduled)
 

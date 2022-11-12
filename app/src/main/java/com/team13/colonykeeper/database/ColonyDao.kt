@@ -104,6 +104,8 @@ interface ColonyDao {
     @Delete
     suspend fun deleteInspection(inspection: Inspections)
 
+    @Query("SELECT * FROM inspection_table")
+    fun getInspections(): Flow<List<Inspections>>
 
 
 }

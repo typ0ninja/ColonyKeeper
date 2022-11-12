@@ -121,8 +121,6 @@ class AddInspectionActivity: AppCompatActivity() {
                 cameraPhotoFilePath)
             startActivityForResult(takePictureIntent,
                 REQUEST_IMAGE_CAPTURE)
-            //add Uri to list of pics
-            picList.add(cameraPhotoFilePath!!)
         }
     }
 
@@ -146,8 +144,9 @@ class AddInspectionActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == pic_id){
             //do something with picture
-            val photo = data!!.extras!!["data"] as Bitmap?
-
+            //val photo = data!!.extras!!["data"] as Bitmap?
+            //add Uri to list of pics
+            picList.add(cameraPhotoFilePath!!)
         }
     }
 
@@ -155,7 +154,9 @@ class AddInspectionActivity: AppCompatActivity() {
         var newInspection: Inspections = Inspections( "fresh", Calendar.DATE.toString(),
             binding.inspectionTextInput.text.toString())
         newInspection.photoList = picList
+        Log.d("Inspection", "Size of photoset: ${newInspection.photoList.size}")
         Log.d("Inspection", "hive id:${newInspection.id}")
+
         colonyViewModel.addInspection(newInspection)
         finish()
     }

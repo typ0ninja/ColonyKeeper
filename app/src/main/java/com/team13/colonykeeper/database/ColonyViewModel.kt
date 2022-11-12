@@ -77,6 +77,8 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         repository.deleteInspection(inspection)
     }
 
+    fun getInspections(): LiveData<List<Inspections>> = repository.getInspections().asLiveData()
+
     fun getGPS(yard: Yard): Pair<Double, Double>{
         return Pair<Double, Double>(yard.latitude, yard.longitude)
     }
