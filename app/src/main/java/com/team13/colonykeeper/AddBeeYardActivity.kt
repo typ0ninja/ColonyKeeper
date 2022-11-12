@@ -31,39 +31,18 @@ import java.util.*
 
 private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 
-class AddBeeYardActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener  {
+class AddBeeYardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBeeYardBinding
     private val pic_id = 1
     var cameraPhotoFilePath: Uri? = null
     private lateinit var imageFilePath: String
+    private var latitude = -1.0
+    private var longitude = -181.0
 
-//    private var foregroundOnlyLocationServiceBound = false
-
-    // Provides location updates for while-in-use feature.
-//    private var foregroundOnlyLocationService: ForegroundOnlyLocationService? = null
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-
-    // Listens for location broadcasts from ForegroundOnlyLocationService.
-//    private lateinit var foregroundOnlyBroadcastReceiver: AddBeeYardActivity.ForegroundOnlyBroadcastReceiver
-
-//    private lateinit var sharedPreferences: SharedPreferences
-
-//    private val foregroundOnlyServiceConnection = object : ServiceConnection {
-//
-//        override fun onServiceConnected(name: ComponentName, service: IBinder) {
-//            val binder = service as ForegroundOnlyLocationService.LocalBinder
-//            foregroundOnlyLocationService = binder.service
-//            foregroundOnlyLocationServiceBound = true
-//        }
-//
-//        override fun onServiceDisconnected(name: ComponentName) {
-//            foregroundOnlyLocationService = null
-//            foregroundOnlyLocationServiceBound = false
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,25 +73,9 @@ class AddBeeYardActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefer
         binding = ActivityAddBeeYardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-//        sharedPreferences =
-//            getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-
-//        val enabled = sharedPreferences.getBoolean(
-//            SharedPreferenceUtil.KEY_FOREGROUND_ENABLED, false)
-
-//        if (enabled) {
-//            foregroundOnlyLocationService?.unsubscribeToLocationUpdates()
-//        } else {
-//            if (foregroundPermissionApproved()) {
-//                foregroundOnlyLocationService?.subscribeToLocationUpdates()
-//            } else {
-//                requestForegroundPermissions()
-//            }
-//        }
 
 
         binding.addBeeYardButton.setOnClickListener{
@@ -133,8 +96,6 @@ class AddBeeYardActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefer
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
@@ -145,39 +106,19 @@ class AddBeeYardActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefer
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 // Got last known location. In some rare situations this can be null.
-                Log.d("TESTING THIS", "${location.toString()}")
+                if (location != null) {
+                    latitude = location.latitude!!
+                    longitude = location.longitude!!
+                }
+                else{
+                    latitude = -1.0
+                    longitude = -181.0
+                }
+                Log.d("TESTING THIS", "latitude: ${latitude}")
+                Log.d("TESTING THIS", "longitude: ${longitude}")
             }
 
-//        sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
-//        val serviceIntent = Intent(this, ForegroundOnlyLocationService::class.java)
-//        bindService(serviceIntent, foregroundOnlyServiceConnection, Context.BIND_AUTO_CREATE)
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        LocalBroadcastManager.getInstance(this).registerReceiver(
-//            foregroundOnlyBroadcastReceiver,
-//            IntentFilter(
-//                ForegroundOnlyLocationService.ACTION_FOREGROUND_ONLY_LOCATION_BROADCAST)
-//        )
-    }
-
-    override fun onPause() {
-//        LocalBroadcastManager.getInstance(this).unregisterReceiver(
-//            foregroundOnlyBroadcastReceiver
-//        )
-        super.onPause()
-    }
-
-    override fun onStop() {
-//        if (foregroundOnlyLocationServiceBound) {
-//            unbindService(foregroundOnlyServiceConnection)
-//            foregroundOnlyLocationServiceBound = false
-//        }
-//        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
-
-        super.onStop()
     }
 
     private fun foregroundPermissionApproved(): Boolean {
@@ -187,34 +128,6 @@ class AddBeeYardActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefer
         )
     }
 
-    private fun requestForegroundPermissions() {
-        val provideRationale = foregroundPermissionApproved()
-
-        // If the user denied a previous request, but didn't check "Don't ask again", provide
-        // additional rationale.
-        if (provideRationale) {
-            Snackbar.make(
-                findViewById(R.id.app_screen_title),
-                R.string.permission_rationale,
-                Snackbar.LENGTH_LONG
-            )
-                .setAction(R.string.ok) {
-                    // Request permission
-                    ActivityCompat.requestPermissions(
-                        this,
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
-                    )
-                }
-                .show()
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
-            )
-        }
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -257,29 +170,6 @@ class AddBeeYardActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefer
                         .show()
                 }
             }
-        }
-    }
-
-    private inner class ForegroundOnlyBroadcastReceiver : BroadcastReceiver() {
-
-        override fun onReceive(context: Context, intent: Intent) {
-            val location = intent.getParcelableExtra<Location>(
-                ForegroundOnlyLocationService.EXTRA_LOCATION
-            )
-
-            Log.d("TESTING", "${location}")
-
-            if (location != null) {
-                Log.d("TESTING", "${location}")
-            }
-        }
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        // Updates button states if new while in use location is added to SharedPreferences.
-        if (key == SharedPreferenceUtil.KEY_FOREGROUND_ENABLED) {
-            Log.d("TESTING", "in location changed"
-            )
         }
     }
 

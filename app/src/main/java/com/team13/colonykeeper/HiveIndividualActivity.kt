@@ -19,11 +19,6 @@ class HiveIndividualActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val location = intent.getParcelableExtra<Location>(
-            ForegroundOnlyLocationService.EXTRA_LOCATION
-        )
-
-        Log.d("TESTING", "${location}")
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
         colonyViewModel.getHive(ColonyApplication.instance.curHive.id)
