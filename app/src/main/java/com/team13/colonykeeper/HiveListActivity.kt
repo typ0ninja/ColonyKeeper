@@ -37,7 +37,12 @@ class HiveListActivity: AppCompatActivity() {
         }
 
         binding.planInspectionButton.setOnClickListener{
-            startActivity(Intent(this, ScheduleInspectionActivity::class.java))
+            startActivity(Intent(
+                this, ScheduleInspectionActivity::class.java
+            ).putExtra(
+                "locName",
+                "All Hives"
+            ))
         }
 
         /*

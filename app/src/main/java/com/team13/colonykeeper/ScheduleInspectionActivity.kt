@@ -12,8 +12,12 @@ import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.databinding.ActivityScheduleInspectionBinding
 import com.team13.colonykeeper.model.PlanInspectionViewModel
+import com.team13.colonykeeper.model.WeatherApiStatus
 import com.team13.colonykeeper.workers.InspectionNotificationWorker
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -31,13 +35,14 @@ class ScheduleInspectionActivity: AppCompatActivity() {
 
         binding.viewModel = viewModel
         viewModel.getWeekForecast()
+        viewModel.onTimeChanged(binding.timePicker.hour, binding.timePicker.minute)
 
         binding.previousDayButton.setOnClickListener{viewModel.onBackArrowClicked()}
         binding.nextDayButton.setOnClickListener { viewModel.onForwardArrowClicked() }
-        binding.setReminderCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.setReminderCheckBox.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onCheckBoxToggled(isChecked)
         }
-        binding.timePicker.setOnTimeChangedListener { view, hourOfDay, minute ->
+        binding.timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
             viewModel.onTimeChanged(hourOfDay, minute)
         }
 
@@ -59,43 +64,50 @@ class ScheduleInspectionActivity: AppCompatActivity() {
     }
 
     private fun scheduleInspection() {
-        var jobName = ""
-        var tagName = ""
-        var isNotif = false
+        if (viewModel.isLoaded()) {
+            var jobName = ""
+            var tagName = ""
+            var isNotif = false
 
-        if(binding.setReminderCheckBox.isChecked){
-            isNotif = true
-            Log.d("ScheduleInspection", "In if")
-            val myWorkRequest = OneTimeWorkRequestBuilder<InspectionNotificationWorker>()
-                .setInitialDelay(3, TimeUnit.SECONDS)
-                .setInputData(workDataOf(
-                    "title" to "Reminder",
-                    "message" to "Message",
-                ))
-                .build()
+            if (binding.setReminderCheckBox.isChecked) {
+                isNotif = true
+                val myWorkRequest = OneTimeWorkRequestBuilder<InspectionNotificationWorker>()
+                    .setInitialDelay(getTimeDiff(), TimeUnit.SECONDS)
+                    .setInputData(
+                        workDataOf(
+                            "title" to "Time to Inspect Hives",
+                            "message" to "Check ColonyKeeper to start inspection",
+                        )
+                    )
+                    .build()
 
-            WorkManager.getInstance(this).enqueue(myWorkRequest)
-            jobName = myWorkRequest.id.toString()
+                WorkManager.getInstance(this).enqueue(myWorkRequest)
+                jobName = myWorkRequest.id.toString()
+            }
+
+            var newInspection = Scheduled(
+                jobName,
+                viewModel.dayForcast.value!!.date,
+                viewModel.returnTime(),
+                tagName,
+                ColonyApplication.instance.curYard.id,
+                intent.getStringExtra("locName")!!,
+                isNotif
+            )
+            ColonyApplication.instance.applicationScope.launch {
+                ColonyApplication.instance.colonyRepository.scheduleInspection(newInspection)
+            }
+            finish()
         }
-
-        if(ColonyApplication.instance.curHive != null){
-            Log.d("ScheduleInspection", "Not null")
-        } else {
-            Log.d("ScheduleInspection", "Null")
-        }
-
-        var newInspection = Scheduled(
-            jobName,
-            viewModel.dayForcast.value!!.date,
-            viewModel.returnTime(),
-            tagName,
-            ColonyApplication.instance.curYard.id,
-            "all",
-            isNotif
-        )
-        ColonyApplication.instance.applicationScope.launch {
-            ColonyApplication.instance.colonyRepository.scheduleInspection(newInspection)
-        }
-        finish()
     }
+
+    private fun getTimeDiff(): Long {
+        val todayDateTime = Calendar.getInstance()
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+        val scheduledDateTime = format.parse(viewModel.dayForcast.value!!.date + "T" + viewModel.returnTime() + "Z")
+        val cal = Calendar.getInstance()
+        cal.time = scheduledDateTime
+        return (cal.timeInMillis/1000L) - (todayDateTime.timeInMillis/1000L)
+    }
+
 }
