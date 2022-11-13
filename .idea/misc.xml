@@ -37,11 +37,14 @@
         <entry key="app/src/main/res/layout/activity_report.xml" value="0.1802536231884058" />
         <entry key="app/src/main/res/layout/activity_schedule_inspection.xml" value="0.12182971014492754" />
         <entry key="app/src/main/res/layout/activity_yard.xml" value="0.37916666666666665" />
-        <entry key="app/src/main/res/layout/activity_yard_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_yard_list.xml" value="0.2335723876953125" />
         <entry key="app/src/main/res/layout/add_bee_hive.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/layout/add_bee_yard.xml" value="0.3802083333333333" />
         <entry key="app/src/main/res/layout/fragment_schedule_inspection.xml" value="0.19066615450209468" />
         <entry key="app/src/main/res/layout/hive_item.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/inspection_item.xml" value="0.184375" />
+        <entry key="app/src/main/res/layout/inspection_pic_item.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/inspection_prev_item.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/yard_inspection_item.xml" value="0.31927083333333334" />
         <entry key="app/src/main/res/layout/yard_item.xml" value="0.3667653882521115" />
       </map>

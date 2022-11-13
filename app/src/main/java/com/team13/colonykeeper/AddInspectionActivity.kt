@@ -1,8 +1,6 @@
 package com.team13.colonykeeper
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -16,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.team13.colonykeeper.adapter.InspectionPicAdapter
 import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityAddInspectionBinding
 import java.io.File
@@ -32,6 +31,9 @@ class AddInspectionActivity: AppCompatActivity() {
     var cameraPhotoFilePath: Uri? = Uri.EMPTY
     var picList: MutableList<String> = mutableListOf<String>()
     private lateinit var imageFilePath: String
+
+
+
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
     }
@@ -43,6 +45,17 @@ class AddInspectionActivity: AppCompatActivity() {
 
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
                 " / " + ColonyApplication.instance.curHive.hiveName
+
+        var inspectionPicAdapter: InspectionPicAdapter = InspectionPicAdapter(applicationContext, 3)
+
+        binding.inspectPicRecyclerView.adapter = inspectionPicAdapter
+        //observe the actual database info and assign it to gridview list via lambda
+//        colonyViewModel.getInspections()
+//            .observe(this) {
+//                inspectionPicAdapter.addInspectionList(it)
+//                inspectionPicAdapter.notifyDataSetChanged()
+//            }
+        inspectionPicAdapter.addPicList(picList)
 
         binding.addPictureButton.setOnClickListener {
             takePhoto()

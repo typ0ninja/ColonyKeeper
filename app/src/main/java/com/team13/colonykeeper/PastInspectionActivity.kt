@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import com.team13.colonykeeper.adapter.YardAdapter
+import com.team13.colonykeeper.adapter.prevInspectionAdapter
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.ColonyViewModelFactory
@@ -29,9 +31,16 @@ class PastInspectionActivity: AppCompatActivity() {
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
                 " / " + ColonyApplication.instance.curHive.hiveName
 
+        val prevInspectionAdapter: prevInspectionAdapter = prevInspectionAdapter(applicationContext)
+        binding.prevInspectionGridRecyclerView.adapter = prevInspectionAdapter
+
         colonyViewModel.getInspections()
             .observe(this) {
                 Log.d("JSON", "Size: ${it.size}")
+                //fill adapter
+                prevInspectionAdapter.addInspectionList(it)
+                prevInspectionAdapter.notifyDataSetChanged()
+                //set test pic
                 setInspectionList(it)
                 var firstInspection = previousInspections[0]
                 Log.d("JSON", firstInspection.photoList.size.toString())
