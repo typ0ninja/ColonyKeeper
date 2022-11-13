@@ -27,17 +27,11 @@ class AddInspectionActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddInspectionBinding
     private val pic_id = 1
 
-    var cameraPhotoFilePath: Uri? = null
+    var cameraPhotoFilePath: Uri? = Uri.EMPTY
     private lateinit var imageFilePath: String
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
-    
-    var cameraPhotoFilePath: Uri? = Uri.EMPTY
     var picList: MutableList<String> = mutableListOf<String>()
-    
-    private lateinit var imageFilePath: String
-
-
 
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -137,17 +131,12 @@ class AddInspectionActivity: AppCompatActivity() {
         if (photoFile != null) {
             Log.d("erroring", "didn't make the file")
 
-            cameraPhotoFilePath = FileProvider.getUriForFile(
-                Objects.requireNonNull(getApplicationContext()),
-                BuildConfig.APPLICATION_ID + ".provider", photoFile);
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                cameraPhotoFilePath);
-            startActivityForResult(takePictureIntent,
             cameraPhotoFilePath = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
                 BuildConfig.APPLICATION_ID + ".provider", photoFile)
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                 cameraPhotoFilePath)
             startActivityForResult(takePictureIntent,
+                REQUEST_IMAGE_CAPTURE)
         }
 
 
