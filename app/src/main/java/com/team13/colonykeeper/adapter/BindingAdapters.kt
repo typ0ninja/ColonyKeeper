@@ -27,7 +27,7 @@ fun bindStatus(statusImageView: ImageView, status: WeatherApiStatus?) {
         WeatherApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
-        WeatherApiStatus.ERROR -> {
+        else -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_baseline_error_outline_24)
         }

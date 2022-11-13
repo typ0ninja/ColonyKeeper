@@ -24,13 +24,7 @@ class HiveListActivity: AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName
 
-        //binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
-
         binding.hiveGridRecyclerView.setHasFixedSize(true)
-
-        colonyViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
-                hives ->
-        }
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

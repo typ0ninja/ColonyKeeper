@@ -1,13 +1,21 @@
 package com.team13.colonykeeper
 
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.databinding.ActivityScheduleInspectionBinding
 import com.team13.colonykeeper.model.PlanInspectionViewModel
+import com.team13.colonykeeper.workers.InspectionNotificationWorker
 import kotlinx.coroutines.launch
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class ScheduleInspectionActivity: AppCompatActivity() {
     private lateinit var binding: ActivityScheduleInspectionBinding
@@ -36,19 +44,44 @@ class ScheduleInspectionActivity: AppCompatActivity() {
         binding.planInspectionSubmitButton.setOnClickListener{
             scheduleInspection()
         }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean{
+        Log.d("ScheduleInspection", "In onOptionsItemSelected")
+        when(item.itemId){
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun scheduleInspection() {
-        // If this kt is used for both hive and yard, need to make logic for
-        // location name
         var jobName = ""
         var tagName = ""
         var isNotif = false
 
-
         if(binding.setReminderCheckBox.isChecked){
             isNotif = true
-            //Schedule job and grab name and tag
+            Log.d("ScheduleInspection", "In if")
+            val myWorkRequest = OneTimeWorkRequestBuilder<InspectionNotificationWorker>()
+                .setInitialDelay(3, TimeUnit.SECONDS)
+                .setInputData(workDataOf(
+                    "title" to "Reminder",
+                    "message" to "Message",
+                ))
+                .build()
+
+            WorkManager.getInstance(this).enqueue(myWorkRequest)
+            jobName = myWorkRequest.id.toString()
+        }
+
+        if(ColonyApplication.instance.curHive != null){
+            Log.d("ScheduleInspection", "Not null")
+        } else {
+            Log.d("ScheduleInspection", "Null")
         }
 
         var newInspection = Scheduled(
