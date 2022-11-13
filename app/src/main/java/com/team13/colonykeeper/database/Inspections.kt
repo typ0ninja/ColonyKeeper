@@ -16,4 +16,6 @@ class Inspections(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0
+    @ColumnInfo(name = "photoList")
+    lateinit var photoList: Array<String>
 }

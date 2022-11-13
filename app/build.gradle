@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.team13.colonykeeper"
-        minSdk 21
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -36,7 +36,7 @@ android {
 
     buildFeatures {
         viewBinding = true
-        dataBinding true
+        dataBinding = true
     }
 }
 
@@ -49,6 +49,8 @@ dependencies {
     implementation 'androidx.room:room-common:2.4.3'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+    implementation 'com.google.code.gson:gson:2.8.7'
+
 
 // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
@@ -72,7 +74,10 @@ dependencies {
     androidTestImplementation ('androidx.test.espresso:espresso-core:3.4.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+//GPS
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
-    // WorkManager dependency
+// WorkManager dependency
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
 }

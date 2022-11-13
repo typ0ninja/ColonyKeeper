@@ -17,6 +17,8 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
 
     fun getHive(hiveID: Int): Flow<Hive> = colonyDao.getHive(hiveID)
 
+    fun getYard(yard_id: Int): Flow<Yard> = colonyDao.getYard(yard_id)
+
     //scheduled inspections
 
     fun getAllScheduled(): Flow<List<Scheduled>> = colonyDao.getAllScheduled()
@@ -26,6 +28,8 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
     fun getYardScheduled(yard_id: Int): Flow<List<Scheduled>> = colonyDao.getYardScheduled(yard_id)
 
     fun getTagScheduled(tag: String): Flow<List<Scheduled>> = colonyDao.getTagScheduled(tag)
+
+    fun getInspections(): Flow<List<Inspections>> = colonyDao.getInspections()
 
     @WorkerThread
     suspend fun deleteScheduled(scheduled: Scheduled) = colonyDao.deleteScheduled(scheduled)

@@ -1,12 +1,11 @@
 package com.team13.colonykeeper
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+
 import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.KeyEvent
@@ -16,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import com.team13.colonykeeper.adapter.InspectionPicAdapter
 import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityAddInspectionBinding
 import java.io.File
@@ -23,14 +23,16 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AddInspectionActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddInspectionBinding
     private val pic_id = 1
+
+    var cameraPhotoFilePath: Uri? = Uri.EMPTY
+    private lateinit var imageFilePath: String
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
-    var cameraPhotoFilePath: Uri? = null
-    private lateinit var imageFilePath: String
+    var picList: MutableList<String> = mutableListOf<String>()
+
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
     }
@@ -42,6 +44,17 @@ class AddInspectionActivity: AppCompatActivity() {
 
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
                 " / " + ColonyApplication.instance.curHive.hiveName
+
+        var inspectionPicAdapter: InspectionPicAdapter = InspectionPicAdapter(applicationContext, 3)
+
+        binding.inspectPicRecyclerView.adapter = inspectionPicAdapter
+        //observe the actual database info and assign it to gridview list via lambda
+//        colonyViewModel.getInspections()
+//            .observe(this) {
+//                inspectionPicAdapter.addInspectionList(it)
+//                inspectionPicAdapter.notifyDataSetChanged()
+//            }
+        inspectionPicAdapter.addPicList(picList)
 
         binding.addPictureButton.setOnClickListener {
             takePhoto()
@@ -82,14 +95,6 @@ class AddInspectionActivity: AppCompatActivity() {
         }
     }
 
-    fun submitInspection(){
-        var newInspection: Inspections = Inspections( "fresh", "10-22-22",
-            binding.inspectionTextInput.text.toString())
-        Log.d("Inspection", "hive id:${newInspection.id}")
-        colonyViewModel.addInspection(newInspection)
-        finish()
-    }
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_VOLUME_DOWN -> voiceText()
@@ -125,13 +130,21 @@ class AddInspectionActivity: AppCompatActivity() {
         }
         if (photoFile != null) {
             Log.d("erroring", "didn't make the file")
+
             cameraPhotoFilePath = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
-                BuildConfig.APPLICATION_ID + ".provider", photoFile);
+                BuildConfig.APPLICATION_ID + ".provider", photoFile)
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                cameraPhotoFilePath);
+                cameraPhotoFilePath)
             startActivityForResult(takePictureIntent,
-                REQUEST_IMAGE_CAPTURE);
+                REQUEST_IMAGE_CAPTURE)
         }
+
+
+//        try {
+//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+//        } catch (e: ActivityNotFoundException) {
+//            // display error state to the user
+//        }
     }
 
     fun createImageFile(): File? {
@@ -154,9 +167,20 @@ class AddInspectionActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == pic_id){
             //do something with picture
-            val photo = data!!.extras!!["data"] as Bitmap?
-
+            //val photo = data!!.extras!!["data"] as Bitmap?
+            //add Uri to list of pics
+            picList.add(cameraPhotoFilePath!!.toString())
         }
     }
 
+    fun submitInspection(){
+        var newInspection: Inspections = Inspections( "fresh", Calendar.DATE.toString(),
+            binding.inspectionTextInput.text.toString())
+        newInspection.photoList = picList.toTypedArray()
+        Log.d("Inspection", "Size of photoset: ${newInspection.photoList.size}")
+        Log.d("Inspection", "hive id:${newInspection.id}")
+
+        colonyViewModel.addInspection(newInspection)
+        finish()
+    }
 }

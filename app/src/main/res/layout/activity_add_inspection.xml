@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -47,15 +48,24 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/inspectPicRecyclerView"
+        android:layout_width="339dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inspection_input_layout" />
+
     <Button
         android:id="@+id/add_picture_button"
-        android:text="@string/inspection_add_photo_button"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@id/inspection_input_layout"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/inspection_add_photo_button"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inspectPicRecyclerView" />
 
     <Button
         android:id="@+id/submit_inspection_button"
