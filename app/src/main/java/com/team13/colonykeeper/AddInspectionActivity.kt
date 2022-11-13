@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+
 import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.KeyEvent
@@ -22,14 +23,18 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AddInspectionActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddInspectionBinding
     private val pic_id = 1
+
+    var cameraPhotoFilePath: Uri? = null
+    private lateinit var imageFilePath: String
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
+    
     var cameraPhotoFilePath: Uri? = Uri.EMPTY
     var picList: MutableList<String> = mutableListOf<String>()
+    
     private lateinit var imageFilePath: String
 
 
@@ -131,13 +136,26 @@ class AddInspectionActivity: AppCompatActivity() {
         }
         if (photoFile != null) {
             Log.d("erroring", "didn't make the file")
+
+            cameraPhotoFilePath = FileProvider.getUriForFile(
+                Objects.requireNonNull(getApplicationContext()),
+                BuildConfig.APPLICATION_ID + ".provider", photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                cameraPhotoFilePath);
+            startActivityForResult(takePictureIntent,
             cameraPhotoFilePath = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
                 BuildConfig.APPLICATION_ID + ".provider", photoFile)
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                 cameraPhotoFilePath)
             startActivityForResult(takePictureIntent,
-                REQUEST_IMAGE_CAPTURE)
         }
+
+
+//        try {
+//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+//        } catch (e: ActivityNotFoundException) {
+//            // display error state to the user
+//        }
     }
 
     fun createImageFile(): File? {
@@ -176,5 +194,4 @@ class AddInspectionActivity: AppCompatActivity() {
         colonyViewModel.addInspection(newInspection)
         finish()
     }
-
 }
