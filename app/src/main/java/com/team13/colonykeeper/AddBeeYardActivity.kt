@@ -123,6 +123,9 @@ class AddBeeYardActivity : AppCompatActivity() {
                 else{
                     latitude = -1.0
                     longitude = -181.0
+                    //austin coords
+                    //latitude = 30.266666
+                    //longitude = -97.733330
                 }
                 Log.d("TESTING THIS", "latitude: ${latitude}")
                 Log.d("TESTING THIS", "longitude: ${longitude}")
@@ -246,7 +249,10 @@ class AddBeeYardActivity : AppCompatActivity() {
 
     fun submitNewYard(){
         //startActivity(Intent(this, YardListActivity::class.java))
+        Log.d("GPS", "$latitude")
         var newYard: Yard = Yard( binding.beeYardNameInput.text.toString(), cameraPhotoFilePath)
+        newYard.latitude = latitude
+        newYard.longitude = longitude
         colonyViewModel.insertYard(newYard)
         finish()
     }

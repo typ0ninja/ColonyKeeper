@@ -28,10 +28,6 @@ class HiveListActivity: AppCompatActivity() {
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
-        colonyViewModel.hivesFromYard(ColonyApplication.instance.curYard.id).observe(this) {
-                hives ->
-        }
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.editYardButton.setOnClickListener{

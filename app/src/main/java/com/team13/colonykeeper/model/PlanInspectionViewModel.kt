@@ -1,12 +1,17 @@
 package com.team13.colonykeeper.model
 
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
+import com.team13.colonykeeper.database.ColonyApplication
+import com.team13.colonykeeper.database.ColonyViewModel
+import com.team13.colonykeeper.database.ColonyViewModelFactory
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.network.Forecast
 import com.team13.colonykeeper.network.Weather
@@ -18,7 +23,8 @@ import retrofit2.Callback
 
 enum class WeatherApiStatus {LOADING, ERROR, DONE}
 
-class PlanInspectionViewModel: ViewModel() {
+class PlanInspectionViewModel: ViewModel(){
+
     private val _status = MutableLiveData<WeatherApiStatus>()
     val status: LiveData<WeatherApiStatus> = _status
 
@@ -44,7 +50,14 @@ class PlanInspectionViewModel: ViewModel() {
             Log.d("PlanInspectionViewModel", "In getWeekForecast")
             _status.value = WeatherApiStatus.LOADING
 
+            val lat: Double = ColonyApplication.instance.curYard.latitude
+            val long: Double = ColonyApplication.instance.curYard.longitude
+
+            Log.d("GPS", "Lat: ${lat}")
+
+            //val response = WeatherApi.retrofitService.getWeekForecast(lat.toFloat(), long.toFloat())
             val response = WeatherApi.retrofitService.getWeekForecast()
+
             response.enqueue(object : Callback<Forecast> {
                 override fun onResponse(call: Call<Forecast>, response: Response<Forecast>) {
                     Log.d("PlanInspectionViewModel", "In Response callback")
