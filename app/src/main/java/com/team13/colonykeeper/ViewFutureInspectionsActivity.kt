@@ -35,7 +35,7 @@ class ViewFutureInspectionsActivity: AppCompatActivity() {
     private fun setUpViews() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this,
             LinearLayoutManager.VERTICAL,false)
-        futureInspectionsParentAdapter = FutureInspectionsParentAdapter(applicationContext)
+        futureInspectionsParentAdapter = FutureInspectionsParentAdapter(applicationContext, colonyViewModel)
         binding.recyclerView.adapter = futureInspectionsParentAdapter
     }
 

@@ -14,15 +14,19 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.team13.colonykeeper.R
-import com.team13.colonykeeper.database.ColonyApplication
+import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.workers.InspectionNotificationWorker
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class FutureInspectionsChildAdapter(private val context: Context?, var memberData: List<Scheduled>) :
-    RecyclerView.Adapter<FutureInspectionsChildAdapter.ScheduledViewHolder>() {
+class FutureInspectionsChildAdapter(
+    private val context: Context?,
+    memberData: List<Scheduled>,
+    private val viewModel: ColonyViewModel,
+    private val parentAdapter: FutureInspectionsParentAdapter
+) : RecyclerView.Adapter<FutureInspectionsChildAdapter.ScheduledViewHolder>() {
 
     private var scheduledList: List<Scheduled> = mutableListOf()
 
@@ -59,7 +63,6 @@ class FutureInspectionsChildAdapter(private val context: Context?, var memberDat
         holder.inspectionDate.text = scheduledList[position].date
         holder.inspectionTime.text = scheduledList[position].time
         holder.isNotificationCheckBox.isChecked = scheduledList[position].isNotification
-
         holder.isNotificationCheckBox.setOnClickListener{
             toggleNotification(holder.isNotificationCheckBox.isChecked, scheduledList[position])
         }
@@ -77,43 +80,33 @@ class FutureInspectionsChildAdapter(private val context: Context?, var memberDat
     override fun getItemCount(): Int = scheduledList.size
 
     private fun toggleNotification(isCurrentlyNotif: Boolean, scheduled: Scheduled) {
-//        if (isCurrentlyNotif){
-//            WorkManager.getInstance(context!!).cancelWorkById(UUID.fromString(scheduled.name))
-//            ColonyApplication.instance.colonyRepository.updateInspection(
-//                Scheduled(
-//                    "",
-//                    scheduled.date,
-//                    scheduled.time,
-//                    scheduled.tag,
-//                    scheduled.yardID,
-//                    scheduled.locName,
-//                    false
-//                )
-//            )
-//        } else {
-//            val myWorkRequest = OneTimeWorkRequestBuilder<InspectionNotificationWorker>()
-//                .setInitialDelay(getTimeDiff(scheduled.date + "T" + scheduled.time + "Z"), TimeUnit.SECONDS)
-//                .setInputData(
-//                    workDataOf(
-//                        "title" to "Time to Inspect Hives",
-//                        "message" to "Check ColonyKeeper to start inspection",
-//                    )
-//                )
-//                .build()
-//
-//            WorkManager.getInstance(context!!).enqueue(myWorkRequest)
-//            ColonyApplication.instance.colonyRepository.updateInspection(
-//                Scheduled(
-//                    myWorkRequest.id.toString(),
-//                    scheduled.date,
-//                    scheduled.time,
-//                    scheduled.tag,
-//                    scheduled.yardID,
-//                    scheduled.locName,
-//                    true
-//                )
-//            )
-//        }
+        if (isCurrentlyNotif){
+            WorkManager.getInstance(context!!).cancelWorkById(UUID.fromString(scheduled.name))
+            viewModel.updateInspection(
+                "",
+                false,
+                scheduled.id
+            )
+            parentAdapter.notifyDataSetChanged()
+        } else {
+            val myWorkRequest = OneTimeWorkRequestBuilder<InspectionNotificationWorker>()
+                .setInitialDelay(getTimeDiff(scheduled.date + "T" + scheduled.time + "Z"), TimeUnit.SECONDS)
+                .setInputData(
+                    workDataOf(
+                        "title" to "Time to Inspect Hives",
+                        "message" to "Check ColonyKeeper to start inspection",
+                    )
+                )
+                .build()
+
+            WorkManager.getInstance(context!!).enqueue(myWorkRequest)
+            viewModel.updateInspection(
+                myWorkRequest.id.toString(),
+                true,
+                scheduled.id
+            )
+            parentAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun getTimeDiff(dateTime: String): Long {
@@ -129,6 +122,7 @@ class FutureInspectionsChildAdapter(private val context: Context?, var memberDat
         if (scheduled.isNotification){
             WorkManager.getInstance(context!!).cancelWorkById(UUID.fromString(scheduled.name))
         }
-//        ColonyApplication.instance.colonyRepository.deleteScheduled(scheduled.id)
+        viewModel.deleteScheduled(scheduled.id)
+        parentAdapter.notifyDataSetChanged()
     }
 }

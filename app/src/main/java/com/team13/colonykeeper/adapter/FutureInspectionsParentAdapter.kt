@@ -11,8 +11,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.R
+import com.team13.colonykeeper.database.ColonyViewModel
 
-class FutureInspectionsParentAdapter(private val context: Context?) :
+class FutureInspectionsParentAdapter(private val context: Context?, private val viewModel: ColonyViewModel) :
 RecyclerView.Adapter<FutureInspectionsParentAdapter.YardInspectionViewHolder>() {
     var yardList: List<YardInspection> = mutableListOf()
 
@@ -42,7 +43,7 @@ RecyclerView.Adapter<FutureInspectionsParentAdapter.YardInspectionViewHolder>() 
 
     override fun onBindViewHolder(viewHolder: YardInspectionViewHolder, position: Int) {
         viewHolder.locationTextView.text = yardList[position].yard.yardName
-        val childMembersAdapter = FutureInspectionsChildAdapter(context, yardList[position].ScheduledInspections)
+        val childMembersAdapter = FutureInspectionsChildAdapter(context, yardList[position].ScheduledInspections, viewModel, this)
         viewHolder.childRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
         viewHolder.childRecyclerView.adapter = childMembersAdapter
 

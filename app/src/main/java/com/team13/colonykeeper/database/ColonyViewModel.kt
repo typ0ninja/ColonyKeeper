@@ -65,8 +65,8 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         repository.scheduleInspection(scheduled)
     }
 
-    fun updateInspection(scheduled: Scheduled) = viewModelScope.launch {
-        repository.updateInspection(scheduled)
+    fun updateInspection(newName: String, isNotif: Boolean, id: Int) = viewModelScope.launch {
+        repository.updateInspection(newName, isNotif, id)
     }
 
     fun addInspection(newInspection: Inspections) = viewModelScope.launch {

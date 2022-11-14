@@ -69,8 +69,8 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
     }
 
     @WorkerThread
-    suspend fun updateInspection(scheduled: Scheduled){
-        colonyDao.updateInspection(scheduled)
+    suspend fun updateInspection(newName: String, isNotif: Boolean, id: Int){
+        colonyDao.updateInspection(newName, isNotif, id)
     }
 
     @WorkerThread
