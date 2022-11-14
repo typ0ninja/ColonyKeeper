@@ -96,15 +96,7 @@ class AddBeeHiveActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == pic_id){
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, cameraPhotoFilePath)
-            //TODO: update xml so we can get hive pic here
-            //binding.beeHivePicture.setImageBitmap(bitmap)
-
-//            val photo = data!!.extras!!["data"] as Bitmap?
-//            binding.beeYardPicture.setImageBitmap(photo)
-
-
         }
-
     }
 
     fun submitNewHive(){

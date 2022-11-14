@@ -52,5 +52,8 @@ class YardListActivity: AppCompatActivity() {
         binding.manageInspectionsButton.setOnClickListener {
             startActivity(Intent(this, ViewFutureInspectionsActivity::class.java))
         }
+        binding.generateReportButton.setOnClickListener{
+            startActivity(Intent(this, ReportActivity::class.java))
+        }
     }
 }
