@@ -26,8 +26,6 @@ class HiveIndividualActivity : AppCompatActivity(){
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
                 " / " + ColonyApplication.instance.curHive.hiveName
 
-        colonyViewModel.getHive(ColonyApplication.instance.curHive.id)
-
         colonyViewModel.getHive(ColonyApplication.instance.curHive.id).observe(this){
             hive ->
             binding.individualHiveTitle.text = hive.hiveName
@@ -62,7 +60,12 @@ class HiveIndividualActivity : AppCompatActivity(){
     }
 
     fun scheduleInspection(){
-        startActivity(Intent(this, ScheduleInspectionActivity::class.java))
+        startActivity(Intent(
+            this, ScheduleInspectionActivity::class.java
+        ).putExtra(
+           "locName",
+           ColonyApplication.instance.curHive.hiveName
+        ))
     }
 
     fun viewPastInspections(){

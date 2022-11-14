@@ -101,4 +101,8 @@ class PlanInspectionViewModel: ViewModel(){
     fun returnTime(): String {
         return _hour.value.toString() + ":" + _minute.value.toString()
     }
+
+    fun isLoaded(): Boolean {
+        return _status.value == WeatherApiStatus.DONE
+    }
 }

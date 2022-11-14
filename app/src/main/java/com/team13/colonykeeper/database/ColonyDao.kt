@@ -69,8 +69,8 @@ interface ColonyDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun scheduleInspection(scheduled: Scheduled)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateInspection(scheduled: Scheduled)
+    @Query("Update scheduled_table SET name = :newName AND isNotification = :isNotif WHERE id = :id")
+    suspend fun updateInspection(newName: String, isNotif: Boolean, id: Int)
 
     @Query("SELECT * FROM scheduled_table ORDER BY date ASC")
     fun getAllScheduled(): Flow<List<Scheduled>>

@@ -24,8 +24,6 @@ class HiveListActivity: AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName
 
-        //binding.hiveGridRecyclerView.adapter = HiveAdapter(applicationContext, 3)
-
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -39,7 +37,12 @@ class HiveListActivity: AppCompatActivity() {
         }
 
         binding.planInspectionButton.setOnClickListener{
-            startActivity(Intent(this, ScheduleInspectionActivity::class.java))
+            startActivity(Intent(
+                this, ScheduleInspectionActivity::class.java
+            ).putExtra(
+                "locName",
+                "All Hives"
+            ))
         }
 
         /*
