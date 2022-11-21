@@ -5,9 +5,9 @@
     <string name="notes_input_placeholder">Notes</string>
     <string name="queen_date_placeholder">Queen Date</string>
     <string name="take_picture_gps_placeholder">Take Picture + GPS</string>
-    <string name="add_hive_button">Add Hive?</string>
+    <string name="add_hive_button">Submit Hive</string>
     <string name="add_bee_yard_title">Add Bee Yard</string>
-    <string name="add_yard_button">Add Yard?</string>
+    <string name="add_yard_button">Submit Yard</string>
     <string name="add_inspection_title">Add Inspection</string>
     <string name="inspection_text_input_hint">Add notes…</string>
     <string name="add_voice_inspection_content_desc">Add voice inspection</string>

@@ -95,6 +95,9 @@ class AddBeeYardActivity : AppCompatActivity() {
         binding.addPictureButton.setOnClickListener{
             takePhoto()
         }
+        binding.beeYardPicture.setOnClickListener{
+            takePhoto()
+        }
 
 
     }

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(){
         }
 
         val animator = ObjectAnimator.ofFloat(binding.startScreenAnimation, View.ROTATION,
-            -360f, 0f)
+            0f, -360f)
         animator.duration = 2000
         //animator.repeatCount(Animation.INFINITE)
         animator.start()

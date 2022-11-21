@@ -10,7 +10,6 @@
         android:id="@+id/app_screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:fontFamily="@font/lalezar"
         android:text="ColonyKeeper"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/start_screen_animation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/app_screen_title"
+        app:layout_constraintTop_toBottomOf="@id/app_screen_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/start_yards"
         app:srcCompat="@drawable/bee_animation_alpha"
@@ -39,15 +38,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/start_screen_animation" />
-
-    <!--    <Button-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/start_hives"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/start_yards"-->
-<!--        android:text="Hive Gallery"-->
-<!--        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
