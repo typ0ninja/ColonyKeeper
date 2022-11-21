@@ -44,6 +44,10 @@ class AddBeeHiveActivity: AppCompatActivity() {
         binding.addPictureButton.setOnClickListener{
             takePhoto()
         }
+
+        binding.beeHivePicture.setOnClickListener{
+            takePhoto()
+        }
     }
 
     fun takePhoto() {
@@ -97,6 +101,7 @@ class AddBeeHiveActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == pic_id){
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, cameraPhotoFilePath)
+            binding.beeHivePicture.setImageBitmap(bitmap)
         }
     }
 
