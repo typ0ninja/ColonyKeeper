@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -246,9 +247,17 @@ class AddBeeYardActivity : AppCompatActivity() {
 
     fun submitNewYard(){
         //startActivity(Intent(this, YardListActivity::class.java))
-        var newYard: Yard = Yard( binding.beeYardNameInput.text.toString(), cameraPhotoFilePath)
-        colonyViewModel.insertYard(newYard)
-        finish()
+        if(binding.beeYardNameInput.text.isNullOrBlank()){
+            //Enter text
+            Toast.makeText(
+                applicationContext, "Please provide a name",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            var newYard: Yard = Yard(binding.beeYardNameInput.text.toString(), cameraPhotoFilePath)
+            colonyViewModel.insertYard(newYard)
+            finish()
+        }
     }
 
 }
