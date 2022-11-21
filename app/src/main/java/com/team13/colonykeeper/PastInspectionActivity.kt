@@ -42,10 +42,6 @@ class PastInspectionActivity: AppCompatActivity() {
                 prevInspectionAdapter.notifyDataSetChanged()
                 //set test pic
                 setInspectionList(it)
-                var firstInspection = previousInspections[0]
-                Log.d("JSON", firstInspection.photoList.size.toString())
-                updateImage()
-
             }
     }
 
