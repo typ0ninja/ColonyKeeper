@@ -3,6 +3,7 @@ package com.team13.colonykeeper
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -46,13 +47,13 @@ class YardListActivity: AppCompatActivity() {
 
         binding.yardGridRecyclerView.setHasFixedSize(true)
 
-        binding.addYardButton.setOnClickListener{
+        binding.addYardButton.setOnClickListener {
             startActivity(Intent(this, AddBeeYardActivity::class.java))
         }
         binding.manageInspectionsButton.setOnClickListener {
             startActivity(Intent(this, ViewFutureInspectionsActivity::class.java))
         }
-        binding.generateReportButton.setOnClickListener{
+        binding.generateReportButton.setOnClickListener {
             startActivity(Intent(this, ReportActivity::class.java))
         }
     }

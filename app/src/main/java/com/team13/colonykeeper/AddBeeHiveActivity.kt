@@ -1,13 +1,13 @@
 package com.team13.colonykeeper
 
-import android.content.ActivityNotFoundException
+import android.R.attr.data
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -17,6 +17,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class AddBeeHiveActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddBeeHiveBinding
@@ -101,9 +102,22 @@ class AddBeeHiveActivity: AppCompatActivity() {
 
     fun submitNewHive(){
         //startActivity(Intent(this, HiveListActivity::class.java))
-        var newHive: Hive = Hive( binding.beeHiveNameInput.text.toString(), ColonyApplication.instance.curYard.id, cameraPhotoFilePath)
-        Log.d("Hive", "hive id:${newHive.id}")
-        colonyViewModel.insertHive(newHive)
-        finish()
+        if(binding.beeHiveNameInput.text.isNullOrBlank()){
+            //Enter text
+            Toast.makeText(
+                applicationContext, "Please provide a name",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            //got enough info can submit
+            var newHive: Hive = Hive(
+                binding.beeHiveNameInput.text.toString(),
+                ColonyApplication.instance.curYard.id,
+                cameraPhotoFilePath
+            )
+            Log.d("Hive", "hive id:${newHive.id}")
+            colonyViewModel.insertHive(newHive)
+            finish()
+        }
     }
 }
