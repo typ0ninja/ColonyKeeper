@@ -50,10 +50,12 @@ class ReportActivity: AppCompatActivity() {
         colonyViewModel.getInspections()
             .observe(this) {
                 inspections = it
-                var cameraPhotoFilePath = inspections.get(0).photoList.get(0).toUri()
-                bmp = MediaStore.Images.Media.getBitmap(this.contentResolver, cameraPhotoFilePath)
-                //bmp = BitmapFactory.decodeResource(resources, inspections.get(0).photoList.get(0).)
-                scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false)
+                    //var cameraPhotoFilePath = inspections.get(0).photoList.get(0).toUri()
+                var cameraPhotoFilePath = ColonyApplication.instance.DEFAULT_URI
+                    bmp =
+                        MediaStore.Images.Media.getBitmap(this.contentResolver, cameraPhotoFilePath)
+                    //bmp = BitmapFactory.decodeResource(resources, inspections.get(0).photoList.get(0).)
+                    scaledbmp = Bitmap.createScaledBitmap(bmp, 140, 140, false)
             }
 
         // on below line we are checking permission
@@ -67,7 +69,14 @@ class ReportActivity: AppCompatActivity() {
         }
 
         binding.makePDF.setOnClickListener{
-            makePdf()
+            if(!inspections.isEmpty()) {
+                makePdf()
+            } else {
+                Toast.makeText(
+                    applicationContext, "Please complete an inspection first",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
