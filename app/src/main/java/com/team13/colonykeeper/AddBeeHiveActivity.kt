@@ -21,7 +21,7 @@ import java.util.*
 class AddBeeHiveActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddBeeHiveBinding
     private val pic_id = 1
-    var cameraPhotoFilePath: Uri? = null
+    var cameraPhotoFilePath: Uri = ColonyApplication.instance.DEFAULT_URI
     private lateinit var imageFilePath: String
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
