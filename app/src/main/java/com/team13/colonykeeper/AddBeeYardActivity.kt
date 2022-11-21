@@ -40,7 +40,7 @@ class AddBeeYardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddBeeYardBinding
     private val pic_id = 1
-    var cameraPhotoFilePath: Uri? = null
+    var cameraPhotoFilePath: Uri = ColonyApplication.instance.DEFAULT_URI
     private lateinit var imageFilePath: String
     private var latitude = -1.0
     private var longitude = -181.0

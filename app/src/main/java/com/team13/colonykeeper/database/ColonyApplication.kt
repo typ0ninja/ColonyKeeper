@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import com.team13.colonykeeper.R
+import android.net.Uri
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
@@ -15,6 +16,8 @@ class ColonyApplication: Application() {
     val colonyRepository by lazy { ColonyRepository(database.colonyDao())}
     lateinit var curYard: Yard
     lateinit var curHive: Hive
+
+    val DEFAULT_URI = Uri.parse("android.resource://com.team13.colonykeeper/" + R.drawable.beehive_temp)
 
     override fun onCreate() {
         super.onCreate()
