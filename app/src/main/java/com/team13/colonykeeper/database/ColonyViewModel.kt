@@ -15,6 +15,11 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     private var yardNotesInProgress = "";
     private var yardPhotoInProgress: Uri? = null;
 
+    private var hiveNameInProgress = ""
+    private var hiveQueenDateInProgress = ""
+    private var hiveNotesInProgress = ""
+    private var hivePhotoInProgress: Uri? = null
+
     fun setYardNameInProgress(yardName: String){
         yardNameInProgress = yardName
     }
@@ -47,6 +52,53 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
 
     fun getYardPictureInProgress(): Uri?{
         return yardPhotoInProgress
+    }
+
+
+
+    fun setHiveNameInProgress(hiveName: String){
+        hiveNameInProgress = hiveName
+    }
+    fun resetHiveNameInProgress(){
+        hiveNameInProgress = ""
+    }
+
+    fun getHiveNameInProgress(): String{
+        return hiveNameInProgress
+    }
+
+    fun setHiveQueenDateInProgress(hiveQueenDate: String){
+        hiveQueenDateInProgress = hiveQueenDate
+    }
+    fun resetHiveQueenDateInProgress(){
+        hiveQueenDateInProgress = ""
+    }
+
+    fun getHiveQueenDateInProgress(): String{
+        return hiveQueenDateInProgress
+    }
+
+    fun setHiveNotesInProgress(hiveNotes: String){
+        hiveNotesInProgress = hiveNotes
+    }
+    fun resetHiveNotesInProgress(){
+        hiveNotesInProgress = ""
+    }
+
+    fun getHiveNotesInProgress(): String{
+        return hiveNotesInProgress
+    }
+
+
+    fun setHivePictureInProgress(hivePicture: Uri){
+        hivePhotoInProgress = hivePicture
+    }
+    fun resetHivePictureInProgress(){
+        hivePhotoInProgress = null
+    }
+
+    fun getHivePictureInProgress(): Uri?{
+        return hivePhotoInProgress
     }
 
 

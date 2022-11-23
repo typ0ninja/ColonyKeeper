@@ -141,8 +141,9 @@ class AddBeeYardActivity : AppCompatActivity() {
             if(colonyViewModel.getYardNotesInProgress().length > 0){
                 binding.beeYardNotesInput.setText(colonyViewModel.getYardNotesInProgress())
             }
-            if(colonyViewModel.getYardPictureInProgress() != null){
+            if(colonyViewModel.getYardPictureInProgress() != null && colonyViewModel.getHivePictureInProgress() != ColonyApplication.instance.DEFAULT_URI){
                 binding.beeYardPicture.setImageURI(colonyViewModel.getYardPictureInProgress())
+                cameraPhotoFilePath = colonyViewModel.getYardPictureInProgress()!!
             }
 
     }

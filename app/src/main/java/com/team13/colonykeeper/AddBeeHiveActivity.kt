@@ -22,6 +22,7 @@ import java.util.*
 class AddBeeHiveActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddBeeHiveBinding
     private val pic_id = 1
+    private var finished = false
     var cameraPhotoFilePath: Uri = ColonyApplication.instance.DEFAULT_URI
     private lateinit var imageFilePath: String
     private val colonyViewModel: ColonyViewModel by viewModels {
@@ -47,6 +48,23 @@ class AddBeeHiveActivity: AppCompatActivity() {
 
         binding.beeHivePicture.setOnClickListener{
             takePhoto()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(colonyViewModel.getHiveNameInProgress().length > 0){
+            binding.beeHiveNameInput.setText(colonyViewModel.getHiveNameInProgress())
+        }
+        if(colonyViewModel.getHiveQueenDateInProgress().length > 0){
+            binding.beeHiveQueenDateInput.setText(colonyViewModel.getHiveQueenDateInProgress())
+        }
+        if(colonyViewModel.getHiveNotesInProgress().length > 0){
+            binding.beeHiveNotesInput.setText(colonyViewModel.getHiveNotesInProgress())
+        }
+        if(colonyViewModel.getHivePictureInProgress() != null && colonyViewModel.getHivePictureInProgress() != ColonyApplication.instance.DEFAULT_URI){
+            binding.beeHivePicture.setImageURI(colonyViewModel.getHivePictureInProgress())
+            cameraPhotoFilePath = colonyViewModel.getHivePictureInProgress()!!
         }
     }
 
@@ -122,7 +140,21 @@ class AddBeeHiveActivity: AppCompatActivity() {
             )
             Log.d("Hive", "hive id:${newHive.id}")
             colonyViewModel.insertHive(newHive)
+            colonyViewModel.resetHiveNameInProgress()
+            colonyViewModel.resetHiveQueenDateInProgress()
+            colonyViewModel.resetHiveNotesInProgress()
+            colonyViewModel.resetHivePictureInProgress()
             finish()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!finished){
+            colonyViewModel.setHiveNameInProgress(binding.beeHiveNameInput.text.toString())
+            colonyViewModel.setHiveQueenDateInProgress(binding.beeHiveQueenDateInput.text.toString())
+            colonyViewModel.setHiveNotesInProgress(binding.beeHiveNotesInput.text.toString())
+            colonyViewModel.setHivePictureInProgress(cameraPhotoFilePath)
         }
     }
 }
