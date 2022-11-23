@@ -45,6 +45,7 @@ class AddBeeYardActivity : AppCompatActivity() {
     private lateinit var imageFilePath: String
     private var latitude = -1.0
     private var longitude = -181.0
+    private var finished = false
 
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -134,7 +135,15 @@ class AddBeeYardActivity : AppCompatActivity() {
                 Log.d("TESTING THIS", "latitude: ${latitude}")
                 Log.d("TESTING THIS", "longitude: ${longitude}")
             }
-
+            if(colonyViewModel.getYardNameInProgress().length > 0){
+                binding.beeYardNameInput.setText(colonyViewModel.getYardNameInProgress())
+            }
+            if(colonyViewModel.getYardNotesInProgress().length > 0){
+                binding.beeYardNotesInput.setText(colonyViewModel.getYardNotesInProgress())
+            }
+            if(colonyViewModel.getYardPictureInProgress() != null){
+                binding.beeYardPicture.setImageURI(colonyViewModel.getYardPictureInProgress())
+            }
 
     }
 
@@ -242,8 +251,7 @@ class AddBeeYardActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, cameraPhotoFilePath)
 
            binding.beeYardPicture.setImageBitmap(bitmap)
-//            val photo = data!!.extras!!["data"] as Bitmap?
-//            binding.beeYardPicture.setImageBitmap(photo)
+
 
 
         }
@@ -264,7 +272,20 @@ class AddBeeYardActivity : AppCompatActivity() {
             newYard.latitude = latitude
             newYard.longitude = longitude
             colonyViewModel.insertYard(newYard)
+            colonyViewModel.resetYardNameInProgress()
+            colonyViewModel.resetYardNotesInProgress()
+            colonyViewModel.resetYardPictureInProgress()
+            finished = true
             finish()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!finished){
+            colonyViewModel.setYardNameInProgress(binding.beeYardNameInput.text.toString())
+            colonyViewModel.setYardNotesInProgress(binding.beeYardNotesInput.text.toString())
+            colonyViewModel.setYardPictureInProgress(cameraPhotoFilePath)
         }
     }
 

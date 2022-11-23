@@ -10,6 +10,46 @@ import java.net.URI
 
 class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     //Yard Items
+
+    private var yardNameInProgress = "";
+    private var yardNotesInProgress = "";
+    private var yardPhotoInProgress: Uri? = null;
+
+    fun setYardNameInProgress(yardName: String){
+        yardNameInProgress = yardName
+    }
+    fun resetYardNameInProgress(){
+        yardNameInProgress = ""
+    }
+
+    fun getYardNameInProgress(): String{
+        return yardNameInProgress
+    }
+
+    fun setYardNotesInProgress(yardNotes: String){
+        yardNotesInProgress = yardNotes
+    }
+    fun resetYardNotesInProgress(){
+        yardNotesInProgress = ""
+    }
+
+    fun getYardNotesInProgress(): String{
+        return yardNotesInProgress
+    }
+
+
+    fun setYardPictureInProgress(yardPicture: Uri){
+        yardPhotoInProgress = yardPicture
+    }
+    fun resetYardPictureInProgress(){
+        yardPhotoInProgress = null
+    }
+
+    fun getYardPictureInProgress(): Uri?{
+        return yardPhotoInProgress
+    }
+
+
     fun allYards(): LiveData<List<Yard>> = repository.allYards.asLiveData()
 
     fun insertYard(yard: Yard) = viewModelScope.launch {
