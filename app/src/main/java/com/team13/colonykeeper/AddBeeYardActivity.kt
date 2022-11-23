@@ -138,9 +138,6 @@ class AddBeeYardActivity : AppCompatActivity() {
             if(colonyViewModel.getYardNameInProgress().length > 0){
                 binding.beeYardNameInput.setText(colonyViewModel.getYardNameInProgress())
             }
-            if(colonyViewModel.getYardNotesInProgress().length > 0){
-                binding.beeYardNotesInput.setText(colonyViewModel.getYardNotesInProgress())
-            }
             if(colonyViewModel.getYardPictureInProgress() != null && colonyViewModel.getHivePictureInProgress() != ColonyApplication.instance.DEFAULT_URI){
                 binding.beeYardPicture.setImageURI(colonyViewModel.getYardPictureInProgress())
                 cameraPhotoFilePath = colonyViewModel.getYardPictureInProgress()!!
@@ -274,7 +271,6 @@ class AddBeeYardActivity : AppCompatActivity() {
             newYard.longitude = longitude
             colonyViewModel.insertYard(newYard)
             colonyViewModel.resetYardNameInProgress()
-            colonyViewModel.resetYardNotesInProgress()
             colonyViewModel.resetYardPictureInProgress()
             finished = true
             finish()
@@ -285,8 +281,9 @@ class AddBeeYardActivity : AppCompatActivity() {
         super.onDestroy()
         if(!finished){
             colonyViewModel.setYardNameInProgress(binding.beeYardNameInput.text.toString())
-            colonyViewModel.setYardNotesInProgress(binding.beeYardNotesInput.text.toString())
-            colonyViewModel.setYardPictureInProgress(cameraPhotoFilePath)
+            if(cameraPhotoFilePath != ColonyApplication.instance.DEFAULT_URI){
+                colonyViewModel.setYardPictureInProgress(cameraPhotoFilePath)
+            }
         }
     }
 
