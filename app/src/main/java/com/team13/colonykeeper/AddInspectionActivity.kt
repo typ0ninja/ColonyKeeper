@@ -32,6 +32,8 @@ class AddInspectionActivity: AppCompatActivity() {
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
     var picList: MutableList<String> = mutableListOf<String>()
+    private var finished = false
+
 
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -77,6 +79,13 @@ class AddInspectionActivity: AppCompatActivity() {
 
         voiceResult = registerVoice()
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(colonyViewModel.getInspectionNotes().length > 0){
+            binding.inspectionTextInput.setText(colonyViewModel.getInspectionNotes())
+        }
     }
 
     fun registerVoice(): ActivityResultLauncher<Intent> {
@@ -179,8 +188,15 @@ class AddInspectionActivity: AppCompatActivity() {
         newInspection.photoList = picList.toTypedArray()
         Log.d("Inspection", "Size of photoset: ${newInspection.photoList.size}")
         Log.d("Inspection", "hive id:${newInspection.id}")
-
+        colonyViewModel.resetInspectionNotes()
         colonyViewModel.addInspection(newInspection)
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!finished){
+            colonyViewModel.setInspectionNotes(binding.inspectionTextInput.toString())
+        }
     }
 }

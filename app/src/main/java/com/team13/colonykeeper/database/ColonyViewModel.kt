@@ -18,6 +18,14 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     private var hiveQueenDateInProgress = ""
     private var hivePhotoInProgress: Uri? = null
 
+    private var editHiveName = ""
+    private var editHivePhotoInProgress: Uri? = Uri.EMPTY
+
+    private var editYardName = ""
+    private var editYardPhotoInProgress: Uri? = Uri.EMPTY
+
+    private var inspectionNotes = ""
+
     fun setYardNameInProgress(yardName: String){
         yardNameInProgress = yardName
     }
@@ -76,6 +84,70 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     fun getHivePictureInProgress(): Uri?{
         return hivePhotoInProgress
     }
+
+
+    fun setEditYardNameInProgress(yardName: String){
+        editYardName = yardName
+    }
+    fun resetEditYardNameInProgress(){
+        editYardName = ""
+    }
+
+    fun getEditYardNameInProgress(): String{
+        return editYardName
+    }
+
+
+    fun setEditYardPictureInProgress(yardPicture: Uri){
+        editYardPhotoInProgress = yardPicture
+    }
+    fun resetEditYardPictureInProgress(){
+        editYardPhotoInProgress = Uri.EMPTY
+    }
+
+    fun getEditYardPictureInProgress(): Uri?{
+        return editYardPhotoInProgress
+    }
+
+
+
+    fun setEditHiveNameInProgress(hiveName: String){
+        editHiveName = hiveName
+    }
+    fun resetEditHiveNameInProgress(){
+        editHiveName = ""
+    }
+
+    fun getEditHiveNameInProgress(): String{
+        return editHiveName
+    }
+
+
+    fun setEditHivePictureInProgress(hivePicture: Uri){
+        editHivePhotoInProgress = hivePicture
+    }
+    fun resetEditHivePictureInProgress(){
+        editHivePhotoInProgress = Uri.EMPTY
+    }
+
+    fun getEditHivePictureInProgress(): Uri?{
+        return editHivePhotoInProgress
+    }
+
+
+    fun getInspectionNotes(): String{
+        return inspectionNotes
+    }
+
+    fun resetInspectionNotes(){
+        inspectionNotes = ""
+    }
+
+    fun setInspectionNotes(inspectionNote: String){
+        inspectionNotes = inspectionNote
+    }
+
+
 
 
     fun allYards(): LiveData<List<Yard>> = repository.allYards.asLiveData()

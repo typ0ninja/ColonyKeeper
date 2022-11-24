@@ -87,13 +87,6 @@ class AddBeeHiveActivity: AppCompatActivity() {
             startActivityForResult(takePictureIntent,
                 REQUEST_IMAGE_CAPTURE);
         }
-
-
-//        try {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//        } catch (e: ActivityNotFoundException) {
-//            // display error state to the user
-//        }
     }
 
     fun createImageFile(): File? {
@@ -140,6 +133,7 @@ class AddBeeHiveActivity: AppCompatActivity() {
             colonyViewModel.resetHiveNameInProgress()
             colonyViewModel.resetHiveQueenDateInProgress()
             colonyViewModel.resetHivePictureInProgress()
+            finished = true
             finish()
         }
     }

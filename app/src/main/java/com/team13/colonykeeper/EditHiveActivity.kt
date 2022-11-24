@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import java.net.URI
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -25,6 +26,7 @@ class EditHiveActivity: AppCompatActivity() {
     private val pic_id = 1
     private lateinit var imageFilePath: String
     var cameraPhotoFilePath: Uri = Uri.EMPTY
+    private var finished = false
 
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -45,11 +47,31 @@ class EditHiveActivity: AppCompatActivity() {
         binding.photoButton.setOnClickListener{
             takePhoto()
         }
+
+        binding.editHivePicture.setOnClickListener{
+            takePhoto()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(colonyViewModel.getEditHiveNameInProgress().length > 0){
+            binding.beeHiveNameInput.setText(colonyViewModel.getEditHiveNameInProgress())
+        }
+        if(colonyViewModel.getEditHivePictureInProgress() != Uri.EMPTY){
+            binding.editHivePicture.setImageURI(colonyViewModel.getEditHivePictureInProgress())
+            cameraPhotoFilePath = colonyViewModel.getEditHivePictureInProgress()!!
+        }
     }
 
     fun takePhoto() {
         val REQUEST_IMAGE_CAPTURE = 1
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        if(cameraPhotoFilePath != Uri.EMPTY){
+            val file = File(URI(cameraPhotoFilePath.toString()))
+            file.delete()
+        }
 
         //Create a file to store the image
         var photoFile: File? = null;
@@ -70,12 +92,6 @@ class EditHiveActivity: AppCompatActivity() {
                 REQUEST_IMAGE_CAPTURE);
         }
 
-
-//        try {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//        } catch (e: ActivityNotFoundException) {
-//            // display error state to the user
-//        }
     }
 
     fun createImageFile(): File? {
@@ -122,6 +138,19 @@ class EditHiveActivity: AppCompatActivity() {
             //update current hive photo in UI
             ColonyApplication.instance.curHive.photoURI = cameraPhotoFilePath
         }
+        colonyViewModel.resetEditHiveNameInProgress()
+        colonyViewModel.resetEditHivePictureInProgress()
+        finished = true
         finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(!finished){
+            colonyViewModel.setEditHiveNameInProgress(binding.beeHiveNameInput.text.toString())
+            if(cameraPhotoFilePath != Uri.EMPTY){
+                colonyViewModel.setEditHivePictureInProgress(cameraPhotoFilePath!!)
+            }
+        }
     }
 }
