@@ -12,12 +12,10 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     //Yard Items
 
     private var yardNameInProgress = "";
-    private var yardNotesInProgress = "";
     private var yardPhotoInProgress: Uri? = null;
 
     private var hiveNameInProgress = ""
     private var hiveQueenDateInProgress = ""
-    private var hiveNotesInProgress = ""
     private var hivePhotoInProgress: Uri? = null
 
     fun setYardNameInProgress(yardName: String){
@@ -29,17 +27,6 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
 
     fun getYardNameInProgress(): String{
         return yardNameInProgress
-    }
-
-    fun setYardNotesInProgress(yardNotes: String){
-        yardNotesInProgress = yardNotes
-    }
-    fun resetYardNotesInProgress(){
-        yardNotesInProgress = ""
-    }
-
-    fun getYardNotesInProgress(): String{
-        return yardNotesInProgress
     }
 
 
@@ -78,16 +65,6 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         return hiveQueenDateInProgress
     }
 
-    fun setHiveNotesInProgress(hiveNotes: String){
-        hiveNotesInProgress = hiveNotes
-    }
-    fun resetHiveNotesInProgress(){
-        hiveNotesInProgress = ""
-    }
-
-    fun getHiveNotesInProgress(): String{
-        return hiveNotesInProgress
-    }
 
     fun setHivePictureInProgress(hivePicture: Uri){
         hivePhotoInProgress = hivePicture

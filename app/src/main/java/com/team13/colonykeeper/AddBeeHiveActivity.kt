@@ -59,9 +59,6 @@ class AddBeeHiveActivity: AppCompatActivity() {
         if(colonyViewModel.getHiveQueenDateInProgress().length > 0){
             binding.beeHiveQueenDateInput.setText(colonyViewModel.getHiveQueenDateInProgress())
         }
-        if(colonyViewModel.getHiveNotesInProgress().length > 0){
-            binding.beeHiveNotesInput.setText(colonyViewModel.getHiveNotesInProgress())
-        }
         if(colonyViewModel.getHivePictureInProgress() != null && colonyViewModel.getHivePictureInProgress() != ColonyApplication.instance.DEFAULT_URI){
             binding.beeHivePicture.setImageURI(colonyViewModel.getHivePictureInProgress())
             cameraPhotoFilePath = colonyViewModel.getHivePictureInProgress()!!
@@ -142,7 +139,6 @@ class AddBeeHiveActivity: AppCompatActivity() {
             colonyViewModel.insertHive(newHive)
             colonyViewModel.resetHiveNameInProgress()
             colonyViewModel.resetHiveQueenDateInProgress()
-            colonyViewModel.resetHiveNotesInProgress()
             colonyViewModel.resetHivePictureInProgress()
             finish()
         }
@@ -153,8 +149,9 @@ class AddBeeHiveActivity: AppCompatActivity() {
         if(!finished){
             colonyViewModel.setHiveNameInProgress(binding.beeHiveNameInput.text.toString())
             colonyViewModel.setHiveQueenDateInProgress(binding.beeHiveQueenDateInput.text.toString())
-            colonyViewModel.setHiveNotesInProgress(binding.beeHiveNotesInput.text.toString())
-            colonyViewModel.setHivePictureInProgress(cameraPhotoFilePath)
+            if(cameraPhotoFilePath != ColonyApplication.instance.DEFAULT_URI){
+                colonyViewModel.setHivePictureInProgress(cameraPhotoFilePath)
+            }
         }
     }
 }
