@@ -104,7 +104,7 @@ class AddInspectionActivity: AppCompatActivity() {
     }
 
     fun voiceText(){
-        Toast.makeText(applicationContext, "Volume down", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(applicationContext, "Volume down", Toast.LENGTH_SHORT).show()
         val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 
         speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
