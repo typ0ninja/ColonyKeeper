@@ -54,13 +54,23 @@ class ColonyRepository(private val colonyDao: ColonyDao) {
     }
 
     @WorkerThread
+    suspend fun updateHiveName(hive_id: Int, newName: String){
+        colonyDao.updateHiveName(hive_id, newName)
+    }
+
+    @WorkerThread
+    suspend fun updateYardName(yard_id: Int, newName: String){
+        colonyDao.updateYardName(yard_id, newName)
+    }
+
+    @WorkerThread
     suspend fun updateHivePhoto(hive_id: Int, photoURI: Uri){
         colonyDao.updateHivePhoto(hive_id, photoURI)
     }
 
     @WorkerThread
     suspend fun updateYardPhoto(yard_id: Int, photoURI: Uri){
-        colonyDao.updateHivePhoto(yard_id, photoURI)
+        colonyDao.updateYardPhoto(yard_id, photoURI)
     }
 
     @WorkerThread

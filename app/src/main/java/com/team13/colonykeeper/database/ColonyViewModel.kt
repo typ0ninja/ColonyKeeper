@@ -89,7 +89,6 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         return hiveNotesInProgress
     }
 
-
     fun setHivePictureInProgress(hivePicture: Uri){
         hivePhotoInProgress = hivePicture
     }
@@ -125,6 +124,10 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         repository.insertHive(hive)
     }
 
+    fun updateHiveName(hive_id: Int, newName: String) = viewModelScope.launch{
+        repository.updateHiveName(hive_id, newName)
+    }
+
     fun getYardScheduled(yard_id: Int): LiveData<List<Scheduled>> = repository.getYardScheduled(yard_id).asLiveData()
 
     fun getTagScheduled(tag: String): LiveData<List<Scheduled>> = repository.getTagScheduled(tag).asLiveData()
@@ -150,7 +153,11 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
     }
 
     fun updateYardPhoto(yard_id: Int, photoURI: Uri) = viewModelScope.launch {
-        repository.updateHivePhoto(yard_id, photoURI)
+        repository.updateYardPhoto(yard_id, photoURI)
+    }
+
+    fun updateYardName(yard_id: Int, newName: String) = viewModelScope.launch {
+        repository.updateYardName(yard_id, newName)
     }
 
     fun scheduleInspection(scheduled: Scheduled) = viewModelScope.launch {

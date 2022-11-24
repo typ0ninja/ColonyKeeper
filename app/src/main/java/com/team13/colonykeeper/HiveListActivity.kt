@@ -2,6 +2,7 @@ package com.team13.colonykeeper
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,17 @@ class HiveListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHiveListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = ColonyApplication.instance.curYard.yardName
+        colonyViewModel.getYard(ColonyApplication.instance.curYard.id).observe(this) {
+                yard ->
+            supportActionBar?.title = "Current Yard: " + yard.yardName
+
+            binding.yardPic.setImageBitmap(
+                MediaStore.Images.Media.getBitmap(this.contentResolver,
+                yard.photoURI))
+
+            binding.HiveText.setText("Hives in ${yard.yardName}:")
+
+        }
 
         binding.hiveGridRecyclerView.setHasFixedSize(true)
 

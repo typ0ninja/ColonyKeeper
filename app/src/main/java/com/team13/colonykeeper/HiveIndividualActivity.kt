@@ -23,16 +23,18 @@ class HiveIndividualActivity : AppCompatActivity(){
 
         binding = ActivityHiveIndividualBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
-                " / " + ColonyApplication.instance.curHive.hiveName
+//        supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+//                " / " + ColonyApplication.instance.curHive.hiveName
 
         colonyViewModel.getHive(ColonyApplication.instance.curHive.id).observe(this){
             hive ->
             binding.individualHiveTitle.text = hive.hiveName
-        }
+            supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
+                    " / " + hive.hiveName
+            binding.hivePicture.setImageBitmap(MediaStore.Images.Media.getBitmap(this.contentResolver,
+                hive.photoURI))
 
-        binding.hivePicture.setImageBitmap(MediaStore.Images.Media.getBitmap(this.contentResolver,
-            ColonyApplication.instance.curHive.photoURI))
+        }
 
         binding.hiveStartInspectionButton.setOnClickListener {
             gotoNewInspection()

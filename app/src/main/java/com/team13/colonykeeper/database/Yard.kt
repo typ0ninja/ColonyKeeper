@@ -9,7 +9,7 @@ import java.net.URI
 
 @Entity(tableName = "yard_table")
 data class Yard(
-    @NonNull @ColumnInfo(name = "yard_name") val yardName: String,
+    @NonNull @ColumnInfo(name = "yard_name") var yardName: String,
     @ColumnInfo(name = "photoURI") var photoURI: Uri? = Uri.EMPTY
 ){
     @ColumnInfo(name = "latitude")
