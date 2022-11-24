@@ -32,6 +32,7 @@ class AddInspectionActivity: AppCompatActivity() {
     private lateinit var voiceResult: ActivityResultLauncher<Intent>
     private lateinit var speechIntent: Intent
     var picList: MutableList<String> = mutableListOf<String>()
+    lateinit var inspectionPicAdapter: InspectionPicAdapter
 
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -45,7 +46,7 @@ class AddInspectionActivity: AppCompatActivity() {
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName +
                 " / " + ColonyApplication.instance.curHive.hiveName
 
-        var inspectionPicAdapter: InspectionPicAdapter = InspectionPicAdapter(applicationContext, 3)
+        inspectionPicAdapter = InspectionPicAdapter(applicationContext, 3)
 
         binding.inspectPicRecyclerView.adapter = inspectionPicAdapter
         //observe the actual database info and assign it to gridview list via lambda
@@ -54,7 +55,6 @@ class AddInspectionActivity: AppCompatActivity() {
 //                inspectionPicAdapter.addInspectionList(it)
 //                inspectionPicAdapter.notifyDataSetChanged()
 //            }
-        inspectionPicAdapter.addPicList(picList)
 
         binding.addPictureButton.setOnClickListener {
             takePhoto()
@@ -139,7 +139,6 @@ class AddInspectionActivity: AppCompatActivity() {
                 REQUEST_IMAGE_CAPTURE)
         }
 
-
 //        try {
 //            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
 //        } catch (e: ActivityNotFoundException) {
@@ -170,6 +169,9 @@ class AddInspectionActivity: AppCompatActivity() {
             //val photo = data!!.extras!!["data"] as Bitmap?
             //add Uri to list of pics
             picList.add(cameraPhotoFilePath!!.toString())
+            inspectionPicAdapter.inspectionPics = picList.toList()
+            inspectionPicAdapter.notifyDataSetChanged()
+            Log.d("inspect", "Size of dataset: ${inspectionPicAdapter.inspectionPics.size}")
         }
     }
 

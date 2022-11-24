@@ -49,13 +49,13 @@ class PastInspectionActivity: AppCompatActivity() {
         previousInspections = inspections
     }
 
-    fun updateImage(){
-        if (!previousInspections.isEmpty()) {
-            val bitmap = MediaStore.Images.Media.getBitmap(
-                this.contentResolver,
-                previousInspections[0].photoList[0].toUri()
-            )
-            binding.imageView.setImageBitmap(bitmap)
-        }
-    }
+//    fun updateImage(){
+//        if (!previousInspections.isEmpty()) {
+//            val bitmap = MediaStore.Images.Media.getBitmap(
+//                this.contentResolver,
+//                previousInspections[0].photoList[0].toUri()
+//            )
+//            binding.imageView.setImageBitmap(bitmap)
+//        }
+//    }
 }

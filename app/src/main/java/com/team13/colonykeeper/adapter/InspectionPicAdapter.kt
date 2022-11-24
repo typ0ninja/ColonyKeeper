@@ -19,7 +19,6 @@ private val layout: Int
 
     //private val listener =
     var inspectionPics: List<String> = emptyList()
-    private lateinit var hiveIntent: Intent
 
     class InspectionPicViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
         //find each view and assign to this container
@@ -48,7 +47,6 @@ private val layout: Int
 
     fun addPicList(inspectionPics: List<String>) {
         this.inspectionPics = inspectionPics
-        this.notifyDataSetChanged()
     }
 
 }
