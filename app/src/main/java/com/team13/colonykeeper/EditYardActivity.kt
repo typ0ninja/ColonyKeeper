@@ -97,7 +97,7 @@ class EditYardActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == pic_id){
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, cameraPhotoFilePath)
-            binding.editImage.setImageBitmap(bitmap)
+            binding.editHivePicture.setImageBitmap(bitmap)
         }
     }
     fun submitChanges(){
