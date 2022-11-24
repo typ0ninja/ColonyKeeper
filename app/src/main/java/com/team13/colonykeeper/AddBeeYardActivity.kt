@@ -31,6 +31,7 @@ import com.team13.colonykeeper.database.Yard
 import com.team13.colonykeeper.databinding.ActivityAddBeeYardBinding
 import java.io.File
 import java.io.IOException
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -200,6 +201,11 @@ class AddBeeYardActivity : AppCompatActivity() {
     fun takePhoto() {
         val REQUEST_IMAGE_CAPTURE = 1
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        if(cameraPhotoFilePath != Uri.EMPTY){
+            val file = File(URI(cameraPhotoFilePath.toString()))
+            file.delete()
+        }
 
             //Create a file to store the image
             var photoFile: File? = null;
