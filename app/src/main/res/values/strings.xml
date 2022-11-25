@@ -31,5 +31,27 @@
     <string name="location_unknown">Location Unknown</string>
     <string name="location_updates_label">Location Updates</string>
     <string name="no_location_text">No current location</string>
+    <string name="colonykeeper">Colony Keeper</string>
+    <string name="start">Start</string>
+    <string name="submit_changes">Submit Changes</string>
+    <string name="new_photo">ADD PHOTO</string>
+    <string name="edit_name_photo">New Photo</string>
+    <string name="delete">Delete</string>
+    <string name="add_hive">Add Hive</string>
+    <string name="edit_yard">Edit Yard</string>
+    <string name="plan_inspection">Plan Inspection</string>
+    <string name="saved_inspections">Saved Inspections:</string>
+    <string name="make_pdf">Make PDF</string>
+    <string name="navigate_to_previous_day">Navigate to previous day</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="navigate_to_next_day">Navigate to next day</string>
+    <string name="set_reminder">Set Reminder</string>
+    <string name="submit">Submit</string>
+    <string name="add_yard">Add Yard</string>
+    <string name="new_report">New Report</string>
+    <string name="manage_inspections">Manage Inspections</string>
+    <string name="reminder">Reminder</string>
+    <string name="future_inspections">Future Inspections</string>
 
 </resources>

@@ -45,7 +45,7 @@
             android:id="@+id/is_notification_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reminder"
+            android:text="@string/reminder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/options_button"
             app:layout_constraintStart_toEndOf="@id/inspection_time"
