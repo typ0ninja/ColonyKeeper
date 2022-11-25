@@ -1,14 +1,14 @@
 package com.team13.colonykeeper
 
-import android.content.ActivityNotFoundException
+import android.R
+import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
-import java.net.URI
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -18,8 +18,10 @@ import com.team13.colonykeeper.database.ColonyViewModelFactory
 import com.team13.colonykeeper.databinding.ActivityEditItemBinding
 import java.io.File
 import java.io.IOException
+import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class EditYardActivity: AppCompatActivity() {
     private lateinit var binding: ActivityEditItemBinding
@@ -51,6 +53,11 @@ class EditYardActivity: AppCompatActivity() {
         binding.editHivePicture.setOnClickListener{
             takePhoto()
         }
+
+        binding.deleteButton.setOnClickListener{
+            deleteYard()
+        }
+
     }
 
     override fun onStart() {
@@ -68,10 +75,10 @@ class EditYardActivity: AppCompatActivity() {
         val REQUEST_IMAGE_CAPTURE = 1
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        if(cameraPhotoFilePath != Uri.EMPTY){
-            val file = File(URI(cameraPhotoFilePath.toString()))
-            file.delete()
-        }
+//        if(cameraPhotoFilePath != Uri.EMPTY){
+//            val file = File(URI(cameraPhotoFilePath.toString()))
+//            file.delete()
+//        }
 
         //Create a file to store the image
         var photoFile: File? = null;
@@ -138,6 +145,20 @@ class EditYardActivity: AppCompatActivity() {
         colonyViewModel.resetEditYardNameInProgress()
         colonyViewModel.resetEditYardPictureInProgress()
         finished = true
+        finish()
+    }
+
+    fun deleteYard(){
+        var yardID = ColonyApplication.instance.curYard.id
+        //var test = colonyViewModel.getYardHives(yardID).value
+//        var hiveList = colonyViewModel.getYardHives(yardID).value?.toList()
+//
+//        for(hive in hiveList!!){
+//            File(URI(hive.photoURI.toString())).delete()
+//        }
+        colonyViewModel.deleteYardHives(yardID)
+        //File(URI(ColonyApplication.instance.curYard.photoURI.toString())).delete()
+        colonyViewModel.deleteYard(yardID)
         finish()
     }
 

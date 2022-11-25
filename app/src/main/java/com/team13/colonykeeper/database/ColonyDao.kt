@@ -55,7 +55,7 @@ interface ColonyDao {
     @Query("DELETE FROM yard_table")
     suspend fun deleteAllYard()
 
-    @Query("SELECT * FROM yard_table JOIN hive_table ON :yard_id = hive_table.yardID")
+    @Query("SELECT * FROM hive_table WHERE :yard_id = hive_table.yardID")
     fun getYardHives(yard_id: Int): Flow<List<Hive>>
 
     @Query("Update yard_table SET photoURI = :photoURI WHERE id = :yard_id")

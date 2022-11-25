@@ -109,7 +109,7 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         return editYardPhotoInProgress
     }
 
-
+    fun getYardHives(yard_id: Int): LiveData<List<Hive>> = repository.getYardHives(yard_id).asLiveData()
 
     fun setEditHiveNameInProgress(hiveName: String){
         editHiveName = hiveName
@@ -147,7 +147,11 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
         inspectionNotes = inspectionNote
     }
 
+    fun deleteHive(hive_id: Int) = viewModelScope.launch { repository.deleteHive(hive_id) }
 
+    fun deleteYardHives(yard_ID: Int) = viewModelScope.launch { repository.deleteYardHives(yard_ID) }
+
+    fun deleteYard(yard_id: Int) = viewModelScope.launch { repository.deleteYard(yard_id) }
 
 
     fun allYards(): LiveData<List<Yard>> = repository.allYards.asLiveData()

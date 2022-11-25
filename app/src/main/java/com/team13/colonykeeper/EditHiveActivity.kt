@@ -51,6 +51,10 @@ class EditHiveActivity: AppCompatActivity() {
         binding.editHivePicture.setOnClickListener{
             takePhoto()
         }
+
+        binding.deleteButton.setOnClickListener{
+            deleteHive()
+        }
     }
 
     override fun onStart() {
@@ -68,10 +72,10 @@ class EditHiveActivity: AppCompatActivity() {
         val REQUEST_IMAGE_CAPTURE = 1
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-        if(cameraPhotoFilePath != Uri.EMPTY){
-            val file = File(URI(cameraPhotoFilePath.toString()))
-            file.delete()
-        }
+//        if(cameraPhotoFilePath != Uri.EMPTY){
+//            val file = File(URI(cameraPhotoFilePath.toString()))
+//            file.delete()
+//        }
 
         //Create a file to store the image
         var photoFile: File? = null;
@@ -142,6 +146,12 @@ class EditHiveActivity: AppCompatActivity() {
         colonyViewModel.resetEditHivePictureInProgress()
         finished = true
         finish()
+    }
+
+    fun deleteHive(){
+        val hiveID = ColonyApplication.instance.curHive.id
+        colonyViewModel.deleteHive(hiveID)
+        startActivity(Intent(this, HiveListActivity::class.java))
     }
 
     override fun onDestroy() {
