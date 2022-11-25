@@ -5,18 +5,19 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-
 import android.speech.RecognizerIntent
 import android.util.Log
 import android.view.KeyEvent
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.team13.colonykeeper.adapter.InspectionPicAdapter
-import com.team13.colonykeeper.database.*
+import com.team13.colonykeeper.database.ColonyApplication
+import com.team13.colonykeeper.database.ColonyViewModel
+import com.team13.colonykeeper.database.ColonyViewModelFactory
+import com.team13.colonykeeper.database.Inspections
 import com.team13.colonykeeper.databinding.ActivityAddInspectionBinding
 import java.io.File
 import java.io.IOException
@@ -191,7 +192,11 @@ class AddInspectionActivity: AppCompatActivity() {
     }
 
     fun submitInspection(){
-        var newInspection: Inspections = Inspections( "fresh", Calendar.DATE.toString(),
+
+        val today = SimpleDateFormat("MM/dd/YYYY")
+        val todaysDate: String = today.format(Date())
+
+        var newInspection: Inspections = Inspections( "fresh", todaysDate,
             binding.inspectionTextInput.text.toString())
         newInspection.photoList = picList.toTypedArray()
         Log.d("Inspection", "Size of photoset: ${newInspection.photoList.size}")

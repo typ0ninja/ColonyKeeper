@@ -32,8 +32,8 @@ class prevInspectionAdapter(
 
     override fun onBindViewHolder(holder: prevInspectionAdapter.PrevInspectionViewHolder, position: Int) {
         val inspection: Inspections = inspections[position]
-
-        holder.date?.text = "test date"
+        inspection.name
+        holder.date?.text = inspection.date
     }
 
     override fun getItemCount(): Int {
