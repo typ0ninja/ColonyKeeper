@@ -106,22 +106,26 @@ class PastInspectionActivity: AppCompatActivity() {
 
         var canvas: Canvas = myPage.canvas
 
-        canvas.drawBitmap(scaledbmp, 56F, 40F, paint)
-
-        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
-
-        title.textSize = 15F
-
-        title.setColor(ContextCompat.getColor(this, R.color.black))
-
-        canvas.drawText("This is a test report", 209F, 100F, title)
-        canvas.drawText("Hive info here", 209F, 80F, title)
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
-        title.setColor(ContextCompat.getColor(this, R.color.black))
-        title.textSize = 15F
 
         title.textAlign = Paint.Align.CENTER
-        canvas.drawText("More test info.", 396F, 560F, title)
+        canvas.drawText("Inspection report \n\n", 0f, 0f, title)
+
+//        canvas.drawBitmap(scaledbmp, 56F, 40F, paint)
+//
+//        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
+//
+//        title.textSize = 15F
+//
+//        title.setColor(ContextCompat.getColor(this, R.color.black))
+//
+//        canvas.drawText("This is a test report", 209F, 100F, title)
+//        canvas.drawText("Hive info here", 209F, 80F, title)
+//        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
+//        title.setColor(ContextCompat.getColor(this, R.color.black))
+//        title.textSize = 15F
+//
+//        title.textAlign = Paint.Align.CENTER
+//        canvas.drawText("More test info.", 396F, 560F, title)
 
         reportPdf.finishPage(myPage)
 
