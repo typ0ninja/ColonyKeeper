@@ -67,7 +67,7 @@ class AddBeeHiveActivity: AppCompatActivity() {
         val REQUEST_IMAGE_CAPTURE = 1
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-//        if(cameraPhotoFilePath != Uri.EMPTY){
+//        if(cameraPhotoFilePath != Uri.EMPTY && cameraPhotoFilePath != ColonyApplication.instance.DEFAULT_URI){
 //            val file = File(URI(cameraPhotoFilePath.toString()))
 //            file.delete()
 //        }
