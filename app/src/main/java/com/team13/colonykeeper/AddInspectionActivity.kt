@@ -197,7 +197,7 @@ class AddInspectionActivity: AppCompatActivity() {
         val today = SimpleDateFormat("MM/dd/YYYY")
         val todaysDate: String = today.format(Date())
 
-        var newInspection: Inspections = Inspections( "fresh", todaysDate,
+        var newInspection: Inspections = Inspections( ColonyApplication.instance.curHive.hiveName, todaysDate,
             binding.inspectionTextInput.text.toString(), ColonyApplication.instance.curYard.id)
         newInspection.photoList = picList.toTypedArray()
         Log.d("Inspection", "Size of photoset: ${newInspection.photoList.size}")

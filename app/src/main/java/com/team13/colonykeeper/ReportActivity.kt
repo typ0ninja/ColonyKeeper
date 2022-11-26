@@ -92,42 +92,127 @@ class ReportActivity: AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun makePdf(){
+        val imageHeight = 210
+        val buffer = 40f
+        val imageAndBuffer = imageHeight + buffer
+        var pageNum = 1
+        var pageHeight = 1120
+        var pageWidth = 792
+
         var reportPdf: PdfDocument = PdfDocument()
+        var pdfCursor = buffer
 
         var paint: Paint = Paint()
         var title: Paint = Paint()
 
-        var pageHeight = 1120
-        var pageWidth = 792
+
 
         var myPageInfo: PdfDocument.PageInfo? =
-            PdfDocument.PageInfo.Builder(pageWidth, pageHeight, 1).create()
+            PdfDocument.PageInfo.Builder(pageWidth, pageHeight, pageNum).create()
 
         var myPage: PdfDocument.Page = reportPdf.startPage(myPageInfo)
 
         var canvas: Canvas = myPage.canvas
 
+        //draw title
+        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
+        title.textSize = 30F
+        pdfCursor += title.textSize
+        canvas.drawText("Inspection Reports:", buffer, pdfCursor, title)
+
+        //reportPdf.finishPage(myPage)
+        //myPage = reportPdf.startPage(myPageInfo)
+        //reportPdf.finishPage(myPage)
+
+
         for(inspect in inspections){
-            inspect.name
+            if(pdfCursor + 60f >= pageHeight){
+                //page is full finish it and start over
+                reportPdf.finishPage(myPage)
+                //reset cursor
+                pdfCursor = buffer
+                //start new page
+                myPage = reportPdf.startPage(myPageInfo)
+                canvas = myPage.canvas
+            }
+
+            title.textSize = 20F
+            pdfCursor += title.textSize + buffer
+
+            //hive name
+            canvas.drawText("Hive Name: ${inspect.name}", buffer, pdfCursor, title)
+            pdfCursor += title.textSize
+
+            //inspection date
+            canvas.drawText("Inspection Date: ${inspect.date}", buffer, pdfCursor, title)
+            pdfCursor += title.textSize
+
+            //notes
+            canvas.drawText("Notes:", buffer, pdfCursor, title)
+            pdfCursor += title.textSize
+
+            canvas.drawText("${inspect.notes}", buffer, pdfCursor, title)
+            pdfCursor += title.textSize
+
+            //images
+            var imageCursorX = buffer
+            var imageXCount = 0
+            for(photo in inspect.photoList){
+                var bmpPhoto = MediaStore.Images.Media.getBitmap(this.contentResolver, photo.toUri())
+                var scaledPhoto = Bitmap.createScaledBitmap(bmpPhoto, imageHeight, imageHeight, true)
+
+                canvas.drawBitmap(scaledPhoto, imageCursorX, pdfCursor, paint)
+
+                imageXCount++
+                imageCursorX = buffer + imageXCount * imageAndBuffer
+                if(imageXCount%3 == 0){
+                    imageXCount = 0
+                    imageCursorX = buffer
+                    pdfCursor += imageAndBuffer
+                    if(pdfCursor >= pageHeight){
+                        //page is full finish it and start over
+                        reportPdf.finishPage(myPage)
+                        //reset cursor
+                        pdfCursor = buffer
+                        //start new page
+                        myPage = reportPdf.startPage(myPageInfo)
+                        canvas = myPage.canvas
+                    }
+                }
+
+
+            }
+            if(imageXCount%3 != 0){
+                pdfCursor += imageAndBuffer
+                if(pdfCursor >= pageHeight){
+                    //page is full finish it and start over
+                    reportPdf.finishPage(myPage)
+                    //reset cursor
+                    pdfCursor = buffer
+                    //start new page
+                    myPage = reportPdf.startPage(myPageInfo)
+                    canvas = myPage.canvas
+                }
+            }
 
         }
 
-        canvas.drawBitmap(scaledbmp, 56F, 40F, paint)
+        //canvas.drawBitmap(scaledbmp, 56F, 40F, paint)
 
-        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
+//        title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
+//
+//        title.textSize = 15F
 
-        title.textSize = 15F
-
-        title.setColor(ContextCompat.getColor(this, R.color.black))
-
-        canvas.drawText("Inspection Reports:", 209F, 100F, title)
-        canvas.drawText("Hive info here", 209F, 80F, title)
-        title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
-        title.setColor(ContextCompat.getColor(this, R.color.black))
-        title.textSize = 15F
-
-        title.textAlign = Paint.Align.CENTER
-        canvas.drawText("More test info.", 396F, 560F, title)
+//        title.setColor(ContextCompat.getColor(this, R.color.black))
+//
+//        canvas.drawText("Inspection Reports:", 209F, 100F, title)
+//        canvas.drawText("Hive info here", 209F, 80F, title)
+//        title.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
+//        title.color = ContextCompat.getColor(this, R.color.black)
+//        title.textSize = 15F
+//
+//        title.textAlign = Paint.Align.CENTER
+//        canvas.drawText("More test info.", 396F, 560F, title)
 
         reportPdf.finishPage(myPage)
 
@@ -141,7 +226,7 @@ class ReportActivity: AppCompatActivity() {
             reportPdf.writeTo(FileOutputStream(file))
 
             // on below line we are displaying a toast message as PDF file generated..
-            Toast.makeText(applicationContext, "PDF file generated..", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "PDF file added to Documents...", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             // below line is used
             // to handle error
@@ -155,6 +240,11 @@ class ReportActivity: AppCompatActivity() {
         // location we are closing our PDF file.
         reportPdf.close()
     }
+
+    fun newPage(){
+
+    }
+
     fun checkPermissions(): Boolean {
         // on below line we are creating a variable for both of our permissions.
 
