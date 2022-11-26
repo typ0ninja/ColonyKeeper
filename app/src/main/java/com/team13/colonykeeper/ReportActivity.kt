@@ -32,8 +32,10 @@ class ReportActivity: AppCompatActivity() {
     private lateinit var binding: ActivityReportBinding
     lateinit var bmp: Bitmap
     lateinit var scaledbmp: Bitmap
+    var finished = false
 
     var PERMISSION_CODE = 101
+    var inspections: List<Inspections> = emptyList()
 
     private val colonyViewModel: ColonyViewModel by viewModels {
         ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
@@ -45,7 +47,9 @@ class ReportActivity: AppCompatActivity() {
 
         supportActionBar?.title = "Generate Report"
 
-        var inspections: List<Inspections> = emptyList()
+        binding.pdfNameInputField.setText(colonyViewModel.reportName)
+
+
 
         colonyViewModel.getInspections()
             .observe(this) {
@@ -71,6 +75,12 @@ class ReportActivity: AppCompatActivity() {
         binding.makePDF.setOnClickListener{
             if(!inspections.isEmpty()) {
                 makePdf()
+            } else if(binding.pdfNameInputField.text.isNullOrBlank()) {
+                Toast.makeText(
+                    applicationContext, "Please name the report",
+                    Toast.LENGTH_SHORT
+                ).show()
+
             } else {
                 Toast.makeText(
                     applicationContext, "Please complete an inspection first",
@@ -97,6 +107,11 @@ class ReportActivity: AppCompatActivity() {
 
         var canvas: Canvas = myPage.canvas
 
+        for(inspect in inspections){
+            inspect.name
+
+        }
+
         canvas.drawBitmap(scaledbmp, 56F, 40F, paint)
 
         title.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL))
@@ -105,7 +120,7 @@ class ReportActivity: AppCompatActivity() {
 
         title.setColor(ContextCompat.getColor(this, R.color.black))
 
-        canvas.drawText("This is a test report", 209F, 100F, title)
+        canvas.drawText("Inspection Reports:", 209F, 100F, title)
         canvas.drawText("Hive info here", 209F, 80F, title)
         title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL))
         title.setColor(ContextCompat.getColor(this, R.color.black))
@@ -117,7 +132,9 @@ class ReportActivity: AppCompatActivity() {
         reportPdf.finishPage(myPage)
 
         Log.d("Storage", "Storage State: ${Environment.getExternalStorageState()}")
-        val file: File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "InspectionReport.pdf")
+        var fileName: String = binding.pdfNameInputField.text.toString()
+        fileName += ".pdf"
+        val file: File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), fileName)
         try {
             // after creating a file name we will
             // write our PDF file to that location.
@@ -206,5 +223,11 @@ class ReportActivity: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        colonyViewModel.reportName = binding.pdfNameInputField.text.toString()
+
     }
 }

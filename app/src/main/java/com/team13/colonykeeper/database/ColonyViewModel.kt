@@ -26,6 +26,8 @@ class ColonyViewModel(private val repository: ColonyRepository): ViewModel() {
 
     private var inspectionNotes = ""
 
+    var reportName: String = ""
+
     fun setYardNameInProgress(yardName: String){
         yardNameInProgress = yardName
     }

@@ -11,6 +11,7 @@ class Inspections(
     @ColumnInfo val name: String,
     @ColumnInfo val date: String,
     @ColumnInfo val notes: String,
+    @ColumnInfo val yard_id: Int
     //@ColumnInfo val photoUri: Uri
 ){
     @PrimaryKey(autoGenerate = true)

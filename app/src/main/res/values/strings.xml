@@ -53,5 +53,7 @@
     <string name="manage_inspections">Manage Inspections</string>
     <string name="reminder">Reminder</string>
     <string name="future_inspections">Future Inspections</string>
+    <string name="file_name">File Name...</string>
+    <string name="create_report">Create Report</string>
 
 </resources>
