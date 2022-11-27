@@ -34,6 +34,7 @@ class ScheduleInspectionActivity: AppCompatActivity() {
         supportActionBar?.title = ColonyApplication.instance.curYard.yardName
 
         binding.viewModel = viewModel
+        binding.setReminderCheckBox.isChecked = true
         viewModel.getWeekForecast()
         viewModel.onTimeChanged(binding.timePicker.hour, binding.timePicker.minute)
 

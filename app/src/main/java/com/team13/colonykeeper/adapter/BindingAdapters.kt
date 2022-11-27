@@ -3,11 +3,13 @@ package com.team13.colonykeeper.adapter
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.team13.colonykeeper.R
 import com.team13.colonykeeper.database.Yard
 import com.team13.colonykeeper.model.WeatherApiStatus
+import java.text.SimpleDateFormat
 
 // -------- Binding Adapters for activity_schedule_inspection --------
 
@@ -47,21 +49,20 @@ fun bindWeatherIcon(weatherImageView: ImageView, id: Int){
     }
 }
 
+@BindingAdapter("time")
+fun bindFormattedTime(textView: TextView, unformattedText: String?) {
+    val stringLength = unformattedText?.length ?: 0
+    if (stringLength > 10) {
+        textView.text = unformattedText!!.substring(11)
+    }
+}
 
-// -------- Binding Adapter for activity_view_future_inspections --------
-
-/**
- * Gives recycler view list of future inspections, starting with yard-wide inspections
- * then granular hive inspections
- */
-//@BindingAdapter("FutureInspectionListData", "YardId")
-//fun bindFutureInspectionRecyclerView(recyclerView: RecyclerView, yardID: Int) {
-//
-//    val adapter = recyclerView.adapter as FututreInspectionListAdapter
-//    adapter.submitList(getYardFutureInspections(yardID))
-//}
-
-//@BindingAdapter("YardListData")
-//fun bindYardListRecyclerView(recyclerView: RecyclerView, data: List<Yard>) {
-//    val adapter = recyclerView.
-//}
+@BindingAdapter("date")
+fun bindFormattedDate(textView: TextView, unformattedText: String?) {
+    val stringLength = unformattedText?.length ?: 0
+    if (stringLength > 1) {
+        val parser = SimpleDateFormat("yyyy-MM-dd")
+        val formatter = SimpleDateFormat("EEEE MMM d")
+        textView.text = formatter.format(parser.parse(unformattedText!!))
+    }
+}
