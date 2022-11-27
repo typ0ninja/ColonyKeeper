@@ -9,8 +9,11 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.team13.colonykeeper.database.ColonyApplication
+import com.team13.colonykeeper.database.ColonyViewModel
+import com.team13.colonykeeper.database.ColonyViewModelFactory
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.databinding.ActivityScheduleInspectionBinding
+import com.team13.colonykeeper.model.EditScheduledInspectionViewModel
 import com.team13.colonykeeper.model.PlanInspectionViewModel
 import com.team13.colonykeeper.workers.InspectionNotificationWorker
 import kotlinx.coroutines.launch
@@ -18,9 +21,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class ScheduleInspectionActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityScheduleInspectionBinding
-    private val viewModel: PlanInspectionViewModel by viewModels()
+class EditFutureInspection: AppCompatActivity() {
+    private lateinit var binding: ActivityEditScheduledInspectionBinding
+    private val viewModel: EditScheduledInspectionViewModel by viewModels()
+
+    private val colonyViewModel: ColonyViewModel by viewModels {
+        ColonyViewModelFactory((application as ColonyApplication).colonyRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,41 +35,41 @@ class ScheduleInspectionActivity: AppCompatActivity() {
         binding.lifecycleOwner = this
         setContentView(binding.root)
 
-        supportActionBar?.title = ColonyApplication.instance.curYard.yardName + " / " + intent.getStringExtra("locName")
-
         binding.viewModel = viewModel
-        binding.setReminderCheckBox.isChecked = true
-        viewModel.getWeekForecast()
-        viewModel.onTimeChanged(binding.timePicker.hour, binding.timePicker.minute)
 
+        val scheduledID = intent.getIntExtra("id", -1)
+        if (scheduledID != -1) {
+            colonyViewModel.getScheduled(scheduledID).observe(this){scheduled ->
+                viewModel.setScheduled(scheduled)
+            }
+        }
+
+        supportActionBar?.title = viewModel.scheduled.value!!.locName
+        binding.setReminderCheckBox.isChecked = viewModel.scheduled.value!!.isNotification
+
+        viewModel.onTimeChanged(binding.timePicker.hour, binding.timePicker.minute)
         binding.previousDayButton.setOnClickListener{viewModel.onBackArrowClicked()}
         binding.nextDayButton.setOnClickListener { viewModel.onForwardArrowClicked() }
         binding.setReminderCheckBox.setOnCheckedChangeListener { _, isChecked ->
             viewModel.onCheckBoxToggled(isChecked)
         }
+
         binding.timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
             viewModel.onTimeChanged(hourOfDay, minute)
         }
 
-        binding.planInspectionSubmitButton.setOnClickListener{
-            scheduleInspection()
+        binding.editScheduledInspectionSubmitButton.setOnClickListener{
+            submitEdit()
         }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean{
-        Log.d("ScheduleInspection", "In onOptionsItemSelected")
-        when(item.itemId){
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun scheduleInspection() {
+    private fun submitEdit() {
         if (viewModel.isLoaded()) {
+            if (viewModel.scheduled.value!!.isNotification) {
+                WorkManager.getInstance(applicationContext)
+                    .cancelWorkById(UUID.fromString(viewModel.scheduled.value!!.name))
+            }
+
             var jobName = ""
             var tagName = ""
             var isNotif = false
@@ -92,9 +99,8 @@ class ScheduleInspectionActivity: AppCompatActivity() {
                 intent.getStringExtra("locName")!!,
                 isNotif
             )
-            ColonyApplication.instance.applicationScope.launch {
-                ColonyApplication.instance.colonyRepository.scheduleInspection(newInspection)
-            }
+            colonyViewModel.scheduleInspection(newInspection)
+            colonyViewModel.deleteScheduled(viewModel.scheduled.value!!.id)
             finish()
         }
     }
