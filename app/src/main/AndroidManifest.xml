@@ -117,6 +117,12 @@
                 android:value=".YardListActivity" />
         </activity>
 
+        <activity android:name=".EditScheduledInspectionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ViewFutureInspectionsActivity" />
+        </activity>
+
         <activity android:name=".PastInspectionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

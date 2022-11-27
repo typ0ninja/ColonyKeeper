@@ -45,22 +45,23 @@ class EditScheduledInspectionViewModel: ViewModel() {
         viewModelScope.launch {
             _status.value = WeatherApiStatus.LOADING
 
-            val lat: Double = ColonyApplication.instance.curYard.latitude
-            val long: Double = ColonyApplication.instance.curYard.longitude
+            // Get location of yard
+//            val lat: Double = ColonyApplication.instance.curYard.latitude
+//            val long: Double = ColonyApplication.instance.curYard.longitude
 
             //val response = WeatherApi.retrofitService.getWeekForecast(lat.toFloat(), long.toFloat())
             val response = WeatherApi.retrofitService.getWeekForecast()
 
             response.enqueue(object : Callback<Forecast> {
                 override fun onResponse(call: Call<Forecast>, response: Response<Forecast>) {
-                    Log.d("PlanInspectionViewModel", "In Response callback")
+                    Log.d("EditScheduledInspectionViewModel", "In Response callback")
                     _weekForcast.value = response.body()?.parseToWeatherList()
                     _dayForcast.value = _weekForcast.value?.get(dayIndex)
                     _status.value = WeatherApiStatus.DONE
                 }
 
                 override fun onFailure(call: Call<Forecast>, t: Throwable) {
-                    Log.d("PlanInspectionViewModel", "In Failure callback")
+                    Log.d("EditScheduledInspectionViewModel", "In Failure callback")
                     _weekForcast.value = listOf()
                     _status.value = WeatherApiStatus.ERROR
                 }
@@ -97,5 +98,9 @@ class EditScheduledInspectionViewModel: ViewModel() {
 
     fun isLoaded(): Boolean {
         return _status.value == WeatherApiStatus.DONE
+    }
+
+    fun returnScheduled(): Scheduled {
+        return scheduled.value!!
     }
 }

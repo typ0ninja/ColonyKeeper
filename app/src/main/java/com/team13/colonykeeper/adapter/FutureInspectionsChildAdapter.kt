@@ -9,22 +9,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
-import com.team13.colonykeeper.MainActivity
-import com.team13.colonykeeper.R
-import com.team13.colonykeeper.ScheduleInspectionActivity
-import com.team13.colonykeeper.ViewFutureInspectionsActivity
+import com.team13.colonykeeper.*
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.Scheduled
-import com.team13.colonykeeper.workers.InspectionNotificationWorker
-import java.nio.file.Files.delete
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.TimeUnit
+import java.io.Serializable
 
 class FutureInspectionsChildAdapter(
     private val context: Context?,
@@ -80,58 +69,11 @@ class FutureInspectionsChildAdapter(
     }
 
     private fun editScheduledInspection(scheduled: Scheduled) {
-        val intent = Intent(context, MainActivity::class.java)
-            .putExtra("id", scheduled.id)
+        val intent = Intent(context, EditScheduledInspectionActivity::class.java)
+            .putExtra("scheduled", scheduled as Serializable)
             .addFlags(FLAG_ACTIVITY_NEW_TASK)
         context?.startActivity(intent)
     }
 
     override fun getItemCount(): Int = scheduledList.size
-
-    private fun toggleNotification(isCurrentlyNotif: Boolean, scheduled: Scheduled) {
-        if (isCurrentlyNotif){
-            WorkManager.getInstance(context!!).cancelWorkById(UUID.fromString(scheduled.name))
-            viewModel.updateInspection(
-                "",
-                false,
-                scheduled.id
-            )
-            parentAdapter.notifyDataSetChanged()
-        } else {
-            val myWorkRequest = OneTimeWorkRequestBuilder<InspectionNotificationWorker>()
-                .setInitialDelay(getTimeDiff(scheduled.date + "T" + scheduled.time + "Z"), TimeUnit.SECONDS)
-                .setInputData(
-                    workDataOf(
-                        "title" to "Time to Inspect Hives",
-                        "message" to "Check ColonyKeeper to start inspection",
-                    )
-                )
-                .build()
-
-            WorkManager.getInstance(context!!).enqueue(myWorkRequest)
-            viewModel.updateInspection(
-                myWorkRequest.id.toString(),
-                true,
-                scheduled.id
-            )
-            parentAdapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun getTimeDiff(dateTime: String): Long {
-        val todayDateTime = Calendar.getInstance()
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-        val scheduledDateTime = format.parse(dateTime)
-        val cal = Calendar.getInstance()
-        cal.time = scheduledDateTime
-        return (cal.timeInMillis/1000L) - (todayDateTime.timeInMillis/1000L)
-    }
-
-    private fun deleteScheduled(scheduled: Scheduled) {
-        if (scheduled.isNotification){
-            WorkManager.getInstance(context!!).cancelWorkById(UUID.fromString(scheduled.name))
-        }
-        viewModel.deleteScheduled(scheduled.id)
-        parentAdapter.notifyDataSetChanged()
-    }
 }

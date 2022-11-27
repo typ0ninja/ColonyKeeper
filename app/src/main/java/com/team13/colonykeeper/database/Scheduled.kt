@@ -3,6 +3,7 @@ package com.team13.colonykeeper.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 //Strings: Name, Date, time, tag, location name (basically yard or hive name) Ints: ID Bool: isNotification
@@ -16,7 +17,7 @@ class Scheduled (
     @ColumnInfo val yardID: Int,
     @ColumnInfo val locName: String,
     @ColumnInfo val isNotification: Boolean
-){
+): Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0

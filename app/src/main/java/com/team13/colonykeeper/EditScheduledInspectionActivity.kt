@@ -2,7 +2,6 @@ package com.team13.colonykeeper
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.OneTimeWorkRequestBuilder
@@ -12,16 +11,14 @@ import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.ColonyViewModelFactory
 import com.team13.colonykeeper.database.Scheduled
-import com.team13.colonykeeper.databinding.ActivityScheduleInspectionBinding
+import com.team13.colonykeeper.databinding.ActivityEditScheduledInspectionBinding
 import com.team13.colonykeeper.model.EditScheduledInspectionViewModel
-import com.team13.colonykeeper.model.PlanInspectionViewModel
 import com.team13.colonykeeper.workers.InspectionNotificationWorker
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class EditFutureInspection: AppCompatActivity() {
+class EditScheduledInspectionActivity: AppCompatActivity() {
     private lateinit var binding: ActivityEditScheduledInspectionBinding
     private val viewModel: EditScheduledInspectionViewModel by viewModels()
 
@@ -31,21 +28,16 @@ class EditFutureInspection: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityScheduleInspectionBinding.inflate(layoutInflater)
+        binding = ActivityEditScheduledInspectionBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
         setContentView(binding.root)
 
         binding.viewModel = viewModel
 
-        val scheduledID = intent.getIntExtra("id", -1)
-        if (scheduledID != -1) {
-            colonyViewModel.getScheduled(scheduledID).observe(this){scheduled ->
-                viewModel.setScheduled(scheduled)
-            }
-        }
-
-        supportActionBar?.title = viewModel.scheduled.value!!.locName
-        binding.setReminderCheckBox.isChecked = viewModel.scheduled.value!!.isNotification
+        var scheduled = intent.getSerializableExtra("scheduled") as Scheduled
+        viewModel.setScheduled(scheduled)
+        supportActionBar?.title = scheduled.locName
+        binding.setReminderCheckBox.isChecked = scheduled.isNotification
 
         viewModel.onTimeChanged(binding.timePicker.hour, binding.timePicker.minute)
         binding.previousDayButton.setOnClickListener{viewModel.onBackArrowClicked()}
@@ -95,12 +87,12 @@ class EditFutureInspection: AppCompatActivity() {
                 viewModel.dayForcast.value!!.date,
                 viewModel.returnTime(),
                 tagName,
-                ColonyApplication.instance.curYard.id,
-                intent.getStringExtra("locName")!!,
+                viewModel.scheduled.value!!.yardID,
+                viewModel.scheduled.value!!.locName,
                 isNotif
             )
             colonyViewModel.scheduleInspection(newInspection)
-            colonyViewModel.deleteScheduled(viewModel.scheduled.value!!.id)
+            colonyViewModel.deleteScheduled(viewModel.returnScheduled())
             finish()
         }
     }
