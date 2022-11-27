@@ -1,22 +1,27 @@
 package com.team13.colonykeeper.adapter
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import com.team13.colonykeeper.MainActivity
 import com.team13.colonykeeper.R
+import com.team13.colonykeeper.ScheduleInspectionActivity
+import com.team13.colonykeeper.ViewFutureInspectionsActivity
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.workers.InspectionNotificationWorker
+import java.nio.file.Files.delete
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -38,14 +43,12 @@ class FutureInspectionsChildAdapter(
         var locationName: TextView
         var inspectionDate: TextView
         var inspectionTime: TextView
-        var isNotificationCheckBox: CheckBox
         var optionButton: ImageButton
 
         init {
             locationName = itemView.findViewById(R.id.location_name)
             inspectionDate = itemView.findViewById(R.id.inspection_date)
             inspectionTime = itemView.findViewById(R.id.inspection_time)
-            isNotificationCheckBox = itemView.findViewById(R.id.is_notification_check_box)
             optionButton = itemView.findViewById(R.id.options_button)
         }
     }
@@ -62,19 +65,25 @@ class FutureInspectionsChildAdapter(
         holder.locationName.text = scheduledList[position].locName
         holder.inspectionDate.text = scheduledList[position].date
         holder.inspectionTime.text = scheduledList[position].time
-        holder.isNotificationCheckBox.isChecked = scheduledList[position].isNotification
-        holder.isNotificationCheckBox.setOnClickListener{
-            toggleNotification(holder.isNotificationCheckBox.isChecked, scheduledList[position])
-        }
         holder.optionButton.setOnClickListener {
             var popupMenu = PopupMenu(context, holder.optionButton)
             popupMenu.inflate(R.menu.popup_menu)
-            popupMenu.setOnMenuItemClickListener {_ ->
-                deleteScheduled(scheduledList[position])
+            popupMenu.setOnMenuItemClickListener {item ->
+                when (item.itemId) {
+                    R.id.edit -> editScheduledInspection(scheduledList[position])
+                    //R.id.delete -> deleteScheduled(scheduledList[position])
+                }
                 true
             }
             popupMenu.show()
         }
+    }
+
+    private fun editScheduledInspection(scheduled: Scheduled) {
+        val intent = Intent(context, MainActivity::class.java)
+            .putExtra("id", scheduled.id)
+            .addFlags(FLAG_ACTIVITY_NEW_TASK)
+        context?.startActivity(intent)
     }
 
     override fun getItemCount(): Int = scheduledList.size

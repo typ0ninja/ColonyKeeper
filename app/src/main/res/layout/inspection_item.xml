@@ -36,29 +36,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/is_notification_check_box"
             app:layout_constraintStart_toEndOf="@id/inspection_date"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="10:30 AM" />
-
-        <CheckBox
-            android:id="@+id/is_notification_check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reminder"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/options_button"
-            app:layout_constraintStart_toEndOf="@id/inspection_time"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:text="10:30 AM" />
 
         <ImageButton
             android:id="@+id/options_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            app:layout_constraintStart_toEndOf="@id/inspection_time"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/is_notification_check_box"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 

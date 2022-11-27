@@ -37,7 +37,6 @@ RecyclerView.Adapter<FutureInspectionsParentAdapter.YardInspectionViewHolder>() 
             parent,
             false
         )
-
         return YardInspectionViewHolder(view)
     }
 

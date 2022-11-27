@@ -12,12 +12,9 @@ import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.Scheduled
 import com.team13.colonykeeper.databinding.ActivityScheduleInspectionBinding
 import com.team13.colonykeeper.model.PlanInspectionViewModel
-import com.team13.colonykeeper.model.WeatherApiStatus
 import com.team13.colonykeeper.workers.InspectionNotificationWorker
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 import java.util.concurrent.TimeUnit
 

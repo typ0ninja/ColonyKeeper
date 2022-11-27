@@ -1,16 +1,12 @@
 package com.team13.colonykeeper
 
 import android.content.Intent
-import android.location.Location
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.team13.colonykeeper.database.*
 import com.team13.colonykeeper.databinding.ActivityHiveIndividualBinding
-import com.team13.colonykeeper.databinding.ActivityYardListBinding
 
 class HiveIndividualActivity : AppCompatActivity(){
     private lateinit var binding: ActivityHiveIndividualBinding
