@@ -1,5 +1,6 @@
 package com.team13.colonykeeper
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
+import com.team13.colonykeeper.adapter.FutureInspectionsParentAdapter
 import com.team13.colonykeeper.database.ColonyApplication
 import com.team13.colonykeeper.database.ColonyViewModel
 import com.team13.colonykeeper.database.ColonyViewModelFactory
@@ -52,6 +54,16 @@ class EditScheduledInspectionActivity: AppCompatActivity() {
 
         binding.editScheduledInspectionSubmitButton.setOnClickListener{
             submitEdit()
+        }
+
+        binding.deleteScheduledInspectionButton.setOnClickListener {
+            if (viewModel.scheduled.value!!.isNotification) {
+                WorkManager.getInstance(applicationContext)
+                    .cancelWorkById(UUID.fromString(viewModel.scheduled.value!!.name))
+            }
+
+            colonyViewModel.deleteScheduled(viewModel.returnScheduled())
+            startActivity(Intent(this, ViewFutureInspectionsActivity::class.java))
         }
     }
 
