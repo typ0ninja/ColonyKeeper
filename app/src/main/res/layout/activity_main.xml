@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/start_yards"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/beescan_final"
+        app:srcCompat="@drawable/beescan_bg"
         android:contentDescription="TODO" />
 
     <Button
